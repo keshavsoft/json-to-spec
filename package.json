@@ -1,9 +1,9 @@
 {
   "name": "json-to-spec",
-  "version": "1.0.0",
-  "description": "Pure JSON Specification Compiler: (structure.json + data.json) -> Spec JSON",
+  "version": "2.0.0",
+  "description": "Pure JSON Specification Compiler: (contextJson, dataJson) -> Spec JSON",
   "main": "index.js",
-  "module": "./src/v1/index.js",
+  "module": "./src/v2/index.js",
   "files": [
     "index.js",
     "src",

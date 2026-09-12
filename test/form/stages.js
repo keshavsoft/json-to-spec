@@ -1,4 +1,4 @@
-import { compile } from "../../src/v1/index.js";
+import { compile } from "../../src/v2/index.js";
 import { buildSpecElement } from "https://keshavsoft.github.io/json-to-dom/dist/v16/min.js";
 
 const statusBadge = document.getElementById("status-badge");
@@ -42,10 +42,8 @@ export const loadFormStages = async () => {
         if (codeData) codeData.textContent = formatJson({ inObj: data });
 
         const startTime = performance.now();
-        const compiledSpec = compile({
-            inStructure: structure,
-            inData: data
-        });
+        // V2: Clean 2-argument public API without 'in' convention
+        const compiledSpec = compile(structure, data);
 
         if (codeCompiledSpec) codeCompiledSpec.textContent = formatJson({ inObj: compiledSpec });
 
