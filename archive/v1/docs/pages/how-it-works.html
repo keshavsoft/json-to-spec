@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works | json-to-spec Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- Top Navbar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="../index.html" class="flex items-center space-x-2 font-black text-lg text-slate-900 hover:text-indigo-600 transition">
+                    <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm">JS</span>
+                    <span>json-to-spec</span>
+                </a>
+                <span class="text-xs bg-indigo-50 text-indigo-700 font-semibold px-2 py-0.5 rounded-full border border-indigo-200">Guide</span>
+            </div>
+            <nav class="flex items-center space-x-4 text-sm font-medium">
+                <a href="../index.html" class="text-slate-600 hover:text-slate-900 transition">Home</a>
+                <a href="./what.html" class="text-slate-600 hover:text-slate-900 transition">What</a>
+                <a href="./why.html" class="text-slate-600 hover:text-slate-900 transition">Why</a>
+                <a href="./what-not.html" class="text-slate-600 hover:text-slate-900 transition">What Not</a>
+                <a href="./architecture.html" class="text-slate-600 hover:text-slate-900 transition">Architecture</a>
+                <a href="./how-it-works.html" class="text-indigo-600 font-bold">How It Works</a>
+                <a href="../demo.html" class="px-3 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 shadow-sm transition">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full space-y-8">
+        
+        <div class="space-y-3">
+            <span class="text-xs uppercase font-bold text-indigo-600 tracking-wider font-mono">Step-by-Step Guide</span>
+            <h1 class="text-4xl font-black text-slate-900 tracking-tight">How to Build UIs with json-to-spec</h1>
+            <p class="text-base text-slate-600 leading-relaxed">
+                Follow this quick 4-step tutorial to declare a blueprint, supply data, compile the spec, and render it into the live DOM.
+            </p>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+                <h2 class="text-lg font-bold text-slate-900">Define the UI Blueprint (structure.json)</h2>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Create a declarative JSON tree. When a dynamic repeat point is needed, use <code>"operation": "iterate"</code>:
+            </p>
+            <pre class="bg-slate-900 text-purple-300 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed border border-slate-800">
+{
+  "tagName": "div",
+  "attributes": { "class": "card p-4 shadow-sm" },
+  "children": [
+    { "tagName": "h3", "textContent": "${title}", "attributes": { "class": "h5 mb-3" } },
+    {
+      "operation": "iterate",
+      "source": "users",
+      "template": {
+        "tagName": "div",
+        "attributes": { "class": "d-flex justify-content-between py-2 border-bottom" },
+        "children": [
+          { "tagName": "span", "textContent": "${$number}. ${name}" },
+          { "tagName": "span", "textContent": "${role}", "attributes": { "class": "badge bg-primary" } }
+        ]
+      }
+    }
+  ]
+}</pre>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+                <h2 class="text-lg font-bold text-slate-900">Provide the Data Payload (data.json)</h2>
+            </div>
+            <pre class="bg-slate-900 text-emerald-300 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed border border-slate-800">
+{
+  "title": "Engineering Team Directory",
+  "users": [
+    { "name": "Karthik", "role": "Lead Architect" },
+    { "name": "Praveen", "role": "Frontend Engineer" },
+    { "name": "Suresh", "role": "DevOps Engineer" }
+  ]
+}</pre>
+        </div>
+
+        <!-- Step 3 & 4 -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+                <h2 class="text-lg font-bold text-slate-900">Compile & Render to DOM</h2>
+            </div>
+            <pre class="bg-slate-900 text-indigo-300 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed border border-slate-800">
+import { compile } from "https://keshavsoft.github.io/json-to-spec/dist/v1/min.js";
+import { buildSpecElement } from "https://keshavsoft.github.io/json-to-dom/dist/v16/min.js";
+
+// 1. Compile structure + data into spec
+const spec = compile({
+    inStructure: structureBlueprint,
+    inData: dataPayload
+});
+
+// 2. Render directly via json-to-dom
+const domNode = buildSpecElement({ inSpec: spec });
+document.getElementById("app").appendChild(domNode);</pre>
+        </div>
+
+    </main>
+
+    <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        json-to-spec &bull; KeshavSoft Declarative UI Architecture &bull; MIT License
+    </footer>
+</body>
+</html>
