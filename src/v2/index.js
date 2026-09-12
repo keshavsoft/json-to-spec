@@ -59,4 +59,14 @@ export {
     resolvePath
 };
 
+if (typeof globalThis !== "undefined") {
+    globalThis.ks ??= {};
+    globalThis.ks["json-to-spec"] = {
+        meta,
+        compile,
+        compileNode,
+        resolvePath
+    };
+}
+
 export default compile;
