@@ -1,5 +1,5 @@
-import { compile } from "../../src/index.js";
-import { buildSpecElement } from "../../vendor/jsonToDom/index.js";
+import { compile } from "../../src/v1/index.js";
+import { buildSpecElement } from "https://keshavsoft.github.io/json-to-dom/dist/v16/min.js";
 
 const statusBadge = document.getElementById("status-badge");
 const codeStructure = document.getElementById("code-structure");

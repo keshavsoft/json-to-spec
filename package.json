@@ -2,18 +2,25 @@
   "name": "json-to-spec",
   "version": "1.0.0",
   "description": "Pure JSON Specification Compiler: (structure.json + data.json) -> Spec JSON",
-  "type": "module",
-  "main": "src/index.js",
+  "main": "index.js",
+  "module": "./src/v1/index.js",
   "files": [
+    "index.js",
     "src",
+    "docs",
     "samples",
     "README.md"
   ],
-  "exports": {
-    ".": "./src/index.js"
+  "directories": {
+    "doc": "docs"
   },
   "scripts": {
-    "start": "npx serve -l 3000 ."
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keshavsoft/json-to-spec.git"
   },
   "keywords": [
     "json-to-spec",
@@ -24,5 +31,13 @@
     "declarative-ui"
   ],
   "author": "KeshavSoft",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/keshavsoft/json-to-spec/issues"
+  },
+  "homepage": "https://keshavsoft.github.io/json-to-spec/",
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samples Library | json-to-spec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="../index.html" class="flex items-center space-x-2 font-black text-lg text-slate-900 hover:text-indigo-600 transition">
+                    <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm">JS</span>
+                    <span>json-to-spec</span>
+                </a>
+                <span class="text-xs bg-indigo-50 text-indigo-700 font-semibold px-2 py-0.5 rounded-full border border-indigo-200">Samples Library</span>
+            </div>
+            <nav class="flex items-center space-x-4 text-sm font-medium">
+                <a href="../index.html" class="text-slate-600 hover:text-slate-900 transition">Docs Hub</a>
+                <a href="../demo.html" class="text-slate-600 hover:text-indigo-600 transition">Playground</a>
+                <a href="form.html" class="text-slate-600 hover:text-indigo-600 transition">Form Sample</a>
+                <a href="table.html" class="text-slate-600 hover:text-indigo-600 transition">Table Sample</a>
+                <a href="../demo.html" class="px-3 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 shadow-sm transition">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="bg-gradient-to-b from-white to-slate-50 border-b border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-mono font-semibold">
+                <span>CDN Samples &bull; Zero Server Dependencies</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                Interactive CDN Samples & Examples
+            </h1>
+            <p class="text-sm text-slate-600 max-w-2xl mx-auto">
+                Explore real-world implementations demonstrating the 2-file compilation pipeline. All samples load the latest compiler bundle from GitHub Pages CDN.
+            </p>
+        </div>
+    </section>
+
+    <!-- Samples Grid -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Sample 1 -->
+            <a href="form.html" class="group bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold group-hover:bg-indigo-600 group-hover:text-white transition">
+                            📝
+                        </div>
+                        <span class="px-2.5 py-1 text-xs font-mono rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            CDN Sample 01
+                        </span>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition mb-2">
+                        Dynamic Form Engine Sample
+                    </h2>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        Demonstrates dynamic row generation from <code class="text-indigo-600">operation: "iterate"</code> on columns metadata, excluding hidden keys (<code class="text-indigo-600">isVisible: false</code>), binding values, and rendering live Bootstrap form controls.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
+                    <span>Source: structure.json + data.json</span>
+                    <span class="text-indigo-600 font-bold group-hover:translate-x-1 transition">&rarr; Open</span>
+                </div>
+            </a>
+
+            <!-- Sample 2 -->
+            <a href="table.html" class="group bg-white p-6 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold group-hover:bg-emerald-600 group-hover:text-white transition">
+                            📊
+                        </div>
+                        <span class="px-2.5 py-1 text-xs font-mono rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            CDN Sample 02
+                        </span>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition mb-2">
+                        Data Table / Grid Engine Sample
+                    </h2>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        Demonstrates nested iterations: <code class="text-emerald-600">thead</code> loops over columns, <code class="text-emerald-600">tbody</code> loops over rows &times; columns to render cell values, and <code class="text-emerald-600">tfoot</code> computes aggregations.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
+                    <span>Source: nested thead/tbody</span>
+                    <span class="text-emerald-600 font-bold group-hover:translate-x-1 transition">&rarr; Open</span>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        json-to-spec &bull; KeshavSoft &bull; MIT License
+    </footer>
+</body>
+</html>

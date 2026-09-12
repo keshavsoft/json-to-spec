@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>json-to-spec | Minimalist 2-File JSON Spec Compiler</title>
+    <title>json-to-spec | Pure JSON Specification Compiler</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,9 +26,9 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
 
     <header class="border-b border-slate-800/80 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center font-bold text-white shadow-lg text-lg">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-emerald-500 flex items-center justify-center font-bold text-white shadow-lg text-lg">
                     ✨
                 </div>
                 <div>
@@ -39,8 +39,13 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-2 font-mono text-xs text-slate-400">
-                <span class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700">structure.json + data.json &rarr; spec.json</span>
+            <div class="flex items-center gap-3">
+                <a href="./docs/index.html" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center gap-1.5 shadow-sm">
+                    <span>📖</span> Docs & Playground
+                </a>
+                <a href="./test/cdn/index.html" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition flex items-center gap-1">
+                    <span>🌐</span> CDN Tests
+                </a>
             </div>
         </div>
     </header>
@@ -55,19 +60,27 @@
             <p class="max-w-2xl mx-auto text-slate-400 text-sm leading-relaxed">
                 Compiles declarative UI structures and data payloads into valid JSON specifications ready for downstream DOM engines like <code class="text-indigo-300 font-mono">json-to-dom</code>.
             </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a href="./docs/index.html" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition flex items-center gap-2">
+                    <span>📖</span> Open Documentation Portal
+                </a>
+                <a href="./docs/demo.html" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-xs transition flex items-center gap-2">
+                    <span>⚡</span> Live Browser Playground
+                </a>
+            </div>
         </div>
 
-        <!-- 2 Demos -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <!-- Card 1: Form Engine -->
-            <a href="./test/form/index.html" class="group block p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition duration-300">
+            <a href="./docs/samples/form.html" class="group block p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition duration-300">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition">
                         📝
                     </div>
                     <span class="px-2.5 py-1 text-xs font-mono rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                        Live Demo &rarr;
+                        CDN Sample &rarr;
                     </span>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition">
@@ -79,18 +92,17 @@
                 <div class="flex items-center gap-2 text-[11px] font-mono text-slate-500">
                     <span>• Header/Footer shell</span>
                     <span>• Hidden field filtering</span>
-                    <span>• Value binding</span>
                 </div>
             </a>
 
             <!-- Card 2: Table Engine -->
-            <a href="./test/table/index.html" class="group block p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition duration-300">
+            <a href="./docs/samples/table.html" class="group block p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition duration-300">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition">
                         📊
                     </div>
                     <span class="px-2.5 py-1 text-xs font-mono rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-                        Live Demo &rarr;
+                        CDN Sample &rarr;
                     </span>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition">
@@ -101,8 +113,29 @@
                 </p>
                 <div class="flex items-center gap-2 text-[11px] font-mono text-slate-500">
                     <span>• Nested thead/tbody</span>
-                    <span>• Row cell binding</span>
                     <span>• Summary footer</span>
+                </div>
+            </a>
+
+            <!-- Card 3: Online CDN Tests -->
+            <a href="./test/cdn/index.html" class="group block p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 transition duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        🌐
+                    </div>
+                    <span class="px-2.5 py-1 text-xs font-mono rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                        CDN Tests &rarr;
+                    </span>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition">
+                    Online CDN Test Suite
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                    Standalone test workbenches importing directly from GitHub Pages CDN. Zero local server or build tools required.
+                </p>
+                <div class="flex items-center gap-2 text-[11px] font-mono text-slate-500">
+                    <span>• Pure CDN imports</span>
+                    <span>• Standalone HTML</span>
                 </div>
             </a>
 
@@ -112,23 +145,26 @@
         <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
             <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">Usage</h4>
             <pre class="p-4 rounded-xl bg-slate-950 text-xs font-mono text-indigo-300 leading-relaxed overflow-x-auto">
-import { compile } from "./src/index.js";
+// 1. Import from CDN or npm
+import { compile } from "https://keshavsoft.github.io/json-to-spec/dist/v1/min.js";
+import { buildSpecElement } from "https://keshavsoft.github.io/json-to-dom/dist/v16/min.js";
 
-// 1. structure.json (UI blueprint)
-// 2. data.json (data collections & values)
-const compiledSpec = compile({
+// 2. Compile structure.json (HOW) + data.json (WHAT) -> spec.json
+const spec = compile({
     inStructure: structure,
     inData: data
 });
 
-// Pass compiledSpec to json-to-dom to build live elements
+// 3. Render spec directly to DOM
+const element = buildSpecElement({ inSpec: spec });
+document.getElementById("app").appendChild(element);
 </pre>
         </div>
 
     </main>
 
     <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-600">
-        json-to-spec &bull; KeshavSoft
+        json-to-spec &bull; KeshavSoft &bull; MIT License
     </footer>
 
 </body>

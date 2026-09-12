@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Engine Sample (CDN) | json-to-spec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="../index.html" class="flex items-center space-x-2 font-black text-lg text-slate-900 hover:text-emerald-600 transition">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-black text-sm">JS</span>
+                    <span>json-to-spec</span>
+                </a>
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-semibold px-2.5 py-0.5 rounded-full border border-emerald-200">Table Sample (CDN)</span>
+            </div>
+            <nav class="flex items-center space-x-4 text-sm font-medium">
+                <a href="index.html" class="text-emerald-600 font-semibold">&larr; All Samples</a>
+                <a href="form.html" class="text-slate-600 hover:text-slate-900 transition">Form Sample</a>
+                <a href="../demo.html" class="px-3 py-1.5 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 shadow-sm transition">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+
+        <!-- Header Info -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+                <span class="text-xs uppercase font-bold text-emerald-600 font-mono">Sample 02 &bull; 100% CDN Engine</span>
+                <span id="status-badge" class="px-2.5 py-0.5 text-xs font-mono rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    Loading Table via CDN...
+                </span>
+            </div>
+            <h1 class="text-2xl font-black text-slate-900">Data Grid / Table Engine</h1>
+            <p class="text-xs text-slate-600 leading-relaxed max-w-3xl">
+                Demonstrates nested iterations: <code class="text-emerald-600">thead</code> iterates over columns, <code class="text-emerald-600">tbody</code> iterates over rows &times; columns to bind cell values, and <code class="text-emerald-600">tfoot</code> computes aggregations.
+            </p>
+        </div>
+
+        <!-- Rendered DOM Target -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="px-6 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Rendered Table Output
+                </span>
+                <button id="re-render-btn" class="px-3 py-1 text-xs font-semibold bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition">
+                    ⚡ Re-Compile & Render
+                </button>
+            </div>
+            <div class="p-8 bg-slate-100/50 flex justify-center overflow-x-auto">
+                <div id="table-container" class="w-full max-w-4xl">
+                    <!-- Table DOM will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Inspection Tabs: Structure, Data, Spec -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="px-6 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs font-semibold">
+                    <button id="tab-struct" class="px-3 py-1 rounded-lg bg-emerald-600 text-white transition">structure.json</button>
+                    <button id="tab-data" class="px-3 py-1 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition">data.json</button>
+                    <button id="tab-spec" class="px-3 py-1 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition">spec.json (Output)</button>
+                </div>
+                <button id="copy-btn" class="px-3 py-1 text-xs font-mono bg-slate-100 hover:bg-slate-200 rounded border border-slate-200 text-slate-600 transition">
+                    Copy JSON
+                </button>
+            </div>
+            <div class="p-4 bg-slate-900 overflow-auto max-h-96">
+                <pre id="code-display" class="text-xs text-teal-300 leading-relaxed"></pre>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        json-to-spec &bull; KeshavSoft &bull; MIT License
+    </footer>
+
+    <!-- Execution Script via CDN -->
+    <script type="module">
+        let compile;
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
+        try {
+            if (isLocal) {
+                const mod = await import("../dist/min.js");
+                compile = mod.compile;
+            } else {
+                const mod = await import("https://keshavsoft.github.io/json-to-spec/dist/v1/min.js");
+                compile = mod.compile;
+            }
+        } catch {
+            const mod = await import("../dist/min.js");
+            compile = mod.compile;
+        }
+
+        import { buildSpecElement } from "https://keshavsoft.github.io/json-to-dom/dist/v16/min.js";
+
+        const SAMPLE_STRUCTURE = {
+            "tagName": "div",
+            "attributes": {
+                "class": "card shadow-sm border border-slate-200 rounded-xl overflow-hidden max-w-4xl mx-auto"
+            },
+            "children": [
+                {
+                    "tagName": "div",
+                    "attributes": {
+                        "class": "card-header bg-slate-100 px-6 py-4 border-b border-slate-200 d-flex justify-content-between align-items-center"
+                    },
+                    "children": [
+                        {
+                            "tagName": "div",
+                            "children": [
+                                { "tagName": "h2", "textContent": "Item Inventory Table", "attributes": { "class": "h5 mb-0 fw-bold text-slate-800" } },
+                                { "tagName": "p", "textContent": "Rendered via thead + tbody nested iterations", "attributes": { "class": "small text-muted mb-0" } }
+                            ]
+                        },
+                        { "tagName": "span", "textContent": "${summary.totalItems} Items", "attributes": { "class": "badge bg-indigo-600 text-white font-mono px-3 py-1.5" } }
+                    ]
+                },
+                {
+                    "tagName": "div",
+                    "attributes": { "class": "table-responsive" },
+                    "children": [
+                        {
+                            "tagName": "table",
+                            "attributes": { "class": "table table-hover table-striped align-middle mb-0" },
+                            "children": [
+                                {
+                                    "tagName": "thead",
+                                    "attributes": { "class": "table-light" },
+                                    "children": [
+                                        {
+                                            "tagName": "tr",
+                                            "children": [
+                                                { "tagName": "th", "textContent": "#", "attributes": { "class": "text-center py-3", "style": "width: 50px;" } },
+                                                {
+                                                    "operation": "iterate",
+                                                    "source": "columns",
+                                                    "filter": { "isVisible": true },
+                                                    "template": {
+                                                        "tagName": "th",
+                                                        "textContent": "${title}",
+                                                        "attributes": { "class": "text-start py-3" }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tagName": "tbody",
+                                    "children": [
+                                        {
+                                            "operation": "iterate",
+                                            "source": "rows",
+                                            "template": {
+                                                "tagName": "tr",
+                                                "children": [
+                                                    { "tagName": "td", "textContent": "${$number}", "attributes": { "class": "text-center font-mono small text-muted py-2.5" } },
+                                                    {
+                                                        "operation": "iterate",
+                                                        "source": "columns",
+                                                        "filter": { "isVisible": true },
+                                                        "template": {
+                                                            "tagName": "td",
+                                                            "textContent": "${value}",
+                                                            "attributes": { "class": "text-start py-2.5" }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tagName": "tfoot",
+                                    "attributes": { "class": "table-light border-top" },
+                                    "children": [
+                                        {
+                                            "tagName": "tr",
+                                            "children": [
+                                                {
+                                                    "tagName": "td",
+                                                    "textContent": "Summary: Total Items: ${summary.totalItems} | Average Rate: ?${summary.avgRate}",
+                                                    "attributes": { "colspan": "6", "class": "small text-muted py-2.5 px-4 fw-semibold" }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        const SAMPLE_DATA = {
+            "columns": [
+                { "columnName": "Category", "title": "Category", "field": "Category", "isVisible": true },
+                { "columnName": "ItemName", "title": "Item Name", "field": "ItemName", "isVisible": true },
+                { "columnName": "Service", "title": "Service", "field": "Service", "isVisible": true },
+                { "columnName": "Rate", "title": "Rate", "field": "Rate", "isVisible": true },
+                { "columnName": "pk", "title": "pk", "field": "pk", "isVisible": false }
+            ],
+            "rows": [
+                { "pk": "item-001", "Category": "Beverages", "ItemName": "Green Tea", "Service": "Packaging", "Rate": 150 },
+                { "pk": "item-002", "Category": "Beverages", "ItemName": "Espresso Coffee", "Service": "Grinding", "Rate": 220 },
+                { "pk": "item-003", "Category": "Bakery", "ItemName": "Almond Cookies", "Service": "Baking", "Rate": 95 },
+                { "pk": "item-004", "Category": "Beverages", "ItemName": "Orange Juice", "Service": "Bottling", "Rate": 120 }
+            ],
+            "summary": { "totalItems": 4, "avgRate": 146.25 }
+        };
+
+        let currentTab = "struct";
+        let compiledSpecResult = null;
+
+        const codeDisplay = document.getElementById("code-display");
+        const tableContainer = document.getElementById("table-container");
+        const statusBadge = document.getElementById("status-badge");
+
+        function updateCodeDisplay() {
+            if (currentTab === "struct") {
+                codeDisplay.textContent = JSON.stringify(SAMPLE_STRUCTURE, null, 2);
+                codeDisplay.className = "text-xs text-teal-300 leading-relaxed";
+            } else if (currentTab === "data") {
+                codeDisplay.textContent = JSON.stringify(SAMPLE_DATA, null, 2);
+                codeDisplay.className = "text-xs text-emerald-300 leading-relaxed";
+            } else {
+                codeDisplay.textContent = JSON.stringify(compiledSpecResult, null, 2);
+                codeDisplay.className = "text-xs text-amber-300 leading-relaxed";
+            }
+        }
+
+        function runCompilation() {
+            try {
+                const t0 = performance.now();
+                compiledSpecResult = compile({ inStructure: SAMPLE_STRUCTURE, inData: SAMPLE_DATA });
+                const elapsed = (performance.now() - t0).toFixed(2);
+
+                tableContainer.innerHTML = "";
+                const dom = buildSpecElement({ inSpec: compiledSpecResult });
+                if (Array.isArray(dom)) tableContainer.append(...dom);
+                else if (dom) tableContainer.appendChild(dom);
+
+                statusBadge.textContent = `Compiled in ${elapsed}ms via CDN`;
+                updateCodeDisplay();
+            } catch (err) {
+                console.error(err);
+                statusBadge.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        document.getElementById("tab-struct").addEventListener("click", (e) => {
+            currentTab = "struct";
+            resetTabButtons(e.target);
+            updateCodeDisplay();
+        });
+        document.getElementById("tab-data").addEventListener("click", (e) => {
+            currentTab = "data";
+            resetTabButtons(e.target);
+            updateCodeDisplay();
+        });
+        document.getElementById("tab-spec").addEventListener("click", (e) => {
+            currentTab = "spec";
+            resetTabButtons(e.target);
+            updateCodeDisplay();
+        });
+
+        function resetTabButtons(activeBtn) {
+            [document.getElementById("tab-struct"), document.getElementById("tab-data"), document.getElementById("tab-spec")].forEach(b => {
+                b.className = "px-3 py-1 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition";
+            });
+            activeBtn.className = "px-3 py-1 rounded-lg bg-emerald-600 text-white transition";
+        }
+
+        document.getElementById("re-render-btn").addEventListener("click", runCompilation);
+
+        document.getElementById("copy-btn").addEventListener("click", () => {
+            navigator.clipboard.writeText(codeDisplay.textContent).then(() => {
+                const btn = document.getElementById("copy-btn");
+                btn.textContent = "Copied!";
+                setTimeout(() => { btn.textContent = "Copy JSON"; }, 1500);
+            });
+        });
+
+        runCompilation();
+    </script>
+</body>
+</html>
