@@ -1,0 +1,42 @@
+{
+  "columns": [
+    {
+      "columnName": "Category",
+      "title": "Category",
+      "field": "Category",
+      "value": "Beverages",
+      "isVisible": true
+    },
+    {
+      "columnName": "ItemName",
+      "title": "Item Name",
+      "field": "ItemName",
+      "value": "Green Tea",
+      "isVisible": true
+    },
+    {
+      "columnName": "Service",
+      "title": "Service",
+      "field": "Service",
+      "value": "Packaging",
+      "isVisible": true
+    },
+    {
+      "columnName": "Rate",
+      "title": "Rate",
+      "field": "Rate",
+      "value": 150,
+      "isVisible": true
+    },
+    {
+      "columnName": "pk",
+      "title": "pk",
+      "field": "pk",
+      "isVisible": false
+    }
+  ],
+  "Category": "Beverages",
+  "ItemName": "Green Tea",
+  "Service": "Packaging",
+  "Rate": 150
+}

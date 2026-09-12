@@ -1,0 +1,28 @@
+{
+  "name": "json-to-spec",
+  "version": "1.0.0",
+  "description": "Pure JSON Specification Compiler: (structure.json + data.json) -> Spec JSON",
+  "type": "module",
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "samples",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "start": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "json-to-spec",
+    "json-to-dom",
+    "template",
+    "compiler",
+    "spec",
+    "declarative-ui"
+  ],
+  "author": "KeshavSoft",
+  "license": "MIT"
+}
