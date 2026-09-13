@@ -47,19 +47,17 @@
                   "name": "filterStatus",
                   "class": "form-select form-select-sm"
                 },
-                "children": [
-                  {
-                    "operation": "iterate",
-                    "source": "toolbar.statusOptions",
-                    "template": {
-                      "tagName": "option",
-                      "textContent": "${text}",
-                      "attributes": {
-                        "value": "${value}"
-                      }
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "toolbar.statusOptions",
+                  "template": {
+                    "tagName": "option",
+                    "textContent": "${text}",
+                    "attributes": {
+                      "value": "${value}"
                     }
                   }
-                ]
+                }
               }
             ]
           },
@@ -97,7 +95,7 @@
         "children": [
           {
             "tagName": "span",
-            "textContent": "Vouchers Directory (Iterated via tableColumns & tableRows)",
+            "textContent": "Vouchers Directory (v3 jsonToSpec architecture)",
             "attributes": { "class": "fw-bold text-dark" }
           },
           {
@@ -128,13 +126,15 @@
                         "attributes": { "class": "text-center", "style": "width: 50px;" }
                       },
                       {
-                        "operation": "iterate",
-                        "source": "tableColumns",
-                        "filter": { "isVisible": true },
-                        "template": {
-                          "tagName": "th",
-                          "textContent": "${title}",
-                          "attributes": { "class": "text-start" }
+                        "jsonToSpec": {
+                          "operation": "iterate",
+                          "source": "tableColumns",
+                          "filter": { "isVisible": true },
+                          "template": {
+                            "tagName": "th",
+                            "textContent": "${title}",
+                            "attributes": { "class": "text-start" }
+                          }
                         }
                       },
                       {
@@ -148,19 +148,19 @@
               },
               {
                 "tagName": "tbody",
-                "children": [
-                  {
-                    "operation": "iterate",
-                    "source": "tableRows",
-                    "template": {
-                      "tagName": "tr",
-                      "children": [
-                        {
-                          "tagName": "td",
-                          "textContent": "${$number}",
-                          "attributes": { "class": "text-center font-monospace text-muted small" }
-                        },
-                        {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "tableRows",
+                  "template": {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "td",
+                        "textContent": "${$number}",
+                        "attributes": { "class": "text-center font-monospace text-muted small" }
+                      },
+                      {
+                        "jsonToSpec": {
                           "operation": "iterate",
                           "source": "tableColumns",
                           "filter": { "isVisible": true },
@@ -169,31 +169,31 @@
                             "textContent": "${value}",
                             "attributes": { "class": "text-start small" }
                           }
-                        },
-                        {
-                          "tagName": "td",
-                          "attributes": { "class": "text-end px-3" },
-                          "children": [
-                            {
-                              "tagName": "button",
-                              "textContent": "Select",
-                              "attributes": {
-                                "type": "button",
-                                "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
-                                "data-action": "selectRow",
-                                "data-action-type": "click",
-                                "data-voucher-no": "${voucherNo}",
-                                "data-party-name": "${partyName}",
-                                "data-amount": "${amount}",
-                                "data-status": "${status}"
-                              }
-                            }
-                          ]
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "tagName": "td",
+                        "attributes": { "class": "text-end px-3" },
+                        "children": [
+                          {
+                            "tagName": "button",
+                            "textContent": "Select",
+                            "attributes": {
+                              "type": "button",
+                              "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
+                              "data-action": "selectRow",
+                              "data-action-type": "click",
+                              "data-voucher-no": "${voucherNo}",
+                              "data-party-name": "${partyName}",
+                              "data-amount": "${amount}",
+                              "data-status": "${status}"
+                            }
+                          }
+                        ]
+                      }
+                    ]
                   }
-                ]
+                }
               },
               {
                 "tagName": "tfoot",
@@ -234,7 +234,7 @@
         "children": [
           {
             "tagName": "span",
-            "textContent": "Voucher Detail Form (Iterated via formColumns)",
+            "textContent": "Voucher Detail Form (v3 jsonToSpec architecture)",
             "attributes": { "class": "fw-bold fs-6 text-dark" }
           },
           {
@@ -253,33 +253,31 @@
           {
             "tagName": "div",
             "attributes": { "class": "row g-3" },
-            "children": [
-              {
-                "operation": "iterate",
-                "source": "formColumns",
-                "filter": { "isVisible": true },
-                "template": {
-                  "tagName": "div",
-                  "attributes": { "class": "col-md-6" },
-                  "children": [
-                    {
-                      "tagName": "label",
-                      "textContent": "${title}",
-                      "attributes": { "class": "form-label fw-semibold text-secondary small" }
-                    },
-                    {
-                      "tagName": "input",
-                      "attributes": {
-                        "name": "${field}",
-                        "type": "${inputType}",
-                        "placeholder": "Enter ${title}...",
-                        "class": "form-control"
-                      }
+            "jsonToSpec": {
+              "operation": "iterate",
+              "source": "formColumns",
+              "filter": { "isVisible": true },
+              "template": {
+                "tagName": "div",
+                "attributes": { "class": "col-md-6" },
+                "children": [
+                  {
+                    "tagName": "label",
+                    "textContent": "${title}",
+                    "attributes": { "class": "form-label fw-semibold text-secondary small" }
+                  },
+                  {
+                    "tagName": "input",
+                    "attributes": {
+                      "name": "${field}",
+                      "type": "${inputType}",
+                      "placeholder": "Enter ${title}...",
+                      "class": "form-control"
                     }
-                  ]
-                }
+                  }
+                ]
               }
-            ]
+            }
           }
         ]
       },

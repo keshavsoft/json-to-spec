@@ -21,7 +21,7 @@
               },
               {
                 "tagName": "small",
-                "textContent": "Compiled via v2 instructionEngine (columns & rows iteration)",
+                "textContent": "Compiled via v3 jsonToSpec architecture",
                 "attributes": { "class": "text-muted" }
               }
             ]
@@ -62,15 +62,17 @@
                         "attributes": { "class": "text-center", "style": "width: 50px;" }
                       },
                       {
-                        "operation": "iterate",
-                        "source": "columns",
-                        "filter": {
-                          "isVisible": true
-                        },
-                        "template": {
-                          "tagName": "th",
-                          "textContent": "${title}",
-                          "attributes": { "class": "text-start" }
+                        "jsonToSpec": {
+                          "operation": "iterate",
+                          "source": "columns",
+                          "filter": {
+                            "isVisible": true
+                          },
+                          "template": {
+                            "tagName": "th",
+                            "textContent": "${title}",
+                            "attributes": { "class": "text-start" }
+                          }
                         }
                       },
                       {
@@ -84,19 +86,19 @@
               },
               {
                 "tagName": "tbody",
-                "children": [
-                  {
-                    "operation": "iterate",
-                    "source": "rows",
-                    "template": {
-                      "tagName": "tr",
-                      "children": [
-                        {
-                          "tagName": "td",
-                          "textContent": "${$number}",
-                          "attributes": { "class": "text-center font-monospace text-muted small" }
-                        },
-                        {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "rows",
+                  "template": {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "td",
+                        "textContent": "${$number}",
+                        "attributes": { "class": "text-center font-monospace text-muted small" }
+                      },
+                      {
+                        "jsonToSpec": {
                           "operation": "iterate",
                           "source": "columns",
                           "filter": {
@@ -107,31 +109,31 @@
                             "textContent": "${value}",
                             "attributes": { "class": "text-start small" }
                           }
-                        },
-                        {
-                          "tagName": "td",
-                          "attributes": { "class": "text-end px-3" },
-                          "children": [
-                            {
-                              "tagName": "button",
-                              "textContent": "Select",
-                              "attributes": {
-                                "type": "button",
-                                "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
-                                "data-action": "selectRow",
-                                "data-action-type": "click",
-                                "data-voucher-no": "${voucherNo}",
-                                "data-party-name": "${partyName}",
-                                "data-amount": "${amount}",
-                                "data-type": "${type}"
-                              }
-                            }
-                          ]
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "tagName": "td",
+                        "attributes": { "class": "text-end px-3" },
+                        "children": [
+                          {
+                            "tagName": "button",
+                            "textContent": "Select",
+                            "attributes": {
+                              "type": "button",
+                              "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
+                              "data-action": "selectRow",
+                              "data-action-type": "click",
+                              "data-voucher-no": "${voucherNo}",
+                              "data-party-name": "${partyName}",
+                              "data-amount": "${amount}",
+                              "data-type": "${type}"
+                            }
+                          }
+                        ]
+                      }
+                    ]
                   }
-                ]
+                }
               },
               {
                 "tagName": "tfoot",
