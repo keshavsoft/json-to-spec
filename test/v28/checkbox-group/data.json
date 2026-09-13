@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "formTitle": "Checkbox Groups",
+    "formBadge": "multiple checked values per field",
+    "formLead": "Each group repeats nested checkbox options using the same field name, so extraction returns arrays.",
+    "formHint": "Save to verify grouped checkbox values are emitted as arrays."
+  },
+  "columns": [
+    {
+      "title": "Compliance Flags",
+      "field": "complianceFlags",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "gst-applicable", "text": "GST Applicable", "checked": true },
+        { "value": "requires-tds", "text": "TDS Applicable", "checked": false },
+        { "value": "docs-verified", "text": "Documents Verified", "checked": true }
+      ]
+    },
+    {
+      "title": "Distribution Channels",
+      "field": "distributionChannels",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "mail", "text": "Mail Copy", "checked": true },
+        { "value": "portal", "text": "Portal Upload", "checked": true },
+        { "value": "archive", "text": "Archive Bucket", "checked": false }
+      ]
+    }
+  ]
+}

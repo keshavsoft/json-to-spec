@@ -124,6 +124,7 @@
                               "data-action": "selectRow",
                               "data-action-type": "click",
                               "data-voucher-no": "${voucherNo}",
+                              "data-voucher-date": "${voucherDate}",
                               "data-party-name": "${partyName}",
                               "data-amount": "${amount}",
                               "data-type": "${type}"

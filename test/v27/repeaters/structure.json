@@ -1,0 +1,553 @@
+[
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border-0 shadow-sm bg-primary-subtle mb-4"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-body p-4"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "textContent": "${hero.title}",
+            "attributes": {
+              "class": "fw-bold fs-4 text-primary-emphasis mb-1"
+            }
+          },
+          {
+            "tagName": "div",
+            "textContent": "${hero.subtitle}",
+            "attributes": {
+              "class": "text-secondary mb-3"
+            }
+          },
+          {
+            "tagName": "div",
+            "attributes": {
+              "class": "d-flex flex-wrap gap-2"
+            },
+            "children": [
+              {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "hero.badges",
+                  "template": {
+                    "tagName": "span",
+                    "textContent": "${text}",
+                    "attributes": {
+                      "class": "${className}"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white overflow-hidden mb-4"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-header bg-light border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "span",
+            "textContent": "Summary Card Repetition",
+            "attributes": {
+              "class": "fw-bold text-dark"
+            }
+          },
+          {
+            "tagName": "span",
+            "textContent": "1 iterate → many cards",
+            "attributes": {
+              "class": "badge bg-dark-subtle text-dark border"
+            }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-body p-4"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "attributes": {
+              "class": "row g-3"
+            },
+            "children": [
+              {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "summaryCards",
+                  "template": {
+                    "tagName": "div",
+                    "attributes": {
+                      "class": "col-md-4"
+                    },
+                    "children": [
+                      {
+                        "tagName": "div",
+                        "attributes": {
+                          "class": "card h-100 shadow-sm ${cardClass}"
+                        },
+                        "children": [
+                          {
+                            "tagName": "div",
+                            "attributes": {
+                              "class": "card-body"
+                            },
+                            "children": [
+                              {
+                                "tagName": "div",
+                                "textContent": "${cardTitle}",
+                                "attributes": {
+                                  "class": "text-uppercase small fw-semibold text-secondary mb-2"
+                                }
+                              },
+                              {
+                                "tagName": "div",
+                                "textContent": "${cardValue}",
+                                "attributes": {
+                                  "class": "display-6 fw-bold mb-1 ${valueClass}"
+                                }
+                              },
+                              {
+                                "tagName": "div",
+                                "textContent": "${cardLead}",
+                                "attributes": {
+                                  "class": "small text-secondary mb-2"
+                                }
+                              },
+                              {
+                                "tagName": "div",
+                                "textContent": "${cardTrend}",
+                                "attributes": {
+                                  "class": "small fw-semibold text-dark"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "div",
+                            "attributes": {
+                              "class": "card-footer bg-transparent border-0 pt-0 px-3 pb-3"
+                            },
+                            "children": [
+                              {
+                                "tagName": "button",
+                                "textContent": "${buttonText}",
+                                "attributes": {
+                                  "type": "button",
+                                  "class": "${buttonClass}",
+                                  "data-action": "inspectSummaryCard",
+                                  "data-action-type": "click",
+                                  "data-card-title": "${cardTitle}",
+                                  "data-card-value": "${cardValue}",
+                                  "data-card-trend": "${cardTrend}",
+                                  "data-card-tone": "${cardTone}"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white overflow-hidden mb-4"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-header bg-light border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "span",
+            "textContent": "UL / LI Group Repetition",
+            "attributes": {
+              "class": "fw-bold text-dark"
+            }
+          },
+          {
+            "tagName": "span",
+            "textContent": "nested iterate inside list groups",
+            "attributes": {
+              "class": "badge bg-success-subtle text-success-emphasis border border-success-subtle"
+            }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-body p-4"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "attributes": {
+              "class": "row g-4"
+            },
+            "children": [
+              {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "taskGroups",
+                  "template": {
+                    "tagName": "div",
+                    "attributes": {
+                      "class": "col-lg-6"
+                    },
+                    "children": [
+                      {
+                        "tagName": "div",
+                        "attributes": {
+                          "class": "card h-100 border shadow-sm"
+                        },
+                        "children": [
+                          {
+                            "tagName": "div",
+                            "attributes": {
+                              "class": "card-header bg-body-tertiary d-flex justify-content-between align-items-start gap-3"
+                            },
+                            "children": [
+                              {
+                                "tagName": "div",
+                                "children": [
+                                  {
+                                    "tagName": "div",
+                                    "textContent": "${groupTitle}",
+                                    "attributes": {
+                                      "class": "fw-bold text-dark"
+                                    }
+                                  },
+                                  {
+                                    "tagName": "div",
+                                    "textContent": "${groupLead}",
+                                    "attributes": {
+                                      "class": "small text-secondary mt-1"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "span",
+                                "textContent": "${groupCountLabel}",
+                                "attributes": {
+                                  "class": "badge bg-dark-subtle text-dark border"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "ul",
+                            "attributes": {
+                              "class": "list-group list-group-flush"
+                            },
+                            "children": [
+                              {
+                                "jsonToSpec": {
+                                  "operation": "iterate",
+                                  "source": "items",
+                                  "template": {
+                                    "tagName": "li",
+                                    "attributes": {
+                                      "class": "list-group-item d-flex justify-content-between align-items-start gap-3"
+                                    },
+                                    "children": [
+                                      {
+                                        "tagName": "div",
+                                        "attributes": {
+                                          "class": "flex-grow-1"
+                                        },
+                                        "children": [
+                                          {
+                                            "tagName": "div",
+                                            "textContent": "${label}",
+                                            "attributes": {
+                                              "class": "fw-semibold text-dark"
+                                            }
+                                          },
+                                          {
+                                            "tagName": "div",
+                                            "textContent": "${helper}",
+                                            "attributes": {
+                                              "class": "small text-secondary mt-1"
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "tagName": "div",
+                                        "attributes": {
+                                          "class": "d-flex flex-column align-items-end gap-2"
+                                        },
+                                        "children": [
+                                          {
+                                            "tagName": "span",
+                                            "textContent": "${statusText}",
+                                            "attributes": {
+                                              "class": "${statusClass}"
+                                            }
+                                          },
+                                          {
+                                            "tagName": "button",
+                                            "textContent": "${buttonText}",
+                                            "attributes": {
+                                              "type": "button",
+                                              "class": "btn btn-outline-secondary btn-sm",
+                                              "data-action": "inspectChecklistItem",
+                                              "data-action-type": "click",
+                                              "data-group-title": "${groupTitle}",
+                                              "data-task-label": "${label}",
+                                              "data-task-status": "${statusText}"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white overflow-hidden"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-header bg-light border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "span",
+            "textContent": "Accordion Repetition",
+            "attributes": {
+              "class": "fw-bold text-dark"
+            }
+          },
+          {
+            "tagName": "span",
+            "textContent": "repeat sections + nested entries",
+            "attributes": {
+              "class": "badge bg-info-subtle text-info-emphasis border border-info-subtle"
+            }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-body p-4"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "attributes": {
+              "class": "accordion",
+              "id": "voucher-repeaters-accordion"
+            },
+            "children": [
+              {
+                "jsonToSpec": {
+                  "operation": "iterate",
+                  "source": "accordionSections",
+                  "template": {
+                    "tagName": "div",
+                    "attributes": {
+                      "class": "accordion-item border rounded-3 overflow-hidden mb-3"
+                    },
+                    "children": [
+                      {
+                        "tagName": "h2",
+                        "attributes": {
+                          "class": "accordion-header",
+                          "id": "heading-${sectionId}"
+                        },
+                        "children": [
+                          {
+                            "tagName": "button",
+                            "textContent": "${sectionTitle}",
+                            "attributes": {
+                              "class": "${buttonClass}",
+                              "type": "button",
+                              "data-bs-toggle": "collapse",
+                              "data-bs-target": "#collapse-${sectionId}",
+                              "aria-expanded": "${ariaExpanded}",
+                              "aria-controls": "collapse-${sectionId}"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "tagName": "div",
+                        "attributes": {
+                          "id": "collapse-${sectionId}",
+                          "class": "${collapseClass}",
+                          "aria-labelledby": "heading-${sectionId}",
+                          "data-bs-parent": "#voucher-repeaters-accordion"
+                        },
+                        "children": [
+                          {
+                            "tagName": "div",
+                            "attributes": {
+                              "class": "accordion-body"
+                            },
+                            "children": [
+                              {
+                                "tagName": "div",
+                                "attributes": {
+                                  "class": "d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"
+                                },
+                                "children": [
+                                  {
+                                    "tagName": "div",
+                                    "textContent": "${sectionLead}",
+                                    "attributes": {
+                                      "class": "small text-secondary"
+                                    }
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "textContent": "${sectionMeta}",
+                                    "attributes": {
+                                      "class": "badge bg-dark-subtle text-dark border"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "div",
+                                "attributes": {
+                                  "class": "d-grid gap-2"
+                                },
+                                "children": [
+                                  {
+                                    "jsonToSpec": {
+                                      "operation": "iterate",
+                                      "source": "entries",
+                                      "template": {
+                                        "tagName": "div",
+                                        "attributes": {
+                                          "class": "border rounded-3 p-3 d-flex justify-content-between align-items-center gap-3 flex-wrap"
+                                        },
+                                        "children": [
+                                          {
+                                            "tagName": "div",
+                                            "children": [
+                                              {
+                                                "tagName": "div",
+                                                "textContent": "${entryTitle}",
+                                                "attributes": {
+                                                  "class": "fw-semibold text-dark"
+                                                }
+                                              },
+                                              {
+                                                "tagName": "div",
+                                                "textContent": "${entrySubtitle}",
+                                                "attributes": {
+                                                  "class": "small text-secondary mt-1"
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "tagName": "div",
+                                            "attributes": {
+                                              "class": "d-flex align-items-center gap-2 flex-wrap"
+                                            },
+                                            "children": [
+                                              {
+                                                "tagName": "span",
+                                                "textContent": "${entryAmount}",
+                                                "attributes": {
+                                                  "class": "small fw-semibold text-dark"
+                                                }
+                                              },
+                                              {
+                                                "tagName": "span",
+                                                "textContent": "${entryStatus}",
+                                                "attributes": {
+                                                  "class": "${statusClass}"
+                                                }
+                                              },
+                                              {
+                                                "tagName": "button",
+                                                "textContent": "Inspect",
+                                                "attributes": {
+                                                  "type": "button",
+                                                  "class": "btn btn-outline-primary btn-sm",
+                                                  "data-action": "inspectAccordionEntry",
+                                                  "data-action-type": "click",
+                                                  "data-section-title": "${sectionTitle}",
+                                                  "data-entry-title": "${entryTitle}",
+                                                  "data-entry-status": "${entryStatus}",
+                                                  "data-entry-amount": "${entryAmount}"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

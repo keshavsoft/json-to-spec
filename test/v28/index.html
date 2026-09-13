@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON to Spec v27 — Structure + Data Separation Pipeline</title>
-    <!-- Bootstrap 5.3 CSS -->
+    <title>JSON to Spec v28 — Separate Control Folders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-canvas: #0f172a;
-            --card-bg: #1e293b;
             --border-color: #334155;
-            --accent: #38bdf8;
         }
         body {
             background-color: #f8fafc;
@@ -41,87 +38,63 @@
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .nav-pills .nav-link.active {
-            background-color: #2563eb;
-        }
         #dom-render-container {
             min-height: 420px;
-        }
-        .badge-pipeline {
-            font-size: 0.8rem;
-            letter-spacing: 0.02em;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
     <header class="pipeline-header py-3 px-4 shadow-sm mb-4">
         <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="badge bg-primary px-2.5 py-1.5 fw-semibold fs-6">json-to-spec v27</span>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="badge bg-primary px-2.5 py-1.5 fw-semibold fs-6">json-to-spec v28</span>
                     <i class="bi bi-arrow-right text-info"></i>
+                    <span class="badge bg-dark border border-secondary px-2.5 py-1.5 fw-semibold fs-6">Separate Control Folders</span>
                     <span class="badge bg-dark border border-secondary px-2.5 py-1.5 fw-semibold fs-6">json-to-dom v27 Local Bundle</span>
                 </div>
-                <h1 class="h4 mb-0 mt-1 fw-bold text-white">Structure + Data Separation Pipeline</h1>
-                <p class="small text-secondary mb-0">Decoupling <code>structure.json</code> (HOW/template) and <code>data.json</code> (WHAT/business data) into compiled <code>spec.json</code></p>
+                <h1 class="h4 mb-0 mt-1 fw-bold text-white">Dedicated Control Workbench</h1>
+                <p class="small text-secondary mb-0">Each control family gets its own folder with isolated <code>structure.json</code> and <code>data.json</code>.</p>
             </div>
             <div class="d-flex flex-wrap align-items-center gap-2">
-                <span id="cdn-status-badge" class="badge bg-secondary py-2 px-3 small">Loading local renderer...</span>
+                <span id="renderer-status-badge" class="badge bg-success py-2 px-3 small">Connected to local json-to-dom bundle</span>
+                <span id="folder-badge" class="badge bg-info text-dark py-2 px-3 small">Folder: ./input/</span>
                 <span id="compile-time-badge" class="badge bg-dark border border-secondary py-2 px-3 small">Compiling...</span>
                 <span id="action-event-badge" class="badge bg-secondary py-2 px-3 small">Awaiting Event</span>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="container-fluid px-4 pb-5">
-        
-        <!-- Variation Switcher Controls -->
         <div class="card card-stage p-3 mb-4 bg-white">
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="fw-semibold text-muted small text-uppercase">Variation:</span>
-                    <div class="btn-group" role="group" aria-label="Variation Switcher">
-                        <button type="button" class="btn btn-primary active px-3" data-variation-tab="hybrid">
-                            <i class="bi bi-layers-half me-1"></i> Hybrid Compound
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="table">
-                            <i class="bi bi-table me-1"></i> Table Only
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="form">
-                            <i class="bi bi-ui-checks me-1"></i> Form Only
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="controls">
-                            <i class="bi bi-sliders2 me-1"></i> Controls Showcase
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="repeaters">
-                            <i class="bi bi-list-ul me-1"></i> Repeaters Showcase
-                        </button>
-                    </div>
+            <div class="d-flex flex-column gap-3">
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                    <span class="fw-semibold text-muted small text-uppercase me-2">Control Folder:</span>
+                    <button type="button" class="btn btn-primary active px-3" data-variation-tab="input"><i class="bi bi-input-cursor-text me-1"></i> Inputs</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="textarea"><i class="bi bi-textarea-t me-1"></i> Textarea</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="select"><i class="bi bi-menu-button-wide me-1"></i> Select</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="multiselect"><i class="bi bi-list-check me-1"></i> Multi Select</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="radio"><i class="bi bi-record-circle me-1"></i> Radio</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="checkbox"><i class="bi bi-check2-square me-1"></i> Checkbox</button>
+                    <button type="button" class="btn btn-outline-secondary px-3" data-variation-tab="checkboxGroup"><i class="bi bi-ui-checks-grid me-1"></i> Checkbox Group</button>
                 </div>
                 <div class="small text-muted">
-                    Pipeline: <code>structure.json</code> + <code>data.json</code> &rarr; <code>compile()</code> &rarr; <code>specToDom()</code> + <code>listeners</code>
+                    Pipeline: <code>./&lt;control-folder&gt;/structure.json</code> + <code>./&lt;control-folder&gt;/data.json</code> → <code>compile()</code> → <code>specToDom()</code> + <code>listeners</code>
                 </div>
             </div>
         </div>
 
-        <!-- 2-Column Split: Pipeline Inspector (Left) & Render Output (Right) -->
         <div class="row g-4">
-            
-            <!-- Left Column: Pipeline Inspector -->
             <div class="col-lg-5">
                 <div class="card card-stage h-100 bg-white shadow-sm">
                     <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center py-2">
                         <span class="fw-bold text-dark small text-uppercase">
                             <i class="bi bi-diagram-3 me-1 text-primary"></i> Pipeline Stages Inspector
                         </span>
-                        <span class="badge bg-light text-dark border">Inspect Inputs & Output</span>
+                        <span class="badge bg-light text-dark border">Per-folder Inputs & Output</span>
                     </div>
                     <div class="card-body p-3">
-                        
-                        <!-- Nav tabs for stages -->
                         <ul class="nav nav-pills nav-fill mb-3 small" id="pipelineTabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active py-1.5" id="tab-structure-btn" data-bs-toggle="tab" data-bs-target="#tab-structure" type="button" role="tab">
@@ -140,11 +113,10 @@
                             </li>
                         </ul>
 
-                        <!-- Tab contents -->
                         <div class="tab-content mb-3" id="pipelineTabsContent">
                             <div class="tab-pane fade show active" id="tab-structure" role="tabpanel">
                                 <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <small class="text-muted fw-bold">Template &amp; Directives (HOW)</small>
+                                    <small class="text-muted fw-bold">Template & Directives (HOW)</small>
                                     <small class="badge bg-primary">Template</small>
                                 </div>
                                 <pre id="structure-box" class="code-box">Loading structure.json...</pre>
@@ -165,22 +137,19 @@
                             </div>
                         </div>
 
-                        <!-- Action Event Logger Output -->
                         <div class="border rounded p-2 bg-light">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <span class="small fw-bold text-secondary">
                                     <i class="bi bi-lightning-charge-fill text-warning me-1"></i> Last Action Event Payload
                                 </span>
-                                <span class="badge bg-secondary font-monospace" style="font-size:0.7rem;">v27 Listeners</span>
+                                <span class="badge bg-secondary font-monospace" style="font-size:0.7rem;">v28 Controls</span>
                             </div>
-                            <pre id="action-event-box" class="code-box mb-0" style="max-height: 180px;">No event triggered yet. Click a table row or form button.</pre>
+                            <pre id="action-event-box" class="code-box mb-0" style="max-height: 180px;">No event triggered yet. Use Save or Reset inside a control folder demo.</pre>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Live DOM Render Area -->
             <div class="col-lg-7">
                 <div class="card card-stage h-100 bg-white shadow-sm">
                     <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center py-2">
@@ -189,29 +158,23 @@
                         </span>
                         <div class="d-flex align-items-center gap-2">
                             <span class="badge bg-success small"><i class="bi bi-check-circle me-1"></i> pure DOM</span>
-                            <span class="badge bg-info text-dark small">v27 Engine</span>
+                            <span class="badge bg-info text-dark small">v28 Control Suite</span>
                         </div>
                     </div>
                     <div class="card-body p-4">
-                        <!-- Target DOM mount point -->
                         <div id="dom-render-container">
                             <div class="text-center py-5 text-muted">
                                 <div class="spinner-border text-primary mb-3" role="status"></div>
-                                <p>Initializing pipeline and rendering specification...</p>
+                                <p>Initializing separated control folders...</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </main>
 
-    <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Test App Logic -->
     <script type="module" src="./index.js"></script>
 </body>
 </html>

@@ -1,0 +1,149 @@
+{
+  "header": {
+    "title": "Advanced Voucher Control Showcase",
+    "subtitle": "Single inputs, selects, multi-selects, radio groups, checkbox groups, a switch, and textarea — all compiled from structure + data."
+  },
+  "columns": [
+    {
+      "columnName": "voucherNumber",
+      "title": "Voucher Number",
+      "field": "voucherNumber",
+      "value": "VCH-2026-027",
+      "inputType": "text",
+      "placeholder": "Enter voucher number",
+      "control": "input",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "columnName": "voucherDate",
+      "title": "Voucher Date",
+      "field": "voucherDate",
+      "value": "2026-09-13",
+      "inputType": "date",
+      "placeholder": "Choose voucher date",
+      "control": "input",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "columnName": "contactEmail",
+      "title": "Contact Email",
+      "field": "contactEmail",
+      "value": "ops@globallogistics.example",
+      "inputType": "email",
+      "placeholder": "Enter notification email",
+      "control": "input",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "columnName": "amount",
+      "title": "Amount (₹)",
+      "field": "amount",
+      "value": "12400.00",
+      "inputType": "number",
+      "placeholder": "Enter total amount",
+      "control": "input",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "columnName": "voucherType",
+      "title": "Voucher Type",
+      "field": "voucherType",
+      "placeholder": "Choose voucher type",
+      "control": "select",
+      "colClass": "col-md-6",
+      "isVisible": true,
+      "options": [
+        { "value": "sales", "text": "Sales", "selected": false },
+        { "value": "purchase", "text": "Purchase", "selected": false },
+        { "value": "payment", "text": "Payment", "selected": true },
+        { "value": "journal", "text": "Journal", "selected": false }
+      ]
+    },
+    {
+      "columnName": "branchCodes",
+      "title": "Applicable Branches",
+      "field": "branchCodes",
+      "control": "multiselect",
+      "colClass": "col-md-6",
+      "size": 4,
+      "helpText": "Use Ctrl/Cmd for multiple selection",
+      "isVisible": true,
+      "options": [
+        { "value": "hyd", "text": "Hyderabad", "selected": true },
+        { "value": "blr", "text": "Bengaluru", "selected": false },
+        { "value": "che", "text": "Chennai", "selected": true },
+        { "value": "mum", "text": "Mumbai", "selected": false }
+      ]
+    },
+    {
+      "columnName": "paymentMode",
+      "title": "Payment Mode",
+      "field": "paymentMode",
+      "control": "radio",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "bank-transfer", "text": "Bank Transfer", "checked": true },
+        { "value": "cash", "text": "Cash", "checked": false },
+        { "value": "upi", "text": "UPI", "checked": false }
+      ]
+    },
+    {
+      "columnName": "complianceFlags",
+      "title": "Compliance Flags",
+      "field": "complianceFlags",
+      "control": "checkboxGroup",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "gst-applicable", "text": "GST Applicable", "checked": true },
+        { "value": "requires-tds", "text": "TDS Applicable", "checked": false },
+        { "value": "docs-verified", "text": "Documents Verified", "checked": true }
+      ]
+    },
+    {
+      "columnName": "approvalRequired",
+      "title": "Approval Workflow",
+      "field": "approvalRequired",
+      "control": "checkbox",
+      "checkboxText": "Require finance manager approval before posting",
+      "checked": true,
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "columnName": "narration",
+      "title": "Narration / Remarks",
+      "field": "narration",
+      "value": "Quarterly freight and logistics clearance payment covering port handling and inland haulage.",
+      "placeholder": "Enter narration or remarks",
+      "type": "textarea",
+      "control": "textarea",
+      "colClass": "col-12",
+      "isVisible": true
+    },
+    {
+      "columnName": "pk",
+      "title": "Internal Primary Key",
+      "field": "pk",
+      "control": "input",
+      "isVisible": false
+    }
+  ],
+  "summary": {
+    "controlCount": 10,
+    "families": [
+      "input",
+      "select",
+      "multiselect",
+      "radio",
+      "checkbox",
+      "checkboxGroup",
+      "textarea"
+    ]
+  }
+}

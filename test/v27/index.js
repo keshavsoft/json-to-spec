@@ -1,35 +1,37 @@
 import { compile } from "../../src/index.js";
+import * as bundledDomEngine from "./json-to-dom.v27.min.js";
 
-// CDN or local server URL for json-to-dom v27
-const DOM_V27_CDN = "http://localhost:3000/docs/dist/v27/min.js";
-
-let domEngine = null;
+let domEngine = bundledDomEngine;
+let actionBinding = null;
 let currentVariation = "hybrid";
 const state = {
     hybrid: { structure: null, data: null, compiled: null },
     table: { structure: null, data: null, compiled: null },
-    form: { structure: null, data: null, compiled: null }
+    form: { structure: null, data: null, compiled: null },
+    controls: { structure: null, data: null, compiled: null },
+    repeaters: { structure: null, data: null, compiled: null }
+};
+
+const normalizeRowPayload = ({ values = {}, target = null }) => {
+    const dataset = target?.dataset || {};
+
+    return {
+        ...values,
+        voucherNo: values.voucherNo ?? dataset.voucherNo ?? null,
+        voucherDate: values.voucherDate ?? dataset.voucherDate ?? null,
+        partyName: values.partyName ?? dataset.partyName ?? null,
+        amount: values.amount ?? dataset.amount ?? null,
+        status: values.status ?? dataset.status ?? null,
+        type: values.type ?? dataset.type ?? null
+    };
 };
 
 const startFunc = async () => {
     try {
-        // 1. Load json-to-dom v27 bundle dynamically
-        try {
-            domEngine = await import(DOM_V27_CDN);
-            console.log("[json-to-spec v27 Test] Loaded json-to-dom v27 bundle from CDN/local server:", domEngine.meta);
-            updateCdnBadge("Connected to json-to-dom v27 CDN", "bg-success");
-        } catch (err) {
-            console.warn("[json-to-spec v27 Test] Could not load from localhost:3000 CDN, using window.ks fallback if present:", err);
-            if (window.ks?.['json-to-dom']) {
-                domEngine = window.ks['json-to-dom'];
-                updateCdnBadge("Connected via window.ks fallback", "bg-info text-dark");
-            } else {
-                updateCdnBadge("CDN Connection Failed", "bg-danger");
-                throw new Error("json-to-dom v27 bundle could not be loaded. Please ensure server is running on http://localhost:3000");
-            }
-        }
+        updateCdnBadge("Connected to local json-to-dom bundle", "bg-success");
+        console.log("[json-to-spec v27 Test] Using bundled json-to-dom v27:", domEngine.meta);
 
-        // 2. Fetch structure and data for all 3 variations
+        // 1. Fetch structure and data for all 5 variations
         state.hybrid.structure = await fetch("./hybrid/structure.json").then(r => r.json());
         state.hybrid.data = await fetch("./hybrid/data.json").then(r => r.json());
 
@@ -39,7 +41,13 @@ const startFunc = async () => {
         state.form.structure = await fetch("./form/structure.json").then(r => r.json());
         state.form.data = await fetch("./form/data.json").then(r => r.json());
 
-        // 3. Setup tabs and run initial compile & render
+        state.controls.structure = await fetch("./controls/structure.json").then(r => r.json());
+        state.controls.data = await fetch("./controls/data.json").then(r => r.json());
+
+        state.repeaters.structure = await fetch("./repeaters/structure.json").then(r => r.json());
+        state.repeaters.data = await fetch("./repeaters/data.json").then(r => r.json());
+
+        // 2. Setup tabs and run initial compile & render
         setupVariationSwitcher();
         renderVariation("hybrid");
 
@@ -86,11 +94,12 @@ const renderVariation = (variationKey) => {
     });
 
     // 4. HOOK LISTENERS via json-to-dom v27
-    domEngine.listeners.bindActions({
+    actionBinding?.remove?.();
+    actionBinding = domEngine.listeners.bindActions({
         containerId: "dom-render-container",
         actions: {
             applyFilter: ({ values }) => {
-                updateEventBadge('applyFilter Fired!', 'bg-info text-dark');
+                updateEventBadge("applyFilter Fired!", "bg-info text-dark");
                 updateEventBox({
                     source: "toolbar",
                     action: "applyFilter",
@@ -98,13 +107,15 @@ const renderVariation = (variationKey) => {
                     criteria: values
                 });
             },
-            selectRow: ({ values }) => {
-                updateEventBadge(`selectRow Fired (${values.voucherNo})!`, 'bg-primary');
+            selectRow: ({ values, target }) => {
+                const selectedRecord = normalizeRowPayload({ values, target });
+
+                updateEventBadge(`selectRow Fired (${selectedRecord.voucherNo || "Unknown"})!`, "bg-primary");
                 updateEventBox({
                     source: "table",
                     action: "selectRow",
                     timestamp: new Date().toLocaleTimeString(),
-                    selectedRecord: values
+                    selectedRecord
                 });
 
                 // In hybrid mode, auto-fill the form
@@ -112,13 +123,57 @@ const renderVariation = (variationKey) => {
                 const partyInput = document.querySelector('#dom-render-container input[name="partyName"]');
                 const dateInput = document.querySelector('#dom-render-container input[name="voucherDate"]');
                 const amountInput = document.querySelector('#dom-render-container input[name="amount"]');
-                if (voucherInput && values.voucherNo) voucherInput.value = values.voucherNo;
-                if (partyInput && values.partyName) partyInput.value = values.partyName;
-                if (dateInput && values.voucherDate) dateInput.value = values.voucherDate;
-                if (amountInput && values.amount) amountInput.value = values.amount;
+                if (voucherInput && selectedRecord.voucherNo) voucherInput.value = selectedRecord.voucherNo;
+                if (partyInput && selectedRecord.partyName) partyInput.value = selectedRecord.partyName;
+                if (dateInput && selectedRecord.voucherDate) dateInput.value = selectedRecord.voucherDate;
+                if (amountInput && selectedRecord.amount) amountInput.value = selectedRecord.amount;
+            },
+            inspectSummaryCard: ({ target }) => {
+                const dataset = target?.dataset || {};
+                updateEventBadge(`summary card: ${dataset.cardTitle || "Unknown"}`, "bg-info text-dark");
+                updateEventBox({
+                    source: "repeaters.summaryCards",
+                    action: "inspectSummaryCard",
+                    timestamp: new Date().toLocaleTimeString(),
+                    card: {
+                        title: dataset.cardTitle || null,
+                        value: dataset.cardValue || null,
+                        trend: dataset.cardTrend || null,
+                        tone: dataset.cardTone || null
+                    }
+                });
+            },
+            inspectChecklistItem: ({ target }) => {
+                const dataset = target?.dataset || {};
+                updateEventBadge(`checklist item: ${dataset.taskStatus || "Unknown"}`, "bg-secondary");
+                updateEventBox({
+                    source: "repeaters.taskGroups",
+                    action: "inspectChecklistItem",
+                    timestamp: new Date().toLocaleTimeString(),
+                    task: {
+                        groupTitle: dataset.groupTitle || null,
+                        label: dataset.taskLabel || null,
+                        status: dataset.taskStatus || null
+                    }
+                });
+            },
+            inspectAccordionEntry: ({ target }) => {
+                const dataset = target?.dataset || {};
+                updateEventBadge(`accordion entry: ${dataset.entryTitle || "Unknown"}`, "bg-primary");
+                updateEventBox({
+                    source: "repeaters.accordionSections",
+                    action: "inspectAccordionEntry",
+                    timestamp: new Date().toLocaleTimeString(),
+                    entry: {
+                        sectionTitle: dataset.sectionTitle || null,
+                        title: dataset.entryTitle || null,
+                        status: dataset.entryStatus || null,
+                        amount: dataset.entryAmount || null
+                    }
+                });
             },
             save: ({ values }) => {
-                updateEventBadge('save Fired! Form Extracted', 'bg-success');
+                updateEventBadge("save Fired! Form Extracted", "bg-success");
                 updateEventBox({
                     source: "form",
                     action: "save",
@@ -129,7 +184,7 @@ const renderVariation = (variationKey) => {
             },
             cancel: ({ reset }) => {
                 reset();
-                updateEventBadge('cancel Fired! Form Reset', 'bg-warning text-dark');
+                updateEventBadge("cancel Fired! Form Reset", "bg-warning text-dark");
                 updateEventBox({
                     source: "form",
                     action: "cancel",

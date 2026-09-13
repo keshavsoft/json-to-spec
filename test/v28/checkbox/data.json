@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "formTitle": "Checkbox Controls",
+    "formBadge": "single boolean toggles",
+    "formLead": "Each checkbox field is isolated in metadata and extracted as a boolean value.",
+    "formHint": "These are ideal for yes/no flags and workflow switches."
+  },
+  "columns": [
+    {
+      "title": "Approval Workflow",
+      "field": "approvalRequired",
+      "checkboxText": "Require finance manager approval before posting",
+      "checked": true,
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Notifications",
+      "field": "sendMailAlert",
+      "checkboxText": "Send e-mail alert after successful posting",
+      "checked": true,
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Archival",
+      "field": "archiveImmediately",
+      "checkboxText": "Archive documents immediately after posting",
+      "checked": false,
+      "colClass": "col-md-6",
+      "isVisible": true
+    }
+  ]
+}

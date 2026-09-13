@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "formTitle": "Multi Select Controls",
+    "formBadge": "multiple selection",
+    "formLead": "These controls use selected option arrays and a multiple select property.",
+    "formHint": "Save to verify that extracted values come back as arrays."
+  },
+  "columns": [
+    {
+      "title": "Applicable Branches",
+      "field": "branchCodes",
+      "size": 4,
+      "helpText": "Hold Ctrl/Cmd to change multiple selections",
+      "colClass": "col-md-6",
+      "isVisible": true,
+      "options": [
+        { "value": "hyd", "text": "Hyderabad", "selected": true },
+        { "value": "blr", "text": "Bengaluru", "selected": false },
+        { "value": "che", "text": "Chennai", "selected": true },
+        { "value": "mum", "text": "Mumbai", "selected": false }
+      ]
+    },
+    {
+      "title": "Routing Tags",
+      "field": "routingTags",
+      "size": 5,
+      "helpText": "Used by review queues and approval filters",
+      "colClass": "col-md-6",
+      "isVisible": true,
+      "options": [
+        { "value": "urgent", "text": "Urgent", "selected": true },
+        { "value": "audit", "text": "Audit", "selected": true },
+        { "value": "vendor", "text": "Vendor", "selected": false },
+        { "value": "tax", "text": "Tax", "selected": false },
+        { "value": "manual", "text": "Manual Review", "selected": true }
+      ]
+    }
+  ]
+}

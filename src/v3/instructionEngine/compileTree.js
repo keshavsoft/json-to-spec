@@ -1,34 +1,76 @@
 import resolvePath from "./resolvePath.js";
 
 /**
- * Interpolates ${path} variables against local item context and root data payload.
+ * Resolves a token path against local item context first, then root data.
  */
-const interpolateString = ({ inText, inItemContext, inRootData }) => {
-    const localText = inText;
+const resolveTokenValue = ({ inPath, inItemContext, inRootData }) => {
+    const localPath = inPath;
     const localItemContext = inItemContext;
     const localRootData = inRootData;
 
-    if (typeof localText !== "string" || !localText.includes("${")) {
-        return localText;
+    let val = resolvePath({ inData: localItemContext, inPath: localPath });
+    if (val === undefined && localItemContext && typeof localItemContext === "object") {
+        if (localItemContext.item && typeof localItemContext.item === "object") {
+            val = resolvePath({ inData: localItemContext.item, inPath: localPath });
+        }
+        if (val === undefined && localItemContext.row && typeof localItemContext.row === "object") {
+            val = resolvePath({ inData: localItemContext.row, inPath: localPath });
+        }
+    }
+    if (val === undefined && localRootData) {
+        val = resolvePath({ inData: localRootData, inPath: localPath });
     }
 
-    return localText.replace(/\$\{([^}]+)\}/g, (_, expr) => {
-        const key = expr.trim();
-        // Check local item context first (and its inner item/row), then root data
-        let val = resolvePath({ inData: localItemContext, inPath: key });
-        if (val === undefined && localItemContext && typeof localItemContext === "object") {
-            if (localItemContext.item && typeof localItemContext.item === "object") {
-                val = resolvePath({ inData: localItemContext.item, inPath: key });
-            }
-            if (val === undefined && localItemContext.row && typeof localItemContext.row === "object") {
-                val = resolvePath({ inData: localItemContext.row, inPath: key });
-            }
-        }
-        if (val === undefined && localRootData) {
-            val = resolvePath({ inData: localRootData, inPath: key });
-        }
-        return val !== undefined && val !== null ? String(val) : "";
+    return val;
+};
+
+/**
+ * Interpolates tokenized values, preserving native types for exact-token matches.
+ */
+const interpolateValue = ({ inValue, inItemContext, inRootData }) => {
+    const localValue = inValue;
+    const localItemContext = inItemContext;
+    const localRootData = inRootData;
+
+    if (typeof localValue !== "string" || !localValue.includes("${")) {
+        return localValue;
+    }
+
+    const exactTokenMatch = localValue.match(/^\$\{([^}]+)\}$/);
+    if (exactTokenMatch) {
+        const tokenValue = resolveTokenValue({
+            inPath: exactTokenMatch[1].trim(),
+            inItemContext: localItemContext,
+            inRootData: localRootData
+        });
+
+        return tokenValue !== undefined && tokenValue !== null ? tokenValue : "";
+    }
+
+    return localValue.replace(/\$\{([^}]+)\}/g, (_, expr) => {
+        const tokenValue = resolveTokenValue({
+            inPath: expr.trim(),
+            inItemContext: localItemContext,
+            inRootData: localRootData
+        });
+
+        return tokenValue !== undefined && tokenValue !== null ? String(tokenValue) : "";
     });
+};
+
+/**
+ * Interpolates ${path} variables against local item context and root data payload.
+ */
+const interpolateString = ({ inText, inItemContext, inRootData }) => {
+    const interpolatedValue = interpolateValue({
+        inValue: inText,
+        inItemContext,
+        inRootData
+    });
+
+    return interpolatedValue !== undefined && interpolatedValue !== null
+        ? String(interpolatedValue)
+        : "";
 };
 
 /**
@@ -173,8 +215,21 @@ export const compileNode = ({ inNode, inContext = {}, inRootData = {} } = {}) =>
                 cloned.attributes = { ...cloned.attributes };
                 for (const [attrName, attrVal] of Object.entries(cloned.attributes)) {
                     if (typeof attrVal === "string") {
-                        cloned.attributes[attrName] = interpolateString({
-                            inText: attrVal,
+                        cloned.attributes[attrName] = interpolateValue({
+                            inValue: attrVal,
+                            inItemContext: localContext,
+                            inRootData: localRootData
+                        });
+                    }
+                }
+            }
+
+            if (cloned.properties) {
+                cloned.properties = { ...cloned.properties };
+                for (const [propertyName, propertyVal] of Object.entries(cloned.properties)) {
+                    if (typeof propertyVal === "string") {
+                        cloned.properties[propertyName] = interpolateValue({
+                            inValue: propertyVal,
                             inItemContext: localContext,
                             inRootData: localRootData
                         });
@@ -223,8 +278,8 @@ export const compileNode = ({ inNode, inContext = {}, inRootData = {} } = {}) =>
         cloned.attributes = { ...cloned.attributes };
         for (const [attrName, attrVal] of Object.entries(cloned.attributes)) {
             if (typeof attrVal === "string") {
-                cloned.attributes[attrName] = interpolateString({
-                    inText: attrVal,
+                cloned.attributes[attrName] = interpolateValue({
+                    inValue: attrVal,
                     inItemContext: currentItem,
                     inRootData: localRootData
                 });
@@ -250,6 +305,19 @@ export const compileNode = ({ inNode, inContext = {}, inRootData = {} } = {}) =>
                 if (cloned.tagName === "textarea" && !cloned.textContent) {
                     cloned.textContent = String(localRootData.values[fieldName]);
                 }
+            }
+        }
+    }
+
+    if (cloned.properties) {
+        cloned.properties = { ...cloned.properties };
+        for (const [propertyName, propertyVal] of Object.entries(cloned.properties)) {
+            if (typeof propertyVal === "string") {
+                cloned.properties[propertyName] = interpolateValue({
+                    inValue: propertyVal,
+                    inItemContext: currentItem,
+                    inRootData: localRootData
+                });
             }
         }
     }

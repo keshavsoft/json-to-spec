@@ -1,0 +1,208 @@
+{
+  "hero": {
+    "title": "Repeaters Showcase",
+    "subtitle": "A collection-driven demo showing that json-to-spec can repeat cards, lists, and accordion sections using the same iterate architecture.",
+    "badges": [
+      {
+        "text": "summary cards",
+        "className": "badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"
+      },
+      {
+        "text": "ul / li lists",
+        "className": "badge rounded-pill bg-success-subtle text-success border border-success-subtle"
+      },
+      {
+        "text": "bootstrap accordion",
+        "className": "badge rounded-pill bg-warning-subtle text-warning-emphasis border border-warning-subtle"
+      },
+      {
+        "text": "nested iterate",
+        "className": "badge rounded-pill bg-info-subtle text-info-emphasis border border-info-subtle"
+      }
+    ]
+  },
+  "summaryCards": [
+    {
+      "cardTitle": "Pending Review",
+      "cardValue": "12",
+      "cardTrend": "+3 since morning sync",
+      "cardLead": "Vouchers waiting for audit review",
+      "cardClass": "border-warning-subtle bg-warning-subtle",
+      "valueClass": "text-warning-emphasis",
+      "buttonClass": "btn btn-outline-warning btn-sm",
+      "buttonText": "Inspect Queue",
+      "cardTone": "warning"
+    },
+    {
+      "cardTitle": "Ready To Post",
+      "cardValue": "28",
+      "cardTrend": "17 cleared in last batch",
+      "cardLead": "Validated vouchers available for posting",
+      "cardClass": "border-success-subtle bg-success-subtle",
+      "valueClass": "text-success-emphasis",
+      "buttonClass": "btn btn-outline-success btn-sm",
+      "buttonText": "View Batch",
+      "cardTone": "success"
+    },
+    {
+      "cardTitle": "Exception Alerts",
+      "cardValue": "4",
+      "cardTrend": "2 need finance callback",
+      "cardLead": "Items blocked by missing or conflicting data",
+      "cardClass": "border-danger-subtle bg-danger-subtle",
+      "valueClass": "text-danger-emphasis",
+      "buttonClass": "btn btn-outline-danger btn-sm",
+      "buttonText": "Review Issues",
+      "cardTone": "danger"
+    }
+  ],
+  "taskGroups": [
+    {
+      "groupTitle": "Pre-posting Checklist",
+      "groupLead": "High-priority validations before sending vouchers to posting.",
+      "groupCountLabel": "4 checks",
+      "items": [
+        {
+          "label": "Voucher number allocated",
+          "helper": "Number series validated for the current branch",
+          "statusText": "Done",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle",
+          "buttonText": "Inspect"
+        },
+        {
+          "label": "Narration approved",
+          "helper": "Audit remarks reviewed by finance lead",
+          "statusText": "Pending",
+          "statusClass": "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle",
+          "buttonText": "Inspect"
+        },
+        {
+          "label": "GST breakup attached",
+          "helper": "Tax document upload still awaited from operations",
+          "statusText": "Blocked",
+          "statusClass": "badge bg-danger-subtle text-danger-emphasis border border-danger-subtle",
+          "buttonText": "Inspect"
+        },
+        {
+          "label": "Approval trail synced",
+          "helper": "Workflow references confirmed in ERP",
+          "statusText": "Done",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle",
+          "buttonText": "Inspect"
+        }
+      ]
+    },
+    {
+      "groupTitle": "Dispatch Checklist",
+      "groupLead": "Outbound sharing tasks after finance validates the voucher.",
+      "groupCountLabel": "3 tasks",
+      "items": [
+        {
+          "label": "Mail vendor confirmation",
+          "helper": "Share posting note with supporting voucher PDF",
+          "statusText": "Queued",
+          "statusClass": "badge bg-primary-subtle text-primary-emphasis border border-primary-subtle",
+          "buttonText": "Inspect"
+        },
+        {
+          "label": "Archive signed copy",
+          "helper": "Push signed document to monthly archive bucket",
+          "statusText": "Pending",
+          "statusClass": "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle",
+          "buttonText": "Inspect"
+        },
+        {
+          "label": "Notify reconciliation desk",
+          "helper": "Status webhook sent to reconciliation board",
+          "statusText": "Done",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle",
+          "buttonText": "Inspect"
+        }
+      ]
+    }
+  ],
+  "accordionSections": [
+    {
+      "sectionId": "sales-batch",
+      "sectionTitle": "Sales Voucher Batch",
+      "sectionMeta": "3 entries • ₹44,600.00",
+      "sectionLead": "Latest cleared and pending sales-side vouchers.",
+      "buttonClass": "accordion-button",
+      "collapseClass": "accordion-collapse collapse show",
+      "ariaExpanded": "true",
+      "entries": [
+        {
+          "entryTitle": "V-1001",
+          "entrySubtitle": "Acme Industrial Supplies",
+          "entryAmount": "₹12,450.00",
+          "entryStatus": "Cleared",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle"
+        },
+        {
+          "entryTitle": "V-1008",
+          "entrySubtitle": "Summit Consulting Services",
+          "entryAmount": "₹24,000.00",
+          "entryStatus": "Pending",
+          "statusClass": "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle"
+        },
+        {
+          "entryTitle": "V-1012",
+          "entrySubtitle": "Metro Supplies Inc",
+          "entryAmount": "₹8,150.00",
+          "entryStatus": "Cleared",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle"
+        }
+      ]
+    },
+    {
+      "sectionId": "expense-batch",
+      "sectionTitle": "Expense Voucher Batch",
+      "sectionMeta": "2 entries • ₹9,900.00",
+      "sectionLead": "Items routed to expense controls before posting.",
+      "buttonClass": "accordion-button collapsed",
+      "collapseClass": "accordion-collapse collapse",
+      "ariaExpanded": "false",
+      "entries": [
+        {
+          "entryTitle": "E-302",
+          "entrySubtitle": "Global Logistics Corp",
+          "entryAmount": "₹6,700.00",
+          "entryStatus": "Review",
+          "statusClass": "badge bg-info-subtle text-info-emphasis border border-info-subtle"
+        },
+        {
+          "entryTitle": "E-303",
+          "entrySubtitle": "Apex Industrial Tools",
+          "entryAmount": "₹3,200.00",
+          "entryStatus": "Blocked",
+          "statusClass": "badge bg-danger-subtle text-danger-emphasis border border-danger-subtle"
+        }
+      ]
+    },
+    {
+      "sectionId": "journal-batch",
+      "sectionTitle": "Journal Adjustments",
+      "sectionMeta": "2 entries • ₹18,500.00",
+      "sectionLead": "Month-end balancing entries queued for final pass.",
+      "buttonClass": "accordion-button collapsed",
+      "collapseClass": "accordion-collapse collapse",
+      "ariaExpanded": "false",
+      "entries": [
+        {
+          "entryTitle": "J-910",
+          "entrySubtitle": "Provision reversal",
+          "entryAmount": "₹11,000.00",
+          "entryStatus": "Queued",
+          "statusClass": "badge bg-primary-subtle text-primary-emphasis border border-primary-subtle"
+        },
+        {
+          "entryTitle": "J-911",
+          "entrySubtitle": "Round-off adjustment",
+          "entryAmount": "₹7,500.00",
+          "entryStatus": "Ready",
+          "statusClass": "badge bg-success-subtle text-success-emphasis border border-success-subtle"
+        }
+      ]
+    }
+  ]
+}
