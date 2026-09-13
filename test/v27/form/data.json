@@ -1,0 +1,50 @@
+{
+  "columns": [
+    {
+      "columnName": "voucherNumber",
+      "title": "Voucher Number",
+      "field": "voucherNumber",
+      "value": "VCH-2026-001",
+      "inputType": "text",
+      "isVisible": true
+    },
+    {
+      "columnName": "voucherDate",
+      "title": "Voucher Date",
+      "field": "voucherDate",
+      "value": "2026-09-13",
+      "inputType": "date",
+      "isVisible": true
+    },
+    {
+      "columnName": "partyName",
+      "title": "Party Name",
+      "field": "partyName",
+      "value": "Global Logistics Corp",
+      "inputType": "text",
+      "isVisible": true
+    },
+    {
+      "columnName": "amount",
+      "title": "Amount (₹)",
+      "field": "amount",
+      "value": "12,400.00",
+      "inputType": "text",
+      "isVisible": true
+    },
+    {
+      "columnName": "narration",
+      "title": "Narration / Remarks",
+      "field": "narration",
+      "value": "Quarterly freight and logistics clearance payment.",
+      "type": "textarea",
+      "isVisible": true
+    },
+    {
+      "columnName": "pk",
+      "title": "Internal Primary Key",
+      "field": "pk",
+      "isVisible": false
+    }
+  ]
+}

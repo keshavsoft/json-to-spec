@@ -1,0 +1,163 @@
+[
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white overflow-hidden"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-header bg-light p-3 border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "children": [
+              {
+                "tagName": "h5",
+                "textContent": "Vouchers Directory",
+                "attributes": { "class": "mb-0 fw-bold text-dark" }
+              },
+              {
+                "tagName": "small",
+                "textContent": "Compiled via v2 instructionEngine (columns & rows iteration)",
+                "attributes": { "class": "text-muted" }
+              }
+            ]
+          },
+          {
+            "tagName": "span",
+            "textContent": "${summary.totalCount} Vouchers",
+            "attributes": {
+              "class": "badge bg-primary px-3 py-2"
+            }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "table-responsive"
+        },
+        "children": [
+          {
+            "tagName": "table",
+            "attributes": {
+              "class": "table table-hover table-striped align-middle mb-0"
+            },
+            "children": [
+              {
+                "tagName": "thead",
+                "attributes": {
+                  "class": "table-light"
+                },
+                "children": [
+                  {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "th",
+                        "textContent": "#",
+                        "attributes": { "class": "text-center", "style": "width: 50px;" }
+                      },
+                      {
+                        "operation": "iterate",
+                        "source": "columns",
+                        "filter": {
+                          "isVisible": true
+                        },
+                        "template": {
+                          "tagName": "th",
+                          "textContent": "${title}",
+                          "attributes": { "class": "text-start" }
+                        }
+                      },
+                      {
+                        "tagName": "th",
+                        "textContent": "Action",
+                        "attributes": { "class": "text-end px-3", "style": "width: 110px;" }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tagName": "tbody",
+                "children": [
+                  {
+                    "operation": "iterate",
+                    "source": "rows",
+                    "template": {
+                      "tagName": "tr",
+                      "children": [
+                        {
+                          "tagName": "td",
+                          "textContent": "${$number}",
+                          "attributes": { "class": "text-center font-monospace text-muted small" }
+                        },
+                        {
+                          "operation": "iterate",
+                          "source": "columns",
+                          "filter": {
+                            "isVisible": true
+                          },
+                          "template": {
+                            "tagName": "td",
+                            "textContent": "${value}",
+                            "attributes": { "class": "text-start small" }
+                          }
+                        },
+                        {
+                          "tagName": "td",
+                          "attributes": { "class": "text-end px-3" },
+                          "children": [
+                            {
+                              "tagName": "button",
+                              "textContent": "Select",
+                              "attributes": {
+                                "type": "button",
+                                "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
+                                "data-action": "selectRow",
+                                "data-action-type": "click",
+                                "data-voucher-no": "${voucherNo}",
+                                "data-party-name": "${partyName}",
+                                "data-amount": "${amount}",
+                                "data-type": "${type}"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "tagName": "tfoot",
+                "attributes": {
+                  "class": "table-light border-top"
+                },
+                "children": [
+                  {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "td",
+                        "textContent": "Total: ${summary.totalCount} vouchers | Gross Amount: ₹${summary.totalAmount}",
+                        "attributes": {
+                          "colspan": "6",
+                          "class": "small text-muted py-2 px-3 fw-semibold"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "columns": [
+    {
+      "columnName": "voucherNo",
+      "title": "Voucher #",
+      "field": "voucherNo",
+      "isVisible": true
+    },
+    {
+      "columnName": "type",
+      "title": "Type",
+      "field": "type",
+      "isVisible": true
+    },
+    {
+      "columnName": "partyName",
+      "title": "Party Name",
+      "field": "partyName",
+      "isVisible": true
+    },
+    {
+      "columnName": "amount",
+      "title": "Amount (₹)",
+      "field": "amount",
+      "isVisible": true
+    },
+    {
+      "columnName": "pk",
+      "title": "Primary Key",
+      "field": "pk",
+      "isVisible": false
+    }
+  ],
+  "rows": [
+    {
+      "pk": "v-001",
+      "voucherNo": "VCH-2026-001",
+      "type": "Sales",
+      "partyName": "Global Logistics Corp",
+      "amount": "12,400.00"
+    },
+    {
+      "pk": "v-002",
+      "voucherNo": "VCH-2026-002",
+      "type": "Purchase",
+      "partyName": "Apex Industrial Tools",
+      "amount": "8,150.00"
+    },
+    {
+      "pk": "v-003",
+      "voucherNo": "VCH-2026-003",
+      "type": "Payment",
+      "partyName": "Summit Consulting Services",
+      "amount": "24,000.00"
+    },
+    {
+      "pk": "v-004",
+      "voucherNo": "VCH-2026-004",
+      "type": "Journal",
+      "partyName": "Metro Supplies Inc",
+      "amount": "3,250.00"
+    }
+  ],
+  "summary": {
+    "totalCount": 4,
+    "totalAmount": "47,800.00"
+  }
+}

@@ -1,0 +1,316 @@
+[
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white p-3 mb-4"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "row g-2 align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "div",
+            "attributes": { "class": "col-md-3" },
+            "children": [
+              {
+                "tagName": "h6",
+                "textContent": "${toolbar.title}",
+                "attributes": { "class": "mb-0 fw-bold text-dark" }
+              }
+            ]
+          },
+          {
+            "tagName": "div",
+            "attributes": { "class": "col-md-4" },
+            "children": [
+              {
+                "tagName": "input",
+                "attributes": {
+                  "type": "text",
+                  "name": "filterSearch",
+                  "placeholder": "Search voucher # or party...",
+                  "class": "form-control form-control-sm"
+                }
+              }
+            ]
+          },
+          {
+            "tagName": "div",
+            "attributes": { "class": "col-md-3" },
+            "children": [
+              {
+                "tagName": "select",
+                "attributes": {
+                  "name": "filterStatus",
+                  "class": "form-select form-select-sm"
+                },
+                "children": [
+                  {
+                    "operation": "iterate",
+                    "source": "toolbar.statusOptions",
+                    "template": {
+                      "tagName": "option",
+                      "textContent": "${text}",
+                      "attributes": {
+                        "value": "${value}"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tagName": "div",
+            "attributes": { "class": "col-md-2 d-grid" },
+            "children": [
+              {
+                "tagName": "button",
+                "textContent": "Apply Filter",
+                "attributes": {
+                  "type": "button",
+                  "class": "btn btn-primary btn-sm",
+                  "data-action": "applyFilter",
+                  "data-action-type": "click"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "card border rounded-3 shadow-sm bg-white overflow-hidden mb-4"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "card-header bg-light p-3 border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "span",
+            "textContent": "Vouchers Directory (Iterated via tableColumns & tableRows)",
+            "attributes": { "class": "fw-bold text-dark" }
+          },
+          {
+            "tagName": "span",
+            "textContent": "${summary.totalCount} Vouchers Total",
+            "attributes": { "class": "badge bg-secondary font-monospace" }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": { "class": "table-responsive" },
+        "children": [
+          {
+            "tagName": "table",
+            "attributes": { "class": "table table-hover table-striped align-middle mb-0" },
+            "children": [
+              {
+                "tagName": "thead",
+                "attributes": { "class": "table-light" },
+                "children": [
+                  {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "th",
+                        "textContent": "#",
+                        "attributes": { "class": "text-center", "style": "width: 50px;" }
+                      },
+                      {
+                        "operation": "iterate",
+                        "source": "tableColumns",
+                        "filter": { "isVisible": true },
+                        "template": {
+                          "tagName": "th",
+                          "textContent": "${title}",
+                          "attributes": { "class": "text-start" }
+                        }
+                      },
+                      {
+                        "tagName": "th",
+                        "textContent": "Action",
+                        "attributes": { "class": "text-end px-3", "style": "width: 100px;" }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tagName": "tbody",
+                "children": [
+                  {
+                    "operation": "iterate",
+                    "source": "tableRows",
+                    "template": {
+                      "tagName": "tr",
+                      "children": [
+                        {
+                          "tagName": "td",
+                          "textContent": "${$number}",
+                          "attributes": { "class": "text-center font-monospace text-muted small" }
+                        },
+                        {
+                          "operation": "iterate",
+                          "source": "tableColumns",
+                          "filter": { "isVisible": true },
+                          "template": {
+                            "tagName": "td",
+                            "textContent": "${value}",
+                            "attributes": { "class": "text-start small" }
+                          }
+                        },
+                        {
+                          "tagName": "td",
+                          "attributes": { "class": "text-end px-3" },
+                          "children": [
+                            {
+                              "tagName": "button",
+                              "textContent": "Select",
+                              "attributes": {
+                                "type": "button",
+                                "class": "btn btn-outline-primary btn-sm px-2 py-0.5",
+                                "data-action": "selectRow",
+                                "data-action-type": "click",
+                                "data-voucher-no": "${voucherNo}",
+                                "data-party-name": "${partyName}",
+                                "data-amount": "${amount}",
+                                "data-status": "${status}"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "tagName": "tfoot",
+                "attributes": { "class": "table-light border-top" },
+                "children": [
+                  {
+                    "tagName": "tr",
+                    "children": [
+                      {
+                        "tagName": "td",
+                        "textContent": "Total: ${summary.totalCount} vouchers | Gross Amount: ₹${summary.totalAmount}",
+                        "attributes": {
+                          "colspan": "7",
+                          "class": "small text-muted py-2 px-3 fw-semibold"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tagName": "div",
+    "attributes": {
+      "class": "ksform border rounded-3 shadow-sm bg-white overflow-hidden"
+    },
+    "children": [
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "bg-body-secondary p-3 border-bottom d-flex justify-content-between align-items-center"
+        },
+        "children": [
+          {
+            "tagName": "span",
+            "textContent": "Voucher Detail Form (Iterated via formColumns)",
+            "attributes": { "class": "fw-bold fs-6 text-dark" }
+          },
+          {
+            "tagName": "span",
+            "textContent": "Auto-filled on row selection",
+            "attributes": {
+              "class": "badge bg-info-subtle text-info-emphasis border border-info-subtle"
+            }
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": { "class": "p-4" },
+        "children": [
+          {
+            "tagName": "div",
+            "attributes": { "class": "row g-3" },
+            "children": [
+              {
+                "operation": "iterate",
+                "source": "formColumns",
+                "filter": { "isVisible": true },
+                "template": {
+                  "tagName": "div",
+                  "attributes": { "class": "col-md-6" },
+                  "children": [
+                    {
+                      "tagName": "label",
+                      "textContent": "${title}",
+                      "attributes": { "class": "form-label fw-semibold text-secondary small" }
+                    },
+                    {
+                      "tagName": "input",
+                      "attributes": {
+                        "name": "${field}",
+                        "type": "${inputType}",
+                        "placeholder": "Enter ${title}...",
+                        "class": "form-control"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tagName": "div",
+        "attributes": {
+          "class": "bg-light p-3 border-top d-flex justify-content-end gap-2"
+        },
+        "children": [
+          {
+            "tagName": "button",
+            "textContent": "Reset Form",
+            "attributes": {
+              "type": "button",
+              "class": "btn btn-outline-secondary px-3 py-1.5",
+              "data-action": "cancel",
+              "data-action-type": "click"
+            }
+          },
+          {
+            "tagName": "button",
+            "textContent": "Save Voucher",
+            "attributes": {
+              "type": "button",
+              "class": "btn btn-success px-4 py-1.5 fw-semibold",
+              "data-action": "save",
+              "data-action-type": "click"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

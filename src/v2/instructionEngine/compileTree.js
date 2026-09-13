@@ -14,8 +14,16 @@ const interpolateString = ({ inText, inItemContext, inRootData }) => {
 
     return localText.replace(/\$\{([^}]+)\}/g, (_, expr) => {
         const key = expr.trim();
-        // Check local item context first, then root data
+        // Check local item context first (and its inner item/row), then root data
         let val = resolvePath({ inData: localItemContext, inPath: key });
+        if (val === undefined && localItemContext && typeof localItemContext === "object") {
+            if (localItemContext.item && typeof localItemContext.item === "object") {
+                val = resolvePath({ inData: localItemContext.item, inPath: key });
+            }
+            if (val === undefined && localItemContext.row && typeof localItemContext.row === "object") {
+                val = resolvePath({ inData: localItemContext.row, inPath: key });
+            }
+        }
         if (val === undefined && localRootData) {
             val = resolvePath({ inData: localRootData, inPath: key });
         }
@@ -61,7 +69,7 @@ export const compileNode = ({ inNode, inContext = {}, inRootData = {} } = {}) =>
     if (typeof localNode !== "object") {
         return interpolateString({
             inText: localNode,
-            inItemContext: localContext.item,
+            inItemContext: localContext,
             inRootData: localRootData
         });
     }
@@ -137,7 +145,10 @@ export const compileNode = ({ inNode, inContext = {}, inRootData = {} } = {}) =>
 
     // Standard tree node
     const cloned = { ...localNode };
-    const currentItem = localContext.item || localContext;
+    const currentItem = {
+        ...(typeof localContext.item === "object" ? localContext.item : {}),
+        ...localContext
+    };
 
     // Handle control transformation (e.g. textarea)
     if (currentItem.type === "textarea" && cloned.tagName === "input") {

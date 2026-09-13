@@ -1,0 +1,37 @@
+{
+  "toolbar": {
+    "title": "Voucher Management Hub",
+    "statusOptions": [
+      { "value": "", "text": "All Statuses" },
+      { "value": "Cleared", "text": "Cleared" },
+      { "value": "Pending", "text": "Pending" },
+      { "value": "Reconciled", "text": "Reconciled" }
+    ]
+  },
+  "tableColumns": [
+    { "columnName": "voucherNo", "title": "Voucher #", "field": "voucherNo", "isVisible": true },
+    { "columnName": "voucherDate", "title": "Date", "field": "voucherDate", "isVisible": true },
+    { "columnName": "partyName", "title": "Party Name", "field": "partyName", "isVisible": true },
+    { "columnName": "amount", "title": "Amount (₹)", "field": "amount", "isVisible": true },
+    { "columnName": "status", "title": "Status", "field": "status", "isVisible": true },
+    { "columnName": "pk", "title": "pk", "field": "pk", "isVisible": false }
+  ],
+  "tableRows": [
+    { "pk": "v-101", "voucherNo": "V-1001", "voucherDate": "2026-09-10", "partyName": "Acme Industrial Supplies", "amount": "12,450.00", "status": "Cleared" },
+    { "pk": "v-102", "voucherNo": "V-1002", "voucherDate": "2026-09-11", "partyName": "Global Logistics Corp", "amount": "8,150.00", "status": "Cleared" },
+    { "pk": "v-103", "voucherNo": "V-1003", "voucherDate": "2026-09-12", "partyName": "Summit Consulting Services", "amount": "24,000.00", "status": "Pending" },
+    { "pk": "v-104", "voucherNo": "V-1004", "voucherDate": "2026-09-13", "partyName": "Metro Supplies Inc", "amount": "3,250.00", "status": "Reconciled" }
+  ],
+  "formColumns": [
+    { "columnName": "voucherNumber", "title": "Voucher Number", "field": "voucherNumber", "value": "V-1001", "inputType": "text", "isVisible": true },
+    { "columnName": "voucherDate", "title": "Voucher Date", "field": "voucherDate", "value": "2026-09-10", "inputType": "date", "isVisible": true },
+    { "columnName": "partyName", "title": "Party Name", "field": "partyName", "value": "Acme Industrial Supplies", "inputType": "text", "isVisible": true },
+    { "columnName": "amount", "title": "Amount (₹)", "field": "amount", "value": "12,450.00", "inputType": "text", "isVisible": true },
+    { "columnName": "narration", "title": "Narration / Remarks", "field": "narration", "value": "Payment for factory machinery spares.", "type": "textarea", "isVisible": true },
+    { "columnName": "pk", "title": "pk", "field": "pk", "isVisible": false }
+  ],
+  "summary": {
+    "totalCount": 4,
+    "totalAmount": "47,850.00"
+  }
+}
