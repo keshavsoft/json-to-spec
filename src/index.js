@@ -9,7 +9,11 @@
 import * as v1 from "./v1/index.js";
 import * as v2 from "./v2/index.js";
 import * as v3 from "./v3/index.js";
+import * as v5 from "./v6/index.js";
 
+// Keep v3 exports for backward compatibility, and also re-export v5
 export * from "./v3/index.js";
-export { v1, v2, v3 };
-export default v3.compile;
+export * from "./v6/index.js";
+export { v1, v2, v3, v5 };
+// Default to the latest stable implementation (v5)
+export default v5.compile;
