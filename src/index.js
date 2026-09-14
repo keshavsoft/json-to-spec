@@ -11,9 +11,10 @@ import * as v2 from "./v2/index.js";
 import * as v3 from "./v3/index.js";
 import * as v5 from "./v6/index.js";
 import * as v6 from "./v6/index.js";
+import * as v7 from "./v7/index.js";
 
-// Keep older exports for compatibility, and expose the latest v6 compiler as the default.
+// Keep older exports for compatibility, and expose the latest v7 compiler as the default.
 export * from "./v3/index.js";
-export * from "./v6/index.js";
-export { v1, v2, v3, v5, v6 };
-export default v6.compile;
+export * from "./v7/index.js";
+export { v1, v2, v3, v5, v6, v7 };
+export default v7.compile;
