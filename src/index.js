@@ -3,7 +3,7 @@
  * Story: The Minimalist 2-File JSON Spec Compiler
  * Inputs: structure.json (UI blueprint & operations) + data.json (collections & values).
  * 
- * Root entry point re-exporting the latest version (v3) with backwards compatibility for v1 and v2.
+ * Root entry point re-exporting the latest version (v9) with backwards compatibility.
  */
 
 import * as v1 from "./v1/index.js";
@@ -12,13 +12,8 @@ import * as v3 from "./v3/index.js";
 import * as v5 from "./v6/index.js";
 import * as v6 from "./v6/index.js";
 import * as v7 from "./v7/index.js";
-import * as v8 from "./v9/index.js";
+import * as v8 from "./v8/index.js";
+import * as v9 from "./v9/index.js";
 
-// Keep older exports for compatibility, and expose the latest v7 compiler as the default.
-// export * from "./v3/index.js";
-// export * from "./v7/index.js";
-
+export * from "./v9/index.js";
 export { default } from "./v9/index.js";
-
-// export { v1, v2, v3, v5, v6, v7, v8 };
-// export default v8.compile;
