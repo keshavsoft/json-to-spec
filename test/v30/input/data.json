@@ -7,6 +7,13 @@
   },
   "columns": [
     {
+      "title": "Voucher Type",
+      "field": "voucherType",
+      "inputType": "text",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
       "title": "Voucher Number",
       "field": "voucherNumber",
       "inputType": "text",

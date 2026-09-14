@@ -1,25 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>v30 - Input Only</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:2rem;background:#f8fafc;color:#111}
-    .wrap{max-width:640px;margin:0 auto;padding:1.25rem;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-    label{display:block;margin-bottom:.5rem;font-weight:600}
-    input[type="text"]{width:100%;padding:.6rem;border:1px solid #cbd5e1;border-radius:6px;font-size:1rem}
-    .btn{display:inline-block;margin-right:.5rem;padding:.45rem .7rem;border:1px solid #64748b;background:#e2e8f0;border-radius:6px;cursor:pointer}
-    pre#output{margin-top:1rem;background:#f1f5f9;padding:.75rem;border-radius:6px;min-height:44px}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 2rem;
+      background: #f8fafc;
+      color: #111
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 1.25rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .06)
+    }
+
+    label {
+      display: block;
+      margin-bottom: .5rem;
+      font-weight: 600
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: .6rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 1rem
+    }
+
+    .btn {
+      display: inline-block;
+      margin-right: .5rem;
+      padding: .45rem .7rem;
+      border: 1px solid #64748b;
+      background: #e2e8f0;
+      border-radius: 6px;
+      cursor: pointer
+    }
+
+    pre#output {
+      margin-top: 1rem;
+      background: #f1f5f9;
+      padding: .75rem;
+      border-radius: 6px;
+      min-height: 44px
+    }
   </style>
 </head>
+
 <body>
   <main class="wrap">
-    <h1 style="margin-top:0;font-size:1.25rem">Simple Input (v30)</h1>
+    <h1 id="head1" style="margin-top:0;font-size:1.25rem">Simple Input (v30)</h1>
     <div id="dom-render-container">
       <div class="text-center py-5 text-muted">Loading input demo...</div>
     </div>
   </main>
   <script type="module" src="./index.js"></script>
 </body>
+
 </html>

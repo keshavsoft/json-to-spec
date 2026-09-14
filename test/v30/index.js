@@ -1,4 +1,4 @@
-import { compile } from "../../src/index.js";
+import { default as compile } from "../../src/index.js";
 import * as domEngine from "./json-to-dom.v27.min.js";
 
 const folder = "input";
@@ -16,6 +16,10 @@ const loadInput = async () => {
 
 const render = () => {
   const t0 = performance.now();
+
+  console.log("lllllllllll : ", state);
+
+
   state.compiled = compile(state.structure, state.data);
   const compileTime = (performance.now() - t0).toFixed(2);
   const compileBadge = document.getElementById("compile-time-badge");
@@ -58,3 +62,6 @@ const start = async () => {
 };
 
 start();
+
+const head1 = document.getElementById("head1");
+head1.innerHTML += ` - ${window?.ks['json-to-spec']?.meta?.version}`;

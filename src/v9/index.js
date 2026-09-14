@@ -10,8 +10,8 @@
 import compileNode from "./instructionEngine/compileTree.js";
 
 export const meta = {
-    version: "8.0.0",
-    name: "json-to-spec/v7",
+    version: "9.0.0",
+    name: "json-to-spec/v9",
     description: "Pure JSON Specification Compiler with separate interpolation and iteration phases"
 };
 
