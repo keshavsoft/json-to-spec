@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "formTitle": "Radio Groups",
+    "formBadge": "single choice per group",
+    "formLead": "Each group is repeated from column metadata, then each option is repeated from nested options.",
+    "formHint": "Save to confirm each field resolves to one selected value."
+  },
+  "columns": [
+    {
+      "title": "Payment Mode",
+      "field": "paymentMode",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "bank-transfer", "text": "Bank Transfer", "checked": true },
+        { "value": "cash", "text": "Cash", "checked": false },
+        { "value": "upi", "text": "UPI", "checked": false }
+      ]
+    },
+    {
+      "title": "Posting Priority",
+      "field": "postingPriority",
+      "colClass": "col-12",
+      "isVisible": true,
+      "options": [
+        { "value": "normal", "text": "Normal", "checked": false },
+        { "value": "same-day", "text": "Same Day", "checked": true },
+        { "value": "hold", "text": "Hold", "checked": false }
+      ]
+    }
+  ]
+}

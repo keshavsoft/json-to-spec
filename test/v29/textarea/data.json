@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "formTitle": "Textarea Controls",
+    "formBadge": "compiler transforms input → textarea",
+    "formLead": "These fields use metadata type = textarea, while the template still declares an input node.",
+    "formHint": "This demonstrates control adaptation inside the compiler layer."
+  },
+  "columns": [
+    {
+      "title": "Narration",
+      "field": "narration",
+      "type": "textarea",
+      "value": "Freight clearance posted after document verification.",
+      "placeholder": "Enter voucher narration",
+      "rows": 4,
+      "colClass": "col-12",
+      "isVisible": true
+    },
+    {
+      "title": "Internal Notes",
+      "field": "internalNotes",
+      "type": "textarea",
+      "value": "Ops team requested final finance check before posting.",
+      "placeholder": "Enter internal notes",
+      "rows": 5,
+      "colClass": "col-12",
+      "isVisible": true
+    }
+  ]
+}

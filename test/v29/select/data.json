@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "formTitle": "Select Controls",
+    "formBadge": "single selection",
+    "formLead": "Each dropdown gets its options from nested metadata arrays.",
+    "formHint": "Selected options stay in data.json through option.selected."
+  },
+  "columns": [
+    {
+      "title": "Voucher Type",
+      "field": "voucherType",
+      "placeholder": "Choose voucher type",
+      "colClass": "col-md-6",
+      "isVisible": true,
+      "options": [
+        { "value": "sales", "text": "Sales", "selected": false },
+        { "value": "purchase", "text": "Purchase", "selected": false },
+        { "value": "payment", "text": "Payment", "selected": true },
+        { "value": "journal", "text": "Journal", "selected": false }
+      ]
+    },
+    {
+      "title": "Branch Office",
+      "field": "branchCode",
+      "placeholder": "Choose branch office",
+      "colClass": "col-md-6",
+      "isVisible": true,
+      "options": [
+        { "value": "hyd", "text": "Hyderabad", "selected": true },
+        { "value": "blr", "text": "Bengaluru", "selected": false },
+        { "value": "che", "text": "Chennai", "selected": false },
+        { "value": "mum", "text": "Mumbai", "selected": false }
+      ]
+    }
+  ]
+}
