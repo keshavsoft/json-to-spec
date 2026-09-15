@@ -61,20 +61,20 @@ export const compile = (inStructureOrOptions, inData = {}) => {
         inOperation: "iterateDo"
     });
 
-    // const replaced = replace({
-    //     inStructureAsJson: spec,
-    //     inDataAsJson: localData,
-    //     inOperation: "replace"
-    // });
+    const replacedData = replace({
+        inStructureAsJson: iteratedData,
+        inDataAsJson: localData,
+        inOperation: "replace"
+    });
 
-    console.log("iteratedData : ", iteratedData);
+    console.log("iteratedData : ", iteratedData, replacedData);
 
     // const spec = iterate({
     //     inStructure: replaced,
     //     inData: localData
     // });
 
-    return iteratedData;
+    return replacedData;
 };
 
 export const jsonToSpec = {

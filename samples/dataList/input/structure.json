@@ -1,18 +1,38 @@
-{
-    "tagName": "datalist",
-    "attributes": {
-        "id": "dl1"
+[
+    {
+        "tagName": "datalist",
+        "attributes": {
+            "id": "dl1"
+        },
+        "jsonToSpec": {
+            "operation": "iterate",
+            "source": "data",
+            "template": {
+                "tagName": "option",
+                "attributes": {
+                    "value": "${LedgerName}"
+                },
+                "textContent": "${LedgerName}"
+            }
+        },
+        "children": []
     },
-    "jsonToSpec": {
-        "operation": "iterate",
-        "source": "data",
-        "template": {
-            "tagName": "option",
-            "attributes": {
-                "value": "${LedgerName}"
-            },
-            "textContent": "${LedgerName}"
-        }
-    },
-    "children": []
-}
+    {
+        "tagName": "datalist",
+        "attributes": {
+            "id": "uom"
+        },
+        "jsonToSpec": {
+            "operation": "iterate",
+            "source": "uom",
+            "template": {
+                "tagName": "option",
+                "attributes": {
+                    "value": "${name}"
+                },
+                "textContent": "${name}"
+            }
+        },
+        "children": []
+    }
+]
