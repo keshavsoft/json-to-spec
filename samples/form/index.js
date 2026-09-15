@@ -38,14 +38,17 @@ const render = (structure, data) => {
   specToDom({ spec: specAsJsonToDom, targetHtmlId: "dom-render-container" });
 };
 
+const VARIANT = "inline"; // "stacked" | "inline" | "list"
+
 const start = async () => {
   try {
     const {
       structure,
       data
     } = await loadInput();
+    console.log("aaaaaaa : ", structure, data);
 
-    render(structure, data);
+    render(structure[VARIANT], data);
   } catch (err) {
     const container = document.getElementById("dom-render-container");
     if (container) container.innerHTML = `<div style="color:#b91c1c">Error: ${err.message}</div>`;
