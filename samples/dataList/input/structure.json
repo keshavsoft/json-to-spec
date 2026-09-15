@@ -2,15 +2,15 @@
     {
         "tagName": "datalist",
         "attributes": {
-            "id": "dl1"
+            "id": "LedgerName"
         },
         "jsonToSpec": {
             "operation": "iterate",
-            "source": "data",
+            "source": "LedgerName",
             "template": {
                 "tagName": "option",
                 "attributes": {
-                    "value": "${LedgerName}"
+                    "value": "${}"
                 },
                 "textContent": "${}"
             }
@@ -20,17 +20,17 @@
     {
         "tagName": "datalist",
         "attributes": {
-            "id": "uom"
+            "id": "LedgerType"
         },
         "jsonToSpec": {
             "operation": "iterate",
-            "source": "uom",
+            "source": "LedgerType",
             "template": {
                 "tagName": "option",
                 "attributes": {
-                    "value": "${name}"
+                    "value": "${}"
                 },
-                "textContent": "${name}"
+                "textContent": "${}"
             }
         },
         "children": []

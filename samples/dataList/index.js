@@ -26,6 +26,7 @@ const render = (structure, data) => {
 
 
   const specAsJsonToDom = compile(structure, data);
+
   const compileTime = (performance.now() - t0).toFixed(2);
   const compileBadge = document.getElementById("compile-time-badge");
   if (compileBadge) compileBadge.textContent = `Compiled in ${compileTime}ms`;
