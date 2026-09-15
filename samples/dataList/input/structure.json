@@ -1,0 +1,18 @@
+{
+    "tagName": "datalist",
+    "attributes": {
+        "id": "dl1"
+    },
+    "jsonToSpec": {
+        "operation": "iterate",
+        "source": "data",
+        "template": {
+            "tagName": "option",
+            "attributes": {
+                "value": "${LedgerName}"
+            },
+            "textContent": "${LedgerName}"
+        }
+    },
+    "children": []
+}

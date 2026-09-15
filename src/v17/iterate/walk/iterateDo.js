@@ -13,25 +13,22 @@ const startFunc = ({
             if (localNode?.jsonToSpec?.operation === "iterate") {
 
                 if ("source" in localNode?.jsonToSpec) {
-                    if (localNode?.jsonToSpec?.source === "columns") {
-                        const columns = inData[localNode?.jsonToSpec?.source];
+                    const sourceValues = inData[localNode?.jsonToSpec?.source];
 
-                        const newChildren = columns.map(loopColumn => {
-                            const clone = structuredClone(localNode?.jsonToSpec?.template);
+                    const newChildren = sourceValues.map(loopColumn => {
+                        const clone = structuredClone(localNode?.jsonToSpec?.template);
 
-                            const k1 = walk({
-                                inNode: clone,
-                                inData: loopColumn,
-                                inOperation: "replace"
-                            });
-
-                            return k1
+                        const k1 = walk({
+                            inNode: clone,
+                            inData: loopColumn,
+                            inOperation: "replace"
                         });
 
-                        localNode.children = newChildren;
+                        return k1
+                    });
 
-                        // console.log("newChildren : ", newChildren);
-                    };
+                    localNode.children = newChildren;
+
                 };
 
             };
