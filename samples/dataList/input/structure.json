@@ -12,7 +12,7 @@
                 "attributes": {
                     "value": "${LedgerName}"
                 },
-                "textContent": "${LedgerName}"
+                "textContent": "${}"
             }
         },
         "children": []

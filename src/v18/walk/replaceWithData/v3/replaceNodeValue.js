@@ -7,18 +7,20 @@ const startFunc = ({
     const localNode = inNode;
     const localData = inData;
 
-    if (localNode?.textContent) {
-        if (localNode.textContent.includes("${")) {
-            const dataKey = localNode.textContent
-                .replace(/^\$\{/, "")
-                .replace(/\}$/, "");
+    if (!localNode?.textContent) return "no-textContent";
 
-            localNode.textContent = replaceCommonFunc({
-                inData: localData,
-                inDataKey: dataKey
-            });
-        };
-    };
+    if (typeof localNode.textContent !== "string") return "not-a-string";
+
+    if (!localNode.textContent.includes("${")) return "no-template-token";
+
+    const dataKey = localNode.textContent
+        .replace(/^\$\{/, "")
+        .replace(/\}$/, "");
+
+    localNode.textContent = replaceCommonFunc({
+        inData: localData,
+        inDataKey: dataKey
+    });
 
 };
 

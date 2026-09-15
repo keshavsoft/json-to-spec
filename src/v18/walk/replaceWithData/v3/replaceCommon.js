@@ -2,6 +2,8 @@ const startFunc = ({ inData, inDataKey }) => {
     const dataKey = inDataKey;
     // console.log("dataKey : ", dataKey, inData);
 
+    if (dataKey === "") return inData;
+
     let valueToReturn = inData[dataKey];
 
     if (dataKey.includes(".")) {
