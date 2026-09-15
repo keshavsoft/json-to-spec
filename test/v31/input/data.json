@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "formTitle": "Input Controls",
+    "formBadge": "text • date • email • number",
+    "formLead": "A single iterate block renders standard input fields from column metadata.",
+    "formHint": "Save to inspect the extracted payload for native input families."
+  },
+  "columns": [
+    {
+      "title": "Voucher Type",
+      "field": "voucherType",
+      "inputType": "text",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Voucher Number",
+      "field": "voucherNumber",
+      "inputType": "text",
+      "value": "VCH-2026-028",
+      "placeholder": "Enter voucher number",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Voucher Date",
+      "field": "voucherDate",
+      "inputType": "date",
+      "value": "2026-09-13",
+      "placeholder": "Choose voucher date",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Contact Email",
+      "field": "contactEmail",
+      "inputType": "email",
+      "value": "ops@globallogistics.example",
+      "placeholder": "Enter contact email",
+      "colClass": "col-md-6",
+      "isVisible": true
+    },
+    {
+      "title": "Amount (₹)",
+      "field": "amount",
+      "inputType": "number",
+      "value": "12400",
+      "placeholder": "Enter voucher amount",
+      "colClass": "col-md-6",
+      "isVisible": true
+    }
+  ]
+}
