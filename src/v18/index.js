@@ -1,3 +1,4 @@
+import registerGlobal from "./registerGlobal.js";
 /**
  * json-to-spec v11
  *
@@ -52,12 +53,14 @@ export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) =>
     }
 };
 
-if (typeof globalThis !== "undefined") {
-    globalThis.ks ??= {};
-    globalThis.ks["json-to-spec"] = {
-        meta,
-        compile
-    };
-};
+// if (typeof globalThis !== "undefined") {
+//     globalThis.ks ??= {};
+//     globalThis.ks["json-to-spec"] = {
+//         meta,
+//         compile
+//     };
+// };
+
+registerGlobal(compile);
 
 export default compile;
