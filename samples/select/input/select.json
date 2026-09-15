@@ -1,0 +1,18 @@
+{
+    "tagName": "select",
+    "attributes": {
+        "id": "uom"
+    },
+    "jsonToSpec": {
+        "operation": "iterate",
+        "source": "uom",
+        "template": {
+            "tagName": "option",
+            "attributes": {
+                "value": "${name}"
+            },
+            "textContent": "${name}"
+        }
+    },
+    "children": []
+}

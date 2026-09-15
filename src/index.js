@@ -14,7 +14,7 @@ import compile, {
     pipeline,
     pipe,
     jsonToSpec
-} from "./v17/index.js";
+} from "./v18/index.js";
 
 export {
     compile,
