@@ -1,103 +1,5 @@
-const replaceCommonFunc = ({ inData, inDataKey }) => {
-    const dataKey = inDataKey;
-    console.log("dataKey : ", dataKey, inData);
-
-    let valueToReturn = inData[dataKey];
-
-    if (dataKey.includes(".")) {
-        const keysOfArray = dataKey.split(".");
-
-        const value = keysOfArray.reduce(
-            (current, key) => current?.[key],
-            inData
-        );
-
-        valueToReturn = value;
-    };
-
-    return valueToReturn;
-};
-
-const replaceWithData = ({
-    inNode,
-    inData,
-} = {}) => {
-    const localNode = inNode;
-    const localData = inData;
-
-    if ("textContent" in inNode) {
-        if (inNode.textContent.includes("${")) {
-            const dataKey = inNode.textContent
-                .replace(/^\$\{/, "")
-                .replace(/\}$/, "");
-
-            inNode.textContent = replaceCommonFunc({ inData, inDataKey: dataKey });
-
-        };
-    };
-
-    if ("attributes" in inNode) {
-        const attributes = Object.fromEntries(
-            Object.entries(inNode.attributes || {}).map(([key, value]) => [
-                key,
-                typeof value === "string" && value.includes("${")
-                    ? replaceCommonFunc({
-                        inData,
-                        inDataKey: value
-                            .replace(/^\$\{/, "")
-                            .replace(/\}$/, "")
-                    })
-                    : value
-            ])
-        );
-
-        // console.log("attributes----- : ", inNode, attributes);
-
-        inNode.attributes = { ...attributes };
-    };
-};
-
-const iterateDo = ({
-    inNode,
-    inData,
-} = {}) => {
-    const localNode = inNode;
-    const localData = inData;
-
-    if ("jsonToSpec" in localNode) {
-
-        if ("operation" in localNode?.jsonToSpec) {
-            if (localNode?.jsonToSpec?.operation === "iterate") {
-
-                if ("source" in localNode?.jsonToSpec) {
-                    if (localNode?.jsonToSpec?.source === "columns") {
-                        const columns = inData[localNode?.jsonToSpec?.source];
-
-                        const newChildren = columns.map(loopColumn => {
-                            const clone = structuredClone(localNode?.jsonToSpec?.template);
-
-                            const k1 = walk({
-                                inNode: clone,
-                                inData: loopColumn,
-                                inOperation: "replace"
-                            });
-
-                            return k1
-                        });
-
-                        localNode.children = newChildren;
-
-                        // console.log("newChildren : ", newChildren);
-                    };
-                };
-
-            };
-        };
-    };
-
-    console.log("localNode : ", localNode);
-
-};
+import replaceWithData from "./replaceWithData.js";
+import iterateDo from "./iterateDo.js";
 
 const forArray = ({ inNode, inData, inOperation }) => {
     const localNode = inNode;
@@ -170,7 +72,7 @@ const walk = ({
     switch (localOperation) {
         case "replace":
             if (typeof localNode === "object") {
-                console.log("yyyyyyyyyy :", typeof localNode === "object");
+                // console.log("yyyyyyyyyy :", typeof localNode === "object");
                 replaceWithData({
                     inNode: localNode,
                     inData
@@ -187,10 +89,6 @@ const walk = ({
     };
 
     return localNode;
-};
-
-export {
-    walk
 };
 
 export default walk;
