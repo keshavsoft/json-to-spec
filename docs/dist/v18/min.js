@@ -3,7 +3,7 @@ const d = {
   name: "json-to-spec/v18",
   description: "Minimalist 2-layer compiler: pure value replace + jsonToSpec iterate"
 }, f = (n) => {
-  typeof globalThis > "u" || !n || (globalThis.ks ?? (globalThis.ks = {}), globalThis.ks["json-to-dom"] = {
+  typeof globalThis > "u" || !n || (globalThis.ks ?? (globalThis.ks = {}), globalThis.ks["json-to-spec"] = {
     meta: d,
     compile: n
   });
@@ -28,7 +28,7 @@ const d = {
     inData: e,
     inDataKey: r
   });
-}, m = ({
+}, h = ({
   inNode: n,
   inData: o
 } = {}) => {
@@ -45,12 +45,12 @@ const d = {
     );
     t.attributes = { ...r };
   }
-}, h = ({
+}, m = ({
   inNode: n,
   inData: o
 } = {}) => {
   const t = n, e = o;
-  y({ inNode: t, inData: e }), m({ inNode: t, inData: e });
+  y({ inNode: t, inData: e }), h({ inNode: t, inData: e });
 }, j = ({
   inTemplate: n,
   inSourceValues: o
@@ -108,7 +108,7 @@ const d = {
     return e;
   switch (r) {
     case "replace":
-      typeof e == "object" && h({
+      typeof e == "object" && m({
         inNode: e,
         inData: o
       });

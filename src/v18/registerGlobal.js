@@ -8,7 +8,7 @@ export const registerGlobal = (inFuncDefinition) => {
     if (typeof globalThis === "undefined" || !inFuncDefinition) return;
 
     globalThis.ks ??= {};
-    globalThis.ks["json-to-dom"] = {
+    globalThis.ks["json-to-spec"] = {
         meta,
         compile: inFuncDefinition
     };
