@@ -16,8 +16,8 @@ import other from "./instructionEngine/other/other.js";
 import { pipeline, pipe, defaultPipeline } from "./instructionEngine/pipeline/pipeline.js";
 
 export const meta = {
-    version: "9.0.0",
-    name: "json-to-spec/v9",
+    version: "10.0.0",
+    name: "json-to-spec/v10",
     description: "Pure JSON Specification Compiler with decoupled operation, replace, and other pipeline stages"
 };
 

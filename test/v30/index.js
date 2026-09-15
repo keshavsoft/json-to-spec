@@ -64,4 +64,7 @@ const start = async () => {
 start();
 
 const head1 = document.getElementById("head1");
-head1.innerHTML += ` - ${window?.ks['json-to-spec']?.meta?.version}`;
+const version = window?.ks?.["json-to-spec"]?.meta?.version;
+if (version && head1) {
+  head1.innerHTML += ` - ${version}`;
+}

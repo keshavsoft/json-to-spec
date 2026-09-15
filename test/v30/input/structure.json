@@ -40,35 +40,32 @@
           {
             "tagName": "div",
             "attributes": { "class": "row g-3" },
-            "children": [
-              {
-                "jsonToSpec": {
-                  "operation": "iterate",
-                  "source": "columns",
-                  "filter": { "isVisible": true },
-                  "template": {
-                    "tagName": "div",
-                    "attributes": { "class": "${colClass}" },
-                    "children": [
-                      {
-                        "tagName": "label",
-                        "textContent": "${title}",
-                        "attributes": { "class": "form-label fw-semibold text-secondary small" }
-                      },
-                      {
-                        "tagName": "input",
-                        "attributes": {
-                          "name": "${field}",
-                          "type": "${inputType}",
-                          "placeholder": "${placeholder}",
-                          "class": "form-control"
-                        }
-                      }
-                    ]
+            "jsonToSpec": {
+              "operation": "iterate",
+              "source": "columns",
+              "filter": { "isVisible": true },
+              "template": {
+                "tagName": "div",
+                "attributes": { "class": "${colClass}" },
+                "children": [
+                  {
+                    "tagName": "label",
+                    "textContent": "${title}",
+                    "attributes": { "class": "form-label fw-semibold text-secondary small" }
+                  },
+                  {
+                    "tagName": "input",
+                    "attributes": {
+                      "name": "${field}",
+                      "type": "${inputType}",
+                      "placeholder": "${placeholder}",
+                      "class": "form-control"
+                    }
                   }
-                }
+                ]
               }
-            ]
+            },
+            "children": []
           }
         ]
       },
