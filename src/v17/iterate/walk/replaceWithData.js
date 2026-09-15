@@ -1,6 +1,6 @@
 const replaceCommonFunc = ({ inData, inDataKey }) => {
     const dataKey = inDataKey;
-    console.log("dataKey : ", dataKey, inData);
+    // console.log("dataKey : ", dataKey, inData);
 
     let valueToReturn = inData[dataKey];
 

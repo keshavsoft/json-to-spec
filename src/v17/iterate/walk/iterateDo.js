@@ -1,3 +1,5 @@
+import walk from "./walk.js";
+
 const startFunc = ({
     inNode,
     inData,
@@ -36,7 +38,7 @@ const startFunc = ({
         };
     };
 
-    console.log("localNode : ", localNode);
+    // console.log("localNode : ", localNode);
 
 };
 

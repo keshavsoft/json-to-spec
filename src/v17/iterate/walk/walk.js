@@ -6,7 +6,7 @@ const forArray = ({ inNode, inData, inOperation }) => {
     const localData = inData;
     const localOperation = inOperation;
 
-    console.log("forArray : ", inNode, inOperation);
+    // console.log("forArray : ", inNode, inOperation);
 
     if (Array.isArray(localNode)) {
         const results = [];
