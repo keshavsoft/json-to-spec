@@ -1,5 +1,5 @@
-import replaceWithData from "./replaceWithData.js";
-import iterateDo from "./iterateDo.js";
+import replaceWithData from "./replaceWithData/v2/index.js";
+import iterateDo from "./iterate/v1/index.js";
 
 const forArray = ({ inNode, inData, inOperation }) => {
     const localNode = inNode;
