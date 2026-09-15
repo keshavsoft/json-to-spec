@@ -6,47 +6,12 @@
  * 2. iterate: Evaluates jsonToSpec operations, expanding collections into clean children.
  */
 
-import { replace, replaceNode } from "./replace.js";
-
-// import { iterate, iterateNode, operation } from "./iterate.js";
-
-import {
-    iterate,
-    operation
-} from "./iterate/index.js";
+import { replace } from "./replace.js";
 
 export const meta = {
-    version: "17.0.0",
+    version: "18.0.0",
     name: "json-to-spec/v17",
     description: "Minimalist 2-layer compiler: pure value replace + jsonToSpec iterate"
-};
-
-/**
- * Executes a custom pipeline of transformations over the structure.
- */
-export const pipeline = ({ inStructure, inData = {}, inSteps = [replace, iterate] } = {}) => {
-    const localData = inData;
-    const localSteps = inSteps;
-
-    try {
-        let current = inStructure;
-        for (const step of localSteps) {
-            if (typeof step === "function") {
-                current = step({ inStructure: current, inData: localData });
-            };
-        }
-        return current;
-    } catch (err) {
-        console.error("[json-to-spec/v17] pipeline error:", err);
-        throw err;
-    }
-};
-
-export const pipe = (...inSteps) => {
-    const localSteps = inSteps.length > 0 ? inSteps : [replace, iterate];
-    return (inStructure, inData = {}) => {
-        return pipeline({ inStructure, inData, inSteps: localSteps });
-    };
 };
 
 /**
@@ -87,33 +52,12 @@ export const compile = (inStructureOrOptions, inData = {}) => {
     }
 };
 
-export const jsonToSpec = {
-    replace,
-    iterate,
-    operation,
-    pipeline,
-    pipe,
-    compile
-};
-
-export {
-    replace,
-    replaceNode,
-    iterate,
-    operation
-};
-
 if (typeof globalThis !== "undefined") {
     globalThis.ks ??= {};
     globalThis.ks["json-to-spec"] = {
         meta,
-        compile,
-        replace,
-        iterate,
-        operation,
-        pipeline,
-        jsonToSpec
+        compile
     };
-}
+};
 
 export default compile;
