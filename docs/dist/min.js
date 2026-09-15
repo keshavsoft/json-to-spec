@@ -3,7 +3,7 @@ const p = ({ inData: o, inDataKey: n }) => {
   if (t === "") return o;
   let e = o[t];
   return t.includes(".") && (e = t.split(".").reduce(
-    (s, a) => s == null ? void 0 : s[a],
+    (a, c) => a == null ? void 0 : a[c],
     o
   )), e;
 }, d = ({
@@ -19,63 +19,63 @@ const p = ({ inData: o, inDataKey: n }) => {
     inData: e,
     inDataKey: r
   });
-}, f = ({
+}, y = ({
   inNode: o,
   inData: n
 } = {}) => {
   const t = o, e = n;
   if ("attributes" in t) {
     const r = Object.fromEntries(
-      Object.entries(t.attributes || {}).map(([c, s]) => [
-        c,
-        typeof s == "string" && s.includes("${") ? p({
+      Object.entries(t.attributes || {}).map(([s, a]) => [
+        s,
+        typeof a == "string" && a.includes("${") ? p({
           inData: e,
-          inDataKey: s.replace(/^\$\{/, "").replace(/\}$/, "")
-        }) : s
+          inDataKey: a.replace(/^\$\{/, "").replace(/\}$/, "")
+        }) : a
       ])
     );
     t.attributes = { ...r };
   }
-}, y = ({
+}, h = ({
   inNode: o,
   inData: n
 } = {}) => {
   const t = o, e = n;
-  d({ inNode: t, inData: e }), f({ inNode: t, inData: e });
-}, h = ({
+  d({ inNode: t, inData: e }), y({ inNode: t, inData: e });
+}, j = ({
   inTemplate: o,
   inSourceValues: n
 } = {}) => n.map((r) => {
-  const c = structuredClone(o);
+  const s = structuredClone(o);
   return i({
-    inNode: c,
+    inNode: s,
     inData: r,
     inOperation: "replace"
   });
-}), j = ({
+}), A = ({
   inNode: o,
   inData: n
 } = {}) => {
   const t = o, e = n;
   if (!("jsonToSpec" in t) || !("operation" in t.jsonToSpec) || t.jsonToSpec.operation !== "iterate" || !("source" in t.jsonToSpec)) return;
-  const r = e[t.jsonToSpec.source], c = h({
+  const r = e[t.jsonToSpec.source], s = j({
     inTemplate: t.jsonToSpec.template,
     inSourceValues: r
   });
-  t.children = c;
+  t.children = s;
 }, l = ({ inNode: o, inData: n, inOperation: t }) => {
   const e = o, r = t;
   if (Array.isArray(e)) {
-    const c = [];
-    for (const s of e) {
-      const a = i({
-        inNode: s,
+    const s = [];
+    for (const a of e) {
+      const c = i({
+        inNode: a,
         inData: n,
         inOperation: r
       });
-      Array.isArray(a) ? c.push(...a) : a != null && c.push(a);
+      Array.isArray(c) ? s.push(...c) : c != null && s.push(c);
     }
-    return c;
+    return s;
   }
 }, i = ({
   inNode: o,
@@ -99,13 +99,13 @@ const p = ({ inData: o, inDataKey: n }) => {
     return e;
   switch (r) {
     case "replace":
-      typeof e == "object" && y({
+      typeof e == "object" && h({
         inNode: e,
         inData: n
       });
       break;
     case "iterateDo":
-      j({
+      A({
         inNode: e,
         inData: n
       });
@@ -121,34 +121,34 @@ const p = ({ inData: o, inDataKey: n }) => {
   } catch (e) {
     throw console.error("[json-to-spec/v17] replace error:", e), e;
   }
-}, A = {
+}, f = {
   version: "18.0.0",
-  name: "json-to-spec/v17",
+  name: "json-to-spec/v18",
   description: "Minimalist 2-layer compiler: pure value replace + jsonToSpec iterate"
-}, D = (o, n = {}) => {
-  let t = o, e = n;
-  console.log("ccccccccccccc-------- : ", e);
+}, D = (o, n = {}, t = !1) => {
+  let e = o, r = n;
+  t && console.log(f.name, e, r);
   try {
-    const r = u({
-      inStructureAsJson: t,
-      inDataAsJson: e,
+    const s = u({
+      inStructureAsJson: e,
+      inDataAsJson: r,
       inOperation: "iterateDo"
-    }), c = u({
-      inStructureAsJson: r,
-      inDataAsJson: e,
+    }), a = u({
+      inStructureAsJson: s,
+      inDataAsJson: r,
       inOperation: "replace"
     });
-    return console.log("iteratedData : ", r, c), c;
-  } catch (r) {
-    throw console.error("[json-to-spec/v17] compile error:", r), r;
+    return console.log("iteratedData : ", s, a), a;
+  } catch (s) {
+    throw console.error("[json-to-spec/v17] compile error:", s), s;
   }
 };
 typeof globalThis < "u" && (globalThis.ks ?? (globalThis.ks = {}), globalThis.ks["json-to-spec"] = {
-  meta: A,
+  meta: f,
   compile: D
 });
 export {
   D as compile,
   D as default,
-  A as meta
+  f as meta
 };

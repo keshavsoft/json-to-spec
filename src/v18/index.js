@@ -10,7 +10,7 @@ import { replace } from "./replace.js";
 
 export const meta = {
     version: "18.0.0",
-    name: "json-to-spec/v17",
+    name: "json-to-spec/v18",
     description: "Minimalist 2-layer compiler: pure value replace + jsonToSpec iterate"
 };
 
@@ -19,11 +19,11 @@ export const meta = {
  * 1. Replace values: replace(structure, data)
  * 2. Iterate/Operate: iterate(replacedStructure, data)
  */
-export const compile = (inStructureOrOptions, inData = {}) => {
+export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) => {
     let localStructure = inStructureOrOptions;
     let localData = inData;
 
-    console.log("ccccccccccccc-------- : ", localData);
+    if (inShowLog) console.log(meta.name, localStructure, localData);
 
     try {
         const iteratedData = replace({
