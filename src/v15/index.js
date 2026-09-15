@@ -54,30 +54,40 @@ export const compile = (inStructureOrOptions, inData = {}) => {
     let localData = inData;
     // console.log("ccccccccccccc : ", localData);
 
-    if (inStructureOrOptions && typeof inStructureOrOptions === "object" && !Array.isArray(inStructureOrOptions)) {
-        if ("inStructure" in inStructureOrOptions || "inTree" in inStructureOrOptions || "inNode" in inStructureOrOptions) {
-            localStructure = inStructureOrOptions.inStructure || inStructureOrOptions.inTree || inStructureOrOptions.inNode;
-            localData = inStructureOrOptions.inData || localData;
-        } else if ("structure" in inStructureOrOptions) {
-            localStructure = inStructureOrOptions.structure;
-            localData = inStructureOrOptions.data || localData;
-        }
-    };
-    // console.log("ccccccccccccc-------- : ", localData);
+    // if (inStructureOrOptions && typeof inStructureOrOptions === "object" && !Array.isArray(inStructureOrOptions)) {
+    //     if ("inStructure" in inStructureOrOptions || "inTree" in inStructureOrOptions || "inNode" in inStructureOrOptions) {
+    //         localStructure = inStructureOrOptions.inStructure || inStructureOrOptions.inTree || inStructureOrOptions.inNode;
+    //         localData = inStructureOrOptions.inData || localData;
+    //     } else if ("structure" in inStructureOrOptions) {
+    //         localStructure = inStructureOrOptions.structure;
+    //         localData = inStructureOrOptions.data || localData;
+    //     }
+    // };
+    console.log("ccccccccccccc-------- : ", localData);
 
     // Step 1: Replace tokens in the structure
     const replaced = replace({
         inStructureAsJson: localStructure,
-        inDataAsJson: localData
+        inDataAsJson: localData,
+        inOperation: "replace"
     });
 
     // Step 2: Expand jsonToSpec operations on the replaced structure
+    console.log("replaced : ", replaced);
+
+    const spec = replace({
+        inStructureAsJson: replaced,
+        inDataAsJson: localData,
+        inOperation: "iterateDo"
+    });
+
+
     // const spec = iterate({
     //     inStructure: replaced,
     //     inData: localData
     // });
 
-    return replaced;
+    return spec;
 };
 
 export const jsonToSpec = {

@@ -1,102 +1,138 @@
 [
-  {
-    "tagName": "div",
-    "attributes": {
-      "class": "ksform border rounded-3 shadow-sm bg-white overflow-hidden"
-    },
-    "children": [
-      {
+    {
         "tagName": "div",
         "attributes": {
-          "class": "bg-body-secondary p-3 border-bottom d-flex justify-content-between align-items-center"
+            "class": "ksform border rounded-3 shadow-sm bg-white overflow-hidden"
         },
         "children": [
-          {
-            "tagName": "span",
-            "textContent": "${meta.formTitle}",
-            "attributes": { "class": "fw-bold fs-6 text-dark" }
-          },
-          {
-            "tagName": "span",
-            "textContent": "${meta.formBadge}",
-            "attributes": { "class": "badge bg-primary-subtle text-primary border border-primary-subtle font-monospace small" }
-          }
-        ]
-      },
-      {
-        "tagName": "div",
-        "attributes": { "class": "p-4" },
-        "children": [
-          {
-            "tagName": "div",
-            "textContent": "${meta.formLead}",
-            "attributes": { "class": "alert alert-info border small mb-4" }
-          },
-          {
-            "tagName": "div",
-            "textContent": "${meta.formHint}",
-            "attributes": { "class": "small text-muted mb-3" }
-          },
-          {
-            "tagName": "div",
-            "attributes": { "class": "row g-3" },
-            "jsonToSpec": {
-              "operation": "iterate",
-              "source": "columns",
-              "filter": { "isVisible": true },
-              "template": {
+            {
                 "tagName": "div",
-                "attributes": { "class": "${colClass}" },
+                "attributes": {
+                    "class": "bg-body-secondary p-3 border-bottom d-flex justify-content-between align-items-center"
+                },
                 "children": [
-                  {
-                    "tagName": "label",
-                    "textContent": "${title}",
-                    "attributes": { "class": "form-label fw-semibold text-secondary small" }
-                  },
-                  {
-                    "tagName": "input",
-                    "attributes": {
-                      "name": "${field}",
-                      "type": "${inputType}",
-                      "placeholder": "${placeholder}",
-                      "class": "form-control"
+                    {
+                        "tagName": "span",
+                        "textContent": "${meta.formTitle}",
+                        "attributes": {
+                            "class": "fw-bold fs-6 text-dark"
+                        }
+                    },
+                    {
+                        "tagName": "span",
+                        "textContent": "${meta.formBadge}",
+                        "attributes": {
+                            "class": "badge bg-primary-subtle text-primary border border-primary-subtle font-monospace small"
+                        }
                     }
-                  }
                 ]
-              }
             },
-            "children": []
-          }
-        ]
-      },
-      {
-        "tagName": "div",
-        "attributes": {
-          "class": "bg-light p-3 border-top d-flex justify-content-end gap-2"
-        },
-        "children": [
-          {
-            "tagName": "button",
-            "textContent": "Reset",
-            "attributes": {
-              "type": "button",
-              "class": "btn btn-outline-secondary",
-              "data-action": "cancel",
-              "data-action-type": "click"
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "p-4"
+                },
+                "children": [
+                    {
+                        "tagName": "div",
+                        "textContent": "${meta.formLead}",
+                        "attributes": {
+                            "class": "alert alert-info border small mb-4"
+                        }
+                    },
+                    {
+                        "tagName": "div",
+                        "textContent": "${meta.formHint}",
+                        "attributes": {
+                            "class": "small text-muted mb-3"
+                        }
+                    },
+                    {
+                        "tagName": "div",
+                        "attributes": {
+                            "class": "row g-3"
+                        },
+                        "jsonToSpec": {
+                            "operation": "iterate",
+                            "source": "columns",
+                            "filter": {
+                                "isVisible": true
+                            },
+                            "template": {
+                                "tagName": "div",
+                                "attributes": {
+                                    "class": "${colClass}"
+                                },
+                                "children": [
+                                    {
+                                        "tagName": "label",
+                                        "textContent": "${title}",
+                                        "attributes": {
+                                            "class": "form-label fw-semibold text-secondary small"
+                                        }
+                                    },
+                                    {
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "name": "${field}",
+                                            "type": "${inputType}",
+                                            "placeholder": "${placeholder}",
+                                            "class": "form-control"
+                                        }
+                                    }
+                                ],
+                                "children_old": [
+                                    {
+                                        "tagName": "label",
+                                        "textContent": "${title}",
+                                        "attributes": {
+                                            "class": "form-label fw-semibold text-secondary small"
+                                        }
+                                    },
+                                    {
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "name": "${field}",
+                                            "type": "${inputType}",
+                                            "placeholder": "${placeholder}",
+                                            "class": "form-control"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "bg-light p-3 border-top d-flex justify-content-end gap-2"
+                },
+                "children": [
+                    {
+                        "tagName": "button",
+                        "textContent": "Reset",
+                        "attributes": {
+                            "type": "button",
+                            "class": "btn btn-outline-secondary",
+                            "data-action": "cancel",
+                            "data-action-type": "click"
+                        }
+                    },
+                    {
+                        "tagName": "button",
+                        "textContent": "Save Inputs",
+                        "attributes": {
+                            "type": "button",
+                            "class": "btn btn-primary",
+                            "data-action": "save",
+                            "data-action-type": "click"
+                        }
+                    }
+                ]
             }
-          },
-          {
-            "tagName": "button",
-            "textContent": "Save Inputs",
-            "attributes": {
-              "type": "button",
-              "class": "btn btn-primary",
-              "data-action": "save",
-              "data-action-type": "click"
-            }
-          }
         ]
-      }
-    ]
-  }
+    }
 ]

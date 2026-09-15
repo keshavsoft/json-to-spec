@@ -11,6 +11,9 @@ const replaceWithData = ({
                 .replace(/^\$\{/, "")
                 .replace(/\}$/, "");
 
+            inNode.textContent = inData[dataKey];
+            console.log("uuuuuuuuu : ", inNode.textContent);
+
             if (dataKey.includes(".")) {
                 const keysOfArray = dataKey.split(".");
 
@@ -25,9 +28,51 @@ const replaceWithData = ({
     };
 };
 
-const forArray = ({ inNode, inData }) => {
+const iterateDo = ({
+    inNode,
+    inData,
+} = {}) => {
     const localNode = inNode;
     const localData = inData;
+
+
+    if ("jsonToSpec" in localNode) {
+
+        if ("operation" in localNode?.jsonToSpec) {
+            if (localNode?.jsonToSpec?.operation === "iterate") {
+
+                if ("source" in localNode?.jsonToSpec) {
+                    if (localNode?.jsonToSpec?.source === "columns") {
+                        // console.log("ggggggggg :", localNode.jsonToSpec, localData);
+
+                        const columns = inData[localNode?.jsonToSpec?.source];
+
+                        // console.log("jjjjjjjj : ", columns);
+
+                        columns.forEach(loopColumn => {
+                            const clone = structuredClone(localNode?.jsonToSpec?.template);
+
+                            const k1 = walk({
+                                inNode: clone,
+                                inData: loopColumn,
+                                inOperation: "replace"
+                            });
+
+                            console.log("clone : ", k1, clone, loopColumn);
+
+                        });
+                    };
+                };
+
+            };
+        };
+    };
+};
+
+const forArray = ({ inNode, inData, inOperation }) => {
+    const localNode = inNode;
+    const localData = inData;
+    const localOperation = inOperation;
 
     if (Array.isArray(localNode)) {
         const results = [];
@@ -35,7 +80,7 @@ const forArray = ({ inNode, inData }) => {
         for (const child of localNode) {
             const result = walk({
                 inNode: child,
-                inData
+                inData, inOperation: localOperation
             });
 
             if (Array.isArray(result)) {
@@ -62,20 +107,24 @@ const walk = ({
 } = {}) => {
     const localNode = inNode;
     const localData = inData;
-
+    const localOperation = inOperation;
+    // debugger
     if (localNode === null || localNode === undefined) {
         return localNode;
     }
 
     if (Array.isArray(localNode)) {
-        return forArray({ inNode: localNode, inData });
+        return forArray({
+            inNode: localNode, inData,
+            inOperation: localOperation
+        });
     };
 
     if ("children" in localNode) {
         if (Array.isArray(localNode?.children)) {
             localNode.children = forArray({
                 inNode: localNode?.children,
-                inData
+                inData, inOperation: localOperation
             });
         };
     };
@@ -84,8 +133,18 @@ const walk = ({
         return localNode;
     };
 
-    if (typeof localNode === "object") {
-        replaceWithData({ inNode, inData });
+    // console.log("localOperation :", localOperation);
+
+    switch (localOperation) {
+        case "replace":
+            if (typeof localNode === "object") {
+                replaceWithData({ inNode, inData });
+            };
+            break;
+        case "iterateDo":
+            iterateDo({ inNode, inData });
+        default:
+            break;
     };
 
     return localNode;

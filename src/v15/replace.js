@@ -143,10 +143,12 @@ export const replaceNode = ({ inNode, inContext = {}, inData = {} } = {}) => {
 /**
  * Main replace function: (structure, data) -> replaced JSON structure
  */
-export const replace = ({ inStructureAsJson, inDataAsJson }) => {
+export const replace = ({ inStructureAsJson, inDataAsJson, inOperation }) => {
+    // console.log("inDataAsJson-------- : ", inDataAsJson);
+
     return walk({
         inNode: inStructureAsJson,
-        inData: inDataAsJson
+        inData: inDataAsJson, inOperation
     });
 };
 
