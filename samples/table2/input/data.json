@@ -3,17 +3,15 @@
   "data": [
     {
       "LedgerName": "360 one Quant Fund on 20.08.24",
-      "LedgerParentName": "Investments",
-      "LedgerType": "Ledger",
-      "GstRegistrationType": "",
-      "PartyGSTIN": ""
+      "LedgerParentName": "Investments"
     },
     {
-      "LedgerName": "111111",
-      "LedgerParentName": "22222222",
-      "LedgerType": "Ledger",
-      "GstRegistrationType": "",
-      "PartyGSTIN": ""
+      "LedgerName": "222222222",
+      "LedgerParentName": "Investments"
+    },
+    {
+      "LedgerName": "333333333",
+      "LedgerParentName": "Investments"
     }
   ]
 }

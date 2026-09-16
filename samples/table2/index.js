@@ -6,8 +6,8 @@ import { specToDom } from "https://keshavsoft.github.io/json-to-dom/dist/v31/min
 const folder = "input";
 let actionBinding = null;
 let state = { structure: null, data: null, compiled: null };
-const htmlId1 = "table-body";
-const htmlId = "body-row";
+const htmlId = "table-body";
+const htmlId1 = "body-row";
 
 const loadInput = async () => {
   const [structure, data] = await Promise.all([

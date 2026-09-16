@@ -1,4 +1,5 @@
 import replaceWithArray from "../../replaceWithArray/v1/index.js";
+import walk from "../../walk.js";
 
 const startFunc = ({
     inTemplate,
@@ -15,6 +16,20 @@ const startFunc = ({
 
     sourceValues.forEach(element => {
         const clone = structuredClone(inTemplate);
+
+        if ("jsonToSpec" in clone) {
+            const source = clone?.jsonToSpec?.source;
+
+            let data = {};
+
+            data[source] = element;
+            //this walk func will insert to inNode only to children is the spec right
+            walk({
+                inNode: clone,
+                inData: data, inOperation: clone?.jsonToSpec?.operation,
+                inShowLog
+            });
+        };
 
         replaceWithArray({ inNode: clone, inData: element });
 
