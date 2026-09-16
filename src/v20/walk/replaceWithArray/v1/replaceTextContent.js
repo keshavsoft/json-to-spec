@@ -22,7 +22,6 @@ const startFunc = ({
 } = {}) => {
     const localNode = inNode;
     const localData = inData;
-    console.log("localData------- : ", localData);
 
     if (!localNode?.textContent) return "no-textContent";
 

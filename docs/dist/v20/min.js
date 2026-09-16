@@ -76,7 +76,7 @@ const f = {
     inSourceValues: s
   });
   e.children = c;
-}, A = ({
+}, x = ({
   inNode: n,
   inData: r
 } = {}) => {
@@ -85,7 +85,7 @@ const f = {
   if (typeof t.textContent != "string") return "not-a-string";
   if (!t.textContent.includes("${")) return "no-template-token";
   t.textContent === "${key}" && (t.textContent = r.key), t.textContent === "${value}" && (t.textContent = r.value);
-}, x = ({
+}, A = ({
   inNode: n,
   inData: r
 } = {}) => {
@@ -104,7 +104,7 @@ const f = {
   inData: r
 } = {}) => {
   const t = n, e = r;
-  A({ inNode: t, inData: e }), x({ inNode: t, inData: e });
+  x({ inNode: t, inData: e }), A({ inNode: t, inData: e });
 };
 function m(n) {
   return n !== null && typeof n == "object" && Object.getPrototypeOf(n) === Object.prototype;
@@ -141,7 +141,7 @@ const h = ({
 function S(n) {
   return n !== null && typeof n == "object" && Object.getPrototypeOf(n) === Object.prototype;
 }
-const g = ({
+const N = ({
   inNode: n,
   inData: r
 } = {}) => {
@@ -154,11 +154,11 @@ const g = ({
   inData: r
 } = {}) => {
   const t = n, e = r;
-  if (console.log("localData------- : ", e), !(t != null && t.textContent)) return "no-textContent";
+  if (!(t != null && t.textContent)) return "no-textContent";
   if (typeof t.textContent != "string") return "not-a-string";
   if (!t.textContent.includes("${")) return "no-template-token";
-  S(e) ? g({ inNode: n, inData: r }) : t.textContent === "${}" && (t.textContent = e);
-}, N = ({
+  S(e) ? N({ inNode: n, inData: r }) : t.textContent === "${}" && (t.textContent = e);
+}, g = ({
   inNode: n,
   inData: r
 } = {}) => {
@@ -177,7 +177,7 @@ const g = ({
   inData: r
 } = {}) => {
   const t = n, e = r;
-  F({ inNode: t, inData: e }), N({ inNode: t, inData: e });
+  F({ inNode: t, inData: e }), g({ inNode: t, inData: e });
 }, w = ({
   inTemplate: n,
   inSourceValuesAsArray: r,
@@ -200,7 +200,12 @@ const g = ({
         inShowLog: t
       });
     }
-    V({ inNode: c, inData: s }), o.push(c);
+    l({
+      inNode: c,
+      inData: s,
+      inOperation: "replace",
+      inShowLog: t
+    }), V({ inNode: c, inData: s }), o.push(c);
   }), o;
 }, K = ({
   inNode: n,
@@ -208,7 +213,7 @@ const g = ({
   inShowLog: t
 } = {}) => {
   const e = n, o = r;
-  if (console.log("loopArray:1 ", n, r), t && console.log("loopObject:1 ", n, r), !("jsonToSpec" in e) || !("operation" in e.jsonToSpec) || e.jsonToSpec.operation !== "loopArray" || !("source" in e.jsonToSpec)) return;
+  if (t && console.log("loopObject:1 ", n, r), !("jsonToSpec" in e) || !("operation" in e.jsonToSpec) || e.jsonToSpec.operation !== "loopArray" || !("source" in e.jsonToSpec)) return;
   const s = o[e.jsonToSpec.source];
   if (!Array.isArray(s)) return;
   t && console.log("loopObject:2 ", n, r);

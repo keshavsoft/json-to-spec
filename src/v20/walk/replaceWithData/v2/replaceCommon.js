@@ -1,6 +1,5 @@
 const startFunc = ({ inData, inDataKey }) => {
     const dataKey = inDataKey;
-    // console.log("dataKey : ", dataKey, inData);
 
     let valueToReturn = inData[dataKey];
 

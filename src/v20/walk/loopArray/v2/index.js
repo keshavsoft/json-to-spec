@@ -7,8 +7,6 @@ const startFunc = ({
     const localNode = inNode;
     const localData = inData;
 
-    console.log("loopArray:1 ", inNode, inData);
-
     if (inShowLog) console.log("loopObject:1 ", inNode, inData);
 
     if (!("jsonToSpec" in localNode)) return;

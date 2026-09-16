@@ -9,8 +9,6 @@ const forArray = ({ inNode, inData, inOperation }) => {
     const localData = inData;
     const localOperation = inOperation;
 
-    // console.log("forArray : ", inNode, inOperation);
-
     if (Array.isArray(localNode)) {
         const results = [];
 
@@ -79,7 +77,6 @@ const walk = ({
     switch (localOperation) {
         case "replace":
             if (typeof localNode === "object") {
-                // console.log("yyyyyyyyyy :", typeof localNode === "object");
                 replaceWithData({
                     inNode: localNode,
                     inData
@@ -90,7 +87,6 @@ const walk = ({
 
         case "replaceObject":
             if (typeof localNode === "object") {
-                // console.log("yyyyyyyyyy :", typeof localNode === "object");
                 replaceWithObject({
                     inNode: localNode,
                     inData
