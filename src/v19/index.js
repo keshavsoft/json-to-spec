@@ -21,7 +21,7 @@ export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) =>
         const loopedData = replace({
             inStructureAsJson: localStructure,
             inDataAsJson: localData,
-            inOperation: "loopObject",
+            inOperation: "loopArray",
             inShowLog
         });
         // if (inShowLog) console.log("loopedData : ", loopedData);

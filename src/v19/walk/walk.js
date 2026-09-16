@@ -2,6 +2,7 @@ import replaceWithData from "./replaceWithData/v3/index.js";
 import iterateDo from "./iterate/v4/index.js";
 import loopObject from "./loopObject/v2/index.js";
 import replaceWithObject from "./replaceWithObject/v1/index.js";
+import loopArray from "./loopArray/v1/index.js";
 
 const forArray = ({ inNode, inData, inOperation }) => {
     const localNode = inNode;
@@ -114,6 +115,13 @@ const walk = ({
 
             break;
 
+        case "loopArray":
+            loopArray({
+                inNode: localNode,
+                inData: localData, inShowLog
+            });
+
+            break;
         default:
             break;
     };
