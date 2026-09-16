@@ -1,4 +1,4 @@
-import replaceNodeValue from "./replaceNodeValue.js";
+import replaceTextContent from "./replaceTextContent.js";
 import replaceAttributes from "./replaceAttributes.js";
 
 const startFunc = ({
@@ -8,7 +8,7 @@ const startFunc = ({
     const localNode = inNode;
     const localData = inData;
 
-    replaceNodeValue({ inNode: localNode, inData: localData });
+    replaceTextContent({ inNode: localNode, inData: localData });
     replaceAttributes({ inNode: localNode, inData: localData });
 };
 

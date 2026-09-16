@@ -1,0 +1,12 @@
+    {
+        "tagName": "tr",
+        "jsonToSpec": {
+            "operation": "loopArray",
+            "source": "columns",
+            "template": {
+                "tagName": "th",
+                "textContent": "${title}"
+            }
+        },
+        "children": []
+    }
