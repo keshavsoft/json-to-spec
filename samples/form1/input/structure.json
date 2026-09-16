@@ -1,0 +1,278 @@
+{
+    "stacked": {
+        "tagName": "div",
+        "attributes": {
+            "class": "card shadow-sm"
+        },
+        "children": [
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-header fw-semibold"
+                },
+                "children": [
+                    {
+                        "tagName": "span",
+                        "textContent": "Ledger Details"
+                    }
+                ]
+            },
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-body"
+                },
+                "jsonToSpec": {
+                    "operation": "iterate",
+                    "source": "fields",
+                    "template": {
+                        "tagName": "div",
+                        "attributes": {
+                            "class": "mb-3"
+                        },
+                        "children": [
+                            {
+                                "tagName": "label",
+                                "attributes": {
+                                    "class": "form-label"
+                                },
+                                "textContent": "${label}"
+                            },
+                            {
+                                "tagName": "input",
+                                "attributes": {
+                                    "type": "text",
+                                    "class": "form-control",
+                                    "value": "${value}",
+                                    "readonly": "true"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "children": []
+            }
+        ]
+    },
+    "inline": {
+        "tagName": "div",
+        "attributes": {
+            "class": "card shadow-sm"
+        },
+        "children": [
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-header fw-semibold"
+                },
+                "children": [
+                    {
+                        "tagName": "span",
+                        "textContent": "Ledger Details"
+                    }
+                ]
+            },
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-body"
+                },
+                "jsonToSpec": {
+                    "operation": "loopArray",
+                    "source": "columns",
+                    "template": {
+                        "tagName": "div",
+                        "attributes": {
+                            "class": "row mb-2 align-items-center"
+                        },
+                        "children": [
+                            {
+                                "tagName": "label",
+                                "attributes": {
+                                    "class": "col-sm-4 col-form-label text-sm-end mb-0 fw-semibold text-secondary small"
+                                },
+                                "textContent": "${title}"
+                            },
+                            {
+                                "tagName": "div",
+                                "attributes": {
+                                    "class": "col-sm-8"
+                                },
+                                "children": [
+                                    {
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "class": "form-control",
+                                            "name": "${columnName}",
+                                            "value": "${value}"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "jsonToSpec1": {
+                    "operation": "loopArray",
+                    "source": "fields",
+                    "template": {
+                        "tagName": "div",
+                        "attributes": {
+                            "class": "row mb-2 align-items-center"
+                        },
+                        "jsonToSpec": {
+                            "operation": "loopObject",
+                            "source": "data",
+                            "template": {
+                                "tagName": "div",
+                                "textContent": "${value}"
+                            }
+                        },
+                        "children": []
+                    }
+                },
+                "children": []
+            }
+        ]
+    },
+    "inlineWithButtons": {
+        "tagName": "div",
+        "attributes": {
+            "class": "card shadow-sm"
+        },
+        "children": [
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-header fw-semibold"
+                },
+                "children": [
+                    {
+                        "tagName": "span",
+                        "textContent": "Ledger Details"
+                    }
+                ]
+            },
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-body"
+                },
+                "jsonToSpec": {
+                    "operation": "iterate",
+                    "source": "fields",
+                    "template": {
+                        "tagName": "div",
+                        "attributes": {
+                            "class": "row mb-2 align-items-center"
+                        },
+                        "children": [
+                            {
+                                "tagName": "label",
+                                "attributes": {
+                                    "class": "col-4 col-form-label fw-medium text-end"
+                                },
+                                "textContent": "${label}"
+                            },
+                            {
+                                "tagName": "div",
+                                "attributes": {
+                                    "class": "col-6"
+                                },
+                                "children": [
+                                    {
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "type": "text",
+                                            "class": "form-control form-control-sm",
+                                            "value": "${value}",
+                                            "readonly": "true"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "tagName": "div",
+                                "attributes": {
+                                    "class": "col-2 d-flex gap-1"
+                                },
+                                "children": [
+                                    {
+                                        "tagName": "button",
+                                        "attributes": {
+                                            "type": "button",
+                                            "class": "btn btn-sm btn-outline-primary"
+                                        },
+                                        "textContent": "Edit"
+                                    },
+                                    {
+                                        "tagName": "button",
+                                        "attributes": {
+                                            "type": "button",
+                                            "class": "btn btn-sm btn-outline-secondary"
+                                        },
+                                        "textContent": "Copy"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "children": []
+            }
+        ]
+    },
+    "list": {
+        "tagName": "div",
+        "attributes": {
+            "class": "card shadow-sm"
+        },
+        "children": [
+            {
+                "tagName": "div",
+                "attributes": {
+                    "class": "card-header fw-semibold"
+                },
+                "children": [
+                    {
+                        "tagName": "span",
+                        "textContent": "Ledger Details"
+                    }
+                ]
+            },
+            {
+                "tagName": "ul",
+                "attributes": {
+                    "class": "list-group list-group-flush"
+                },
+                "jsonToSpec": {
+                    "operation": "iterate",
+                    "source": "fields",
+                    "template": {
+                        "tagName": "li",
+                        "attributes": {
+                            "class": "list-group-item d-flex justify-content-between align-items-center"
+                        },
+                        "children": [
+                            {
+                                "tagName": "span",
+                                "attributes": {
+                                    "class": "text-muted"
+                                },
+                                "textContent": "${label}"
+                            },
+                            {
+                                "tagName": "span",
+                                "attributes": {
+                                    "class": "fw-medium"
+                                },
+                                "textContent": "${value}"
+                            }
+                        ]
+                    }
+                },
+                "children": []
+            }
+        ]
+    }
+}

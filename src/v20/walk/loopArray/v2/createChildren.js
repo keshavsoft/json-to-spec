@@ -31,6 +31,12 @@ const startFunc = ({
             });
         };
 
+        walk({
+            inNode: clone,
+            inData: element, inOperation: "replace",
+            inShowLog
+        });
+
         replaceWithArray({ inNode: clone, inData: element });
 
         newChildren.push(clone);
