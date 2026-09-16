@@ -1,6 +1,7 @@
 import replaceWithData from "./replaceWithData/v3/index.js";
 import iterateDo from "./iterate/v4/index.js";
 import loopObject from "./loopObject/v2/index.js";
+import replaceWithObject from "./replaceWithObject/v1/index.js";
 
 const forArray = ({ inNode, inData, inOperation }) => {
     const localNode = inNode;
@@ -83,7 +84,20 @@ const walk = ({
                     inData
                 });
             };
+
             break;
+
+        case "replaceObject":
+            if (typeof localNode === "object") {
+                // console.log("yyyyyyyyyy :", typeof localNode === "object");
+                replaceWithObject({
+                    inNode: localNode,
+                    inData
+                });
+            };
+
+            break;
+
         case "iterateDo":
             iterateDo({
                 inNode: localNode,

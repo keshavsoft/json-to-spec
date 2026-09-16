@@ -1,4 +1,9 @@
 import walk from "../../walk.js";
+import replaceWithObject from "../../replaceWithObject/v1/index.js";
+
+function isPlainObject(value) {
+    return value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype;
+};
 
 const startFunc = ({
     inTemplate,
@@ -7,20 +12,19 @@ const startFunc = ({
     const sourceValues = inSourceValues;
 
     if (sourceValues === undefined) return;
+    if (!isPlainObject(sourceValues)) return;
 
     if (inShowLog) console.log("loopObject:createChildren:1 ", inTemplate, inSourceValues);
 
-    const newChildren = sourceValues.map(loopColumn => {
+    let newChildren = [];
+
+    for (const [key, value] of Object.entries(sourceValues)) {
         const clone = structuredClone(inTemplate);
+        
+        replaceWithObject({ inNode: clone, inData: { key, value } });
 
-        const walkResult = walk({
-            inNode: clone,
-            inData: loopColumn,
-            inOperation: "replace"
-        });
-
-        return walkResult;
-    });
+        newChildren.push(clone);
+    };
 
     return newChildren;
 };

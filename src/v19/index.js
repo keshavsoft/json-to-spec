@@ -10,31 +10,31 @@ export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) =>
     if (inShowLog) console.log(meta.name, localStructure, localData);
 
     try {
-        const iteratedData = replace({
-            inStructureAsJson: localStructure,
-            inDataAsJson: localData,
-            inOperation: "iterateDo",
-            inShowLog
-        });
-        if (inShowLog) console.log("iteratedData : ", iteratedData);
+        // const iteratedData = replace({
+        //     inStructureAsJson: localStructure,
+        //     inDataAsJson: localData,
+        //     inOperation: "iterateDo",
+        //     inShowLog
+        // });
+        // if (inShowLog) console.log("iteratedData : ", iteratedData);
 
         const loopedData = replace({
-            inStructureAsJson: iteratedData,
+            inStructureAsJson: localStructure,
             inDataAsJson: localData,
             inOperation: "loopObject",
             inShowLog
         });
-        if (inShowLog) console.log("loopedData : ", loopedData);
-        const replacedData = replace({
-            inStructureAsJson: loopedData,
-            inDataAsJson: localData,
-            inOperation: "replace",
-            inShowLog
-        });
+        // if (inShowLog) console.log("loopedData : ", loopedData);
+        // const replacedData = replace({
+        //     inStructureAsJson: loopedData,
+        //     inDataAsJson: localData,
+        //     inOperation: "replace",
+        //     inShowLog
+        // });
 
-        if (inShowLog) console.log("replacedData : ", replacedData);
+        // if (inShowLog) console.log("replacedData : ", replacedData);
 
-        return replacedData;
+        return loopedData;
     } catch (err) {
         console.error("[json-to-spec/v19] compile error:", err);
         throw err;
