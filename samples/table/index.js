@@ -6,6 +6,7 @@ import { specToDom } from "https://keshavsoft.github.io/json-to-dom/dist/v31/min
 const folder = "input";
 let actionBinding = null;
 let state = { structure: null, data: null, compiled: null };
+const htmlId = "table-body";
 
 const loadInput = async () => {
   const [structure, data] = await Promise.all([
@@ -20,22 +21,12 @@ const loadInput = async () => {
 };
 
 const render = (structure, data) => {
-  const t0 = performance.now();
-
-  console.log("lllllllllll : ", state);
-
-
   const specAsJsonToDom = compile(structure, data);
-  const compileTime = (performance.now() - t0).toFixed(2);
-  const compileBadge = document.getElementById("compile-time-badge");
-  if (compileBadge) compileBadge.textContent = `Compiled in ${compileTime}ms`;
 
-  const container = document.getElementById("dom-render-container");
+  const container = document.getElementById(htmlId);
   if (container) container.innerHTML = "";
 
-  // console.log("222222222 : ", specAsJsonToDom);
-
-  specToDom({ spec: specAsJsonToDom, targetHtmlId: "dom-render-container" });
+  specToDom({ spec: specAsJsonToDom, targetHtmlId: htmlId });
 };
 
 const start = async () => {

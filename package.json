@@ -1,9 +1,9 @@
 {
   "name": "json-to-spec",
-  "version": "3.0.0",
+  "version": "19.1.0",
   "description": "Pure JSON Specification Compiler with jsonToSpec namespace: (structure, data) -> Spec JSON",
-  "main": "index.js",
-  "module": "./src/v3/index.js",
+  "main": "src/v19/index.js",
+  "module": "./src/v19/index.js",
   "files": [
     "index.js",
     "src",
@@ -33,6 +33,13 @@
   "author": "KeshavSoft",
   "license": "MIT",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/v19/index.js",
+      "require": "./src/v19/index.js",
+      "default": "./src/v19/index.js"
+    }
+  },
   "bugs": {
     "url": "https://github.com/keshavsoft/json-to-spec/issues"
   },
