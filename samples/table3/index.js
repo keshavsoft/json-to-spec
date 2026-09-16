@@ -8,7 +8,7 @@ let actionBinding = null;
 let state = { structure: null, data: null, compiled: null };
 const htmlId2 = "table-body";
 const htmlId1 = "body-row";
-const htmlId = "table-head";
+const htmlId = "table";
 
 const loadInput = async () => {
   const [structure, data] = await Promise.all([
