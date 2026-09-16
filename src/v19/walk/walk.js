@@ -1,5 +1,6 @@
 import replaceWithData from "./replaceWithData/v3/index.js";
 import iterateDo from "./iterate/v4/index.js";
+import loopObject from "./loopObject/v2/index.js";
 
 const forArray = ({ inNode, inData, inOperation }) => {
     const localNode = inNode;
@@ -14,7 +15,8 @@ const forArray = ({ inNode, inData, inOperation }) => {
         for (const child of localNode) {
             const result = walk({
                 inNode: child,
-                inData, inOperation: localOperation
+                inData: localData,
+                inOperation: localOperation
             });
 
             if (Array.isArray(result)) {
@@ -70,7 +72,7 @@ const walk = ({
         return localNode;
     };
 
-    // console.log("localOperation :", localOperation);
+    if (inShowLog) console.log("localOperation ", localOperation);
 
     switch (localOperation) {
         case "replace":
@@ -87,6 +89,17 @@ const walk = ({
                 inNode: localNode,
                 inData: localData, inShowLog
             });
+
+            break;
+
+        case "loopObject":
+            loopObject({
+                inNode: localNode,
+                inData: localData, inShowLog
+            });
+
+            break;
+
         default:
             break;
     };

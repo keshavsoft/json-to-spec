@@ -1,20 +1,8 @@
 import registerGlobal from "./registerGlobal.js";
 import meta from "./meta.js";
-/**
- * json-to-spec v11
- *
- * Minimalist 2-Layer Specification Compiler:
- * 1. replace: Pure ${...} token replacement across JSON structures.
- * 2. iterate: Evaluates jsonToSpec operations, expanding collections into clean children.
- */
 
 import { replace } from "./replace.js";
 
-/**
- * Main compiler entry point:
- * 1. Replace values: replace(structure, data)
- * 2. Iterate/Operate: iterate(replacedStructure, data)
- */
 export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) => {
     let localStructure = inStructureOrOptions;
     let localData = inData;
@@ -28,20 +16,23 @@ export const compile = (inStructureOrOptions, inData = {}, inShowLog = false) =>
             inOperation: "iterateDo",
             inShowLog
         });
+        if (inShowLog) console.log("iteratedData : ", iteratedData);
 
-        const replacedData = replace({
+        const loopedData = replace({
             inStructureAsJson: iteratedData,
+            inDataAsJson: localData,
+            inOperation: "loopObject",
+            inShowLog
+        });
+        if (inShowLog) console.log("loopedData : ", loopedData);
+        const replacedData = replace({
+            inStructureAsJson: loopedData,
             inDataAsJson: localData,
             inOperation: "replace",
             inShowLog
         });
 
-        if (inShowLog) console.log("iteratedData : ", iteratedData, replacedData);
-
-        // const spec = iterate({
-        //     inStructure: replaced,
-        //     inData: localData
-        // });
+        if (inShowLog) console.log("replacedData : ", replacedData);
 
         return replacedData;
     } catch (err) {

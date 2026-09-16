@@ -1,10 +1,6 @@
 {
-    "tagName": "div",
-    "attributes": {
-        "id": "table-body"
-    },
     "jsonToSpec": {
-        "operation": "iterate",
+        "operation": "loopObject",
         "source": "data",
         "template": {
             "tagName": "tr",

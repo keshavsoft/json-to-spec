@@ -21,9 +21,15 @@ const loadInput = async () => {
 };
 
 const render = (structure, data) => {
-  const specAsJsonToDom = compile(structure, data);
+  let specAsJsonToDom = compile(structure, data, true);
+  console.log("specAsJsonToDom------------ : ", specAsJsonToDom);
+
+  if (!("tagName" in specAsJsonToDom)) {
+    specAsJsonToDom = specAsJsonToDom.children;
+  };
 
   const container = document.getElementById(htmlId);
+
   if (container) container.innerHTML = "";
 
   specToDom({ spec: specAsJsonToDom, targetHtmlId: htmlId });
