@@ -1,10 +1,19 @@
 {
   "id": "dl2",
   "data": [
-    "360 one Quant Fund on 20.08.24",
-    "Investments",
-    "Ledger",
-    "",
-    ""
+    {
+      "LedgerName": "360 one Quant Fund on 20.08.24",
+      "LedgerParentName": "Investments",
+      "LedgerType": "Ledger",
+      "GstRegistrationType": "",
+      "PartyGSTIN": ""
+    },
+    {
+      "LedgerName": "111111",
+      "LedgerParentName": "22222222",
+      "LedgerType": "Ledger",
+      "GstRegistrationType": "",
+      "PartyGSTIN": ""
+    }
   ]
 }

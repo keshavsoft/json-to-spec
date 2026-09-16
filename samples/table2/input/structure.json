@@ -3,8 +3,16 @@
         "operation": "loopArray",
         "source": "data",
         "template": {
-            "tagName": "td",
-            "textContent": "${}"
+            "tagName": "tr",
+            "jsonToSpec": {
+                "operation": "loopObject",
+                "source": "data",
+                "template": {
+                    "tagName": "td",
+                    "textContent": "${value}"
+                }
+            },
+            "children": []
         }
     },
     "children": []
