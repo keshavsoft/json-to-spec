@@ -2,8 +2,8 @@
   "name": "json-to-spec",
   "version": "23.1.1",
   "description": "Pure JSON Specification Compiler with jsonToSpec namespace: (structure, data) -> Spec JSON",
-  "main": "src/v19/index.js",
-  "module": "./src/v19/index.js",
+  "main": "src/v23/index.js",
+  "module": "./src/v23/index.js",
   "files": [
     "index.js",
     "src",
@@ -35,9 +35,9 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./src/v19/index.js",
-      "require": "./src/v19/index.js",
-      "default": "./src/v19/index.js"
+      "import": "./src/v23/index.js",
+      "require": "./src/v23/index.js",
+      "default": "./src/v23/index.js"
     }
   },
   "bugs": {
