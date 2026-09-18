@@ -1,53 +1,246 @@
 {
-  "meta": {
-    "formTitle": "Input Controls",
-    "formBadge": "text • date • email • number",
-    "formLead": "A single iterate block renders standard input fields from column metadata.",
-    "formHint": "Save to inspect the extracted payload for native input families."
-  },
-  "columns": [
-    {
-      "title": "Voucher Type",
-      "field": "voucherType",
-      "inputType": "text",
-      "colClass": "col-md-6",
-      "isVisible": true
-    },
-    {
-      "title": "Voucher Number",
-      "field": "voucherNumber",
-      "inputType": "text",
-      "value": "VCH-2026-028",
-      "placeholder": "Enter voucher number",
-      "colClass": "col-md-6",
-      "isVisible": true
-    },
-    {
-      "title": "Voucher Date",
-      "field": "voucherDate",
-      "inputType": "date",
-      "value": "2026-09-13",
-      "placeholder": "Choose voucher date",
-      "colClass": "col-md-6",
-      "isVisible": true
-    },
-    {
-      "title": "Contact Email",
-      "field": "contactEmail",
-      "inputType": "email",
-      "value": "ops@globallogistics.example",
-      "placeholder": "Enter contact email",
-      "colClass": "col-md-6",
-      "isVisible": true
-    },
-    {
-      "title": "Amount (₹)",
-      "field": "amount",
-      "inputType": "number",
-      "value": "12400",
-      "placeholder": "Enter voucher amount",
-      "colClass": "col-md-6",
-      "isVisible": true
-    }
-  ]
+    "id": "dl2",
+    "columns": [
+        {
+            "columnName": "NAME",
+            "title": "NAME",
+            "field": "NAME",
+            "isVisible": true
+        },
+        {
+            "columnName": "PARENT",
+            "title": "PARENT",
+            "field": "PARENT",
+            "isVisible": true
+        }
+    ],
+    "data2": [
+        {
+            "LedgerName": "360 one Quant Fund on 20.08.24",
+            "LedgerParentName": "Investments"
+        },
+        {
+            "LedgerName": "222222222",
+            "LedgerParentName": "Investments"
+        },
+        {
+            "LedgerName": "333333333",
+            "LedgerParentName": "Investments"
+        }
+    ],
+    "data1": [
+        {
+            "LedgerName": "360 one Quant Fund on 20.08.24"
+        }
+    ],
+    "data": [
+        {
+            "PARENT": " Primary",
+            "NAME": "ANCHOR HOOKS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "BAT (WOODEN)"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "Blk Line"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "CHECK TRAY"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "CHINESE LURE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "CISCO"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "COVERS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "DUCT TAPES"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "DYES"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "ENGINES"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "E.P.S.SHEETS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FISHING FLOATS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FISHING HOOKS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FISHINGROD"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FISH  KNITTED FABRIC"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FLASH LIGHT"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "FLEX"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "HALCO"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "KNIFE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "LEAD"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "LIFE BUOY"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "LIFE JACKETS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "LOOP"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "LURES"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "Mosquito Mesh"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "MOSQUITO NET"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "M.S.HOOP"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "NEEDLES"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "NETLON"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "NIWAR"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "NYLON FISHNET"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "PLASTIC FLOATS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "POLYTHIN SHEET"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "RAFIA"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "RIBBONS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "RINGS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "RODMACHINE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "ROPE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "SILPAULIN"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "SQUID"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "STEEL WIRE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "STRAP"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "SUTALI"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "SWIVELS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "TARPAULIN"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "Trays"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "TWINE"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "VELCRO"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "Wire Rope"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "WORK WEST"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "WOVEN FABRIC"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "YOZURI"
+        }
+    ]
 }
