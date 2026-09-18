@@ -33,7 +33,7 @@
             "LedgerName": "360 one Quant Fund on 20.08.24"
         }
     ],
-    "data": [
+    "data3": [
         {
             "PARENT": " Primary",
             "NAME": "ANCHOR HOOKS"
@@ -241,6 +241,20 @@
         {
             "PARENT": " Primary",
             "NAME": "YOZURI"
+        }
+    ],
+    "data": [
+        {
+            "PARENT": " Primary",
+            "NAME": "ANCHOR HOOKS"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "BAT (WOODEN)"
+        },
+        {
+            "PARENT": " Primary",
+            "NAME": "Blk Line"
         }
     ]
 }
