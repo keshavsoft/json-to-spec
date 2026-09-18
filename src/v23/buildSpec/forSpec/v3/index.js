@@ -3,7 +3,7 @@ import buildSpec from "../../index.js";
 const resolveTemplate = (template, data) => {
     if (typeof template !== "string") {
         return template;
-    }
+    };
 
     return template.replace(/\$\{([^}]+)\}/g, (_, path) => {
 
@@ -33,26 +33,20 @@ const resolveTemplate = (template, data) => {
 };
 
 const startFunc = ({ inSpecJson, inData, inShowLog }) => {
+    // console.log("inData : ", inData);
 
     // Create a completely new tree.
     const newSpec = structuredClone(inSpecJson);
 
-    if ("key" in inData && "value" in inData) {
-
+    if (typeof inData === 'string') {
+        // console.log("It's a string!");
+        // console.log("inData : ", inData, newSpec);
         if ("textContent" in newSpec) {
-            newSpec.textContent = resolveTemplate(
-                newSpec.textContent,
-                inData
-            );
-        };
-
-    } else {
-
-        if ("textContent" in newSpec) {
-            newSpec.textContent = resolveTemplate(
-                newSpec.textContent,
-                inData
-            );
+            if (newSpec.textContent === "${}") {
+                newSpec.textContent = inData;
+            } else if (typeof newSpec.textContent === "string") {
+                newSpec.textContent = newSpec.textContent.replaceAll("${}", () => inData);
+            };
         };
 
         if ("attributes" in newSpec) {
@@ -60,20 +54,56 @@ const startFunc = ({ inSpecJson, inData, inShowLog }) => {
                 Object.entries(newSpec.attributes).map(
                     ([attributeName, attributeValue]) => [
                         attributeName,
-                        resolveTemplate(attributeValue, inData)
+                        attributeValue === "${}"
+                            ? inData
+                            : (typeof attributeValue === "string"
+                                ? attributeValue.replaceAll("${}", () => inData)
+                                : attributeValue)
                     ]
                 )
             );
         };
 
-        if ("children" in newSpec) {
-            newSpec.children = newSpec.children.map((child) => {
-                return buildSpec({
-                    inSpecJson: child,
-                    inShowLog: inShowLog,
-                    inDataJson: inData
+    } else {
+        if ("key" in inData && "value" in inData) {
+
+            if ("textContent" in newSpec) {
+                newSpec.textContent = resolveTemplate(
+                    newSpec.textContent,
+                    inData
+                );
+            };
+
+        } else {
+
+            if ("textContent" in newSpec) {
+                newSpec.textContent = resolveTemplate(
+                    newSpec.textContent,
+                    inData
+                );
+            };
+
+            if ("attributes" in newSpec) {
+                newSpec.attributes = Object.fromEntries(
+                    Object.entries(newSpec.attributes).map(
+                        ([attributeName, attributeValue]) => [
+                            attributeName,
+                            resolveTemplate(attributeValue, inData)
+                        ]
+                    )
+                );
+            };
+
+            if ("children" in newSpec) {
+                newSpec.children = newSpec.children.map((child) => {
+                    return buildSpec({
+                        inSpecJson: child,
+                        inShowLog: inShowLog,
+                        inDataJson: inData
+                    });
                 });
-            });
+            };
+
         };
 
     };

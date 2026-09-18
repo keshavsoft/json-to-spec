@@ -13,14 +13,8 @@ export const isSpecArray = ({ inSpecJson }) => {
     return Array.isArray(localSpec);
 };
 
-export const isSpecObject = ({ inSpec }) => {
-    const localSpec = inSpec;
-    return typeof localSpec === "object" && localSpec !== null && !Array.isArray(localSpec);
-};
-
 export default {
     isNullOrUndefined,
     isDomNode,
-    isSpecArray,
-    isSpecObject
+    isSpecArray
 };

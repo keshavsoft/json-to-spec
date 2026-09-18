@@ -1,14 +1,14 @@
 import {
     isNullOrUndefined,
     isDomNode,
-    isSpecArray,
-    isSpecObject
+    isSpecArray
 } from "./guards.js";
 
 import buildSpecArray from "./buildSpecArray.js";
 import buildSingleElement from "./forSpec/v3/index.js";
 import forArray from "./forArray/v1/index.js";
 import forObject from "./forObject/v1/index.js";
+import forArrayStrings from "./forArrayStrings/v1/index.js";
 
 const dispatchSpec = ({
     inSpecJson,
@@ -58,6 +58,31 @@ const dispatchSpec = ({
                 inData: inDataJson
             });
         };
+        // may be this can be deleted
+        // if (inSpecJson.jsonToSpec.operation === "loopArrayStrings") {
+        //     debugger
+        //     const fromArray = forArrayStrings({
+        //         inTemplate: inSpecJson.jsonToSpec.template,
+        //         inDataAsArray:
+        //             inDataJson[inSpecJson.jsonToSpec.source]
+        //     });
+
+        //     const {
+        //         jsonToSpec,
+        //         ...specWithoutJsonToSpec
+        //     } = inSpecJson;
+
+        //     const newSpec = {
+        //         ...specWithoutJsonToSpec,
+        //         children: fromArray
+        //     };
+
+        //     return buildSingleElement({
+        //         inSpecJson: newSpec,
+        //         inShowLog,
+        //         inData: inDataJson
+        //     });
+        // };
 
         if (inSpecJson.jsonToSpec.operation === "loopObject") {
 
@@ -89,7 +114,7 @@ const dispatchSpec = ({
         inShowLog,
         inData: inDataJson
     });
-    console.log("toReturnObject : ", inSpecJson, toReturnObject);
+    // console.log("toReturnObject : ", inSpecJson, toReturnObject);
 
     return toReturnObject;
 };
