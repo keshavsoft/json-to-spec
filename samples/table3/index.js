@@ -1,13 +1,8 @@
-import { default as compile } from "../../src/index.js";
-// import * as domEngine from "./json-to-dom.v27.min.js";
+import buildSpecElement from "../../src/index.js";
 
-import { specToDom } from "https://keshavsoft.github.io/json-to-dom/dist/v31/min.js";
+import "https://keshavsoft.github.io/json-to-tag/dist/v4/min.js";
 
 const folder = "input";
-let actionBinding = null;
-let state = { structure: null, data: null, compiled: null };
-const htmlId2 = "table-body";
-const htmlId1 = "body-row";
 const htmlId = "table";
 
 const loadInput = async () => {
@@ -23,8 +18,7 @@ const loadInput = async () => {
 };
 
 const render = (structure, data) => {
-  let specAsJsonToDom = compile(structure, data, false);
-  console.log("specAsJsonToDom------------ : ", specAsJsonToDom);
+  let specAsJsonToDom = buildSpecElement({ specJson: structure, dataJson: data });
 
   if (!("tagName" in specAsJsonToDom)) {
     specAsJsonToDom = specAsJsonToDom.children;
@@ -34,7 +28,11 @@ const render = (structure, data) => {
 
   if (container) container.innerHTML = "";
 
-  specToDom({ spec: specAsJsonToDom, targetHtmlId: htmlId });
+  const content = window.ks.jsonToTag.buildSpecElement(specAsJsonToDom);
+  container.append(content);
+
+  console.log("content : ", content);
+
 };
 
 const start = async () => {
