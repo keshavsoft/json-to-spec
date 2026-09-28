@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>json-to-spec — Documentation</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0d1a2d;
+      --panel2: #0a1728;
+      --line: #203653;
+      --text: #eaf2ff;
+      --muted: #9eb1ca;
+      --accent: #64d7ff;
+      --green: #65e6a0;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 24px
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #07111fe8;
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center
+    }
+
+    .brand {
+      font-weight: 800;
+      margin-right: auto;
+      color: var(--text)
+    }
+
+    .links {
+      display: flex;
+      gap: 18px;
+      font-size: 13px
+    }
+
+    .links a {
+      color: var(--muted)
+    }
+
+    main {
+      padding: 58px 0 80px
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      color: var(--accent)
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin: 12px 0 18px
+    }
+
+    h2 {
+      font-size: 28px;
+      letter-spacing: -.03em;
+      margin: 50px 0 16px
+    }
+
+    h3 {
+      margin: 0 0 7px
+    }
+
+    .lead {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 18px
+    }
+
+    .story {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 28px 0
+    }
+
+    .node {
+      padding: 9px 13px;
+      border: 1px solid #284765;
+      border-radius: 9px;
+      background: var(--panel2)
+    }
+
+    .arrow {
+      color: var(--accent)
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--panel);
+      overflow: hidden
+    }
+
+    .card-head {
+      padding: 18px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      color: var(--accent)
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .code {
+      background: #06101c;
+      padding: 16px;
+      min-height: 205px
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow: auto;
+      font: 11.5px/1.6 Consolas, monospace;
+      color: #dcecff
+    }
+
+    .output {
+      padding: 16px;
+      background: #0a1728
+    }
+
+    .output-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      color: #7fa5c9;
+      text-transform: uppercase;
+      margin-bottom: 9px
+    }
+
+    .preview {
+      background: white;
+      color: #142238;
+      border-radius: 10px;
+      padding: 13px;
+      min-height: 92px
+    }
+
+    .preview label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+
+    .preview p {
+      margin: 0;
+      font-size: 12px;
+      color: #6e86a2
+    }
+
+    .copy {
+      margin-top: 10px;
+      border: 1px solid #345a7c;
+      background: #10243a;
+      color: #ccecff;
+      border-radius: 7px;
+      padding: 6px 10px;
+      font-size: 11px;
+      cursor: pointer
+    }
+
+    .copy:hover {
+      background: #173553
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      background: #0b1b2e;
+      color: #c8d7e9;
+      border-radius: 0 10px 10px 0
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .info {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--panel);
+      padding: 19px
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    @media(max-width:900px) {
+
+      .compare,
+      .grid {
+        grid-template-columns: 1fr
+      }
+
+      .links {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrap nav">
+      <a class="brand" href="index.html">json-to-spec / docs</a>
+      <div class="links">
+        <a href="what.html">What</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="operations.html">Operations</a>
+        <a href="samples.html">Samples</a>
+        <a href="https://github.com/keshavsoft/json-to-spec" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+
+      <span class="eyebrow">json-to-spec · COMPARISON</span>
+      <h1>Understand the specification model.</h1>
+      <p class="lead">
+        Compare the same small UI created with original HTML, built manually with
+        browser JavaScript, and produced from a <strong>json-to-spec</strong>
+        specification.
+      </p>
+
+      <div class="story">
+        <span class="node">UI idea</span><span class="arrow">→</span>
+        <span class="node">DOM</span><span class="arrow">or</span>
+        <span class="node">JSON spec</span><span class="arrow">→</span>
+        <span class="node">DOM</span>
+      </div>
+
+      <h2>Three ways to create the same UI</h2>
+
+      <div class="compare">
+
+        <!-- ORIGINAL HTML -->
+        <article class="card">
+          <div class="card-head">
+            <span class="num">01 · ORIGINAL HTML</span>
+            <h3>Write the DOM as HTML</h3>
+            <span class="sub">The browser's HTML parser creates the elements.</span>
+          </div>
+
+          <div class="code">
+            <pre>&lt;div id="test-content"&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;p&gt;Test Content&lt;/p&gt;
+&lt;/div&gt;</pre>
+          </div>
+
+          <div class="output">
+            <div class="output-label">Browser output</div>
+            <div class="preview">
+              <label>Name</label>
+              <p>Test Content</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- VANILLA JS -->
+        <article class="card">
+          <div class="card-head">
+            <span class="num">02 · VANILLA JAVASCRIPT</span>
+            <h3>Create the DOM with JS</h3>
+            <span class="sub">Native DOM APIs create and connect every node.</span>
+          </div>
+
+          <div class="code">
+            <button class="copy" data-copy="vanilla-code">Copy code</button>
+            <pre id="vanilla-code">const div = document.createElement("div");
+div.id = "test-content";
+
+const label = document.createElement("label");
+label.textContent = "Name";
+
+const text = document.createElement("p");
+text.textContent = "Test Content";
+
+div.append(label, text);
+
+document.querySelector("#app")
+  .append(div);</pre>
+          </div>
+
+          <div class="output">
+            <div class="output-label">Browser output</div>
+            <div class="preview" id="vanilla-output">
+              <label>Name</label>
+              <p>Test Content</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- JSON TO SPEC -->
+        <article class="card">
+          <div class="card-head">
+            <span class="num">03 · JSON-TO-SPEC</span>
+            <h3>Describe the DOM as JSON</h3>
+            <span class="sub">The compiler converts structure + data into a concrete spec.</span>
+          </div>
+
+          <div class="code">
+            <button class="copy" data-copy="spec-code">Copy code</button>
+            <pre id="spec-code">const structure = {
+  tagName: "div",
+  attributes: { id: "test-content" },
+  children: [
+    { tagName: "label",
+      textContent: "${name}" },
+    { tagName: "p",
+      textContent: "${message}" }
+  ]
+};
+
+const data = {
+  name: "Name",
+  message: "Test Content"
+};
+
+const spec = compile({
+  inStructure: structure,
+  inData: data
+});</pre>
+          </div>
+
+          <div class="output">
+            <div class="output-label">Compiled specification → DOM</div>
+            <div class="preview" id="spec-output">
+              <label>Name</label>
+              <p>Test Content</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="note">
+        <strong>The important difference:</strong>
+        Original HTML directly describes the DOM. Vanilla JavaScript creates DOM
+        nodes imperatively. <strong>json-to-spec</strong> separates the UI
+        structure from its data, compiles both into a concrete JSON specification,
+        and leaves that specification ready for a downstream DOM rendering layer.
+      </div>
+
+      <h2>What json-to-spec adds</h2>
+
+      <div class="grid">
+        <div class="info">
+          <h3>1 · Structure</h3>
+          <p>Define the UI tree once: tags, attributes, text placeholders and operations.</p>
+        </div>
+        <div class="info">
+          <h3>2 · Data</h3>
+          <p>Supply values separately. The same structure can be compiled against different data.</p>
+        </div>
+        <div class="info">
+          <h3>3 · Compile</h3>
+          <p>Resolve values, replace <code>${...}</code> tokens and expand iteration nodes into concrete specification
+            JSON.</p>
+        </div>
+      </div>
+
+      <h2>The compiler story</h2>
+
+      <div class="code">
+        <pre>structure.json
+      +
+data.json
+      ↓
+json-to-spec
+      ↓
+resolve
+      ↓
+replace
+      ↓
+iterate
+      ↓
+final specification JSON
+      ↓
+DOM rendering layer</pre>
+      </div>
+
+      <p style="margin-top:25px">
+        <a href="how-it-works.html">Read the step-by-step compiler flow →</a>
+      </p>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      json-to-spec •
+      <a href="https://github.com/keshavsoft/json-to-spec" target="_blank">GitHub repository</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll(".copy").forEach(button => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copy);
+        try {
+          await navigator.clipboard.writeText(target.textContent);
+          button.textContent = "Copied!";
+          setTimeout(() => button.textContent = "Copy code", 1300);
+        } catch {
+          button.textContent = "Copy failed";
+          setTimeout(() => button.textContent = "Copy code", 1300);
+        }
+      });
+    });
+
+    // Vanilla JavaScript output
+    const vanillaOutput = document.getElementById("vanilla-output");
+    const vanillaDiv = document.createElement("div");
+    const vanillaLabel = document.createElement("label");
+    const vanillaText = document.createElement("p");
+
+    vanillaLabel.textContent = "Name";
+    vanillaText.textContent = "Test Content";
+    vanillaDiv.append(vanillaLabel, vanillaText);
+    vanillaOutput.replaceChildren(vanillaDiv);
+
+    // json-to-spec output demonstration.
+    // The final spec shown here is the concrete result of compiling
+    // structure + data. The page intentionally keeps the rendering preview
+    // independent from a renderer library.
+    const compiledSpec = {
+      tagName: "div",
+      attributes: { id: "test-content" },
+      children: [
+        { tagName: "label", textContent: "Name" },
+        { tagName: "p", textContent: "Test Content" }
+      ]
+    };
+
+    const specOutput = document.getElementById("spec-output");
+    const specDiv = document.createElement("div");
+    const specLabel = document.createElement("label");
+    const specText = document.createElement("p");
+
+    specLabel.textContent = compiledSpec.children[0].textContent;
+    specText.textContent = compiledSpec.children[1].textContent;
+    specDiv.append(specLabel, specText);
+    specOutput.replaceChildren(specDiv);
+  </script>
+
+</body>
+
+</html>
