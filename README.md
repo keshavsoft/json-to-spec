@@ -1,118 +1,165 @@
 # json-to-spec
 
-A story about taking two JSON inputs and turning them into a final, concrete UI spec.
+Pure JSON specification compiler for declarative UI generation.
 
-At the center of this project is a simple idea:
+This project takes a structured specification and data payload, resolves dynamic values, expands iteration, and returns a final JSON spec tree that can be rendered by downstream tools such as `json-to-dom`.
 
-- `structure` is the blueprint: the shape, layout, rules, and instructions
-- `data` is the truth: fields, rows, values, arrays, and metadata
-- `compile` is the story engine: it resolves the values, replaces placeholders, and expands iterations
+🌐 **Documentation & Directory Hub**: [https://keshavsoft.github.io/json-to-spec/](https://keshavsoft.github.io/json-to-spec/)  
+🏷️ **New Documentation & Directory Hub**: [https://keshavsoft.github.io/json-to-spec/newDocumentation/](https://keshavsoft.github.io/json-to-spec/newDocumentation/)      
 
-The final output is a clean, serializable JSON spec, ready for rendering by `json-to-dom` or any similar consumer.
 
----
+## What this repo does
 
-## The story in one line
+`json-to-spec` is not a renderer. It is a compiler.
 
-`json-to-spec` is a compiler for declarative UI: it reads a blueprint and a data payload, resolves what belongs where, injects values, expands loops, and emits a final specification tree.
+It takes two inputs:
 
----
+- `specJson`: the blueprint describing the output structure
+- `dataJson`: the runtime data used to fill and expand the structure
 
-## The three core operations
+Then it transforms that into a final, concrete JSON specification ready to render.
 
-This repo is best understood as a pipeline with three essential stages:
+Core behaviors include:
 
-1. `resolve` — find the value from the active context or root data
-2. `replace` — replace `${...}` tokens inside strings, attributes, and text content
-3. `iterate` — expand collection-driven operations into concrete child nodes
+- resolving values from nested data
+- replacing `${...}` expressions within strings and attributes
+- iterating arrays and objects with template-based expansion
+- producing a serializable object tree for downstream rendering
 
-That is the heart of the architecture. Everything else is supporting structure around this idea.
-
----
-
-## Why this design matters
-
-Most UI systems treat layout and data as separate problems, but they still get tangled in components, templates, and imperative logic.
-
-`json-to-spec` keeps them decoupled:
-
-- the structure describes how a screen should look
-- the data tells what should appear
-- the compiler merges them deterministically
-
-This makes the flow predictable, testable, and easy to reason about.
-
----
-
-## 📖 Start Here
-
-- **What is json-to-spec?**: [docs/pages/what.html](docs/pages/what.html)
-- **Why this project exists**: [docs/pages/why.html](docs/pages/why.html)
-- **How the compiler works**: [docs/pages/how-it-works.html](docs/pages/how-it-works.html)
-- **Runtime architecture**: [docs/pages/architecture.html](docs/pages/architecture.html)
-- **Documentation hub**: [docs/index.html](docs/index.html)
-
----
-
-## ⚡ Quick Start
+## Install
 
 ```bash
 npm install
+```
+
+## Run locally
+
+```bash
 npm run dev
 ```
 
----
+This starts the Vite dev server for the project demo and sample pages.
 
-## 💻 Minimal Example
+## Build
 
-```javascript
-import { compile } from "json-to-spec";
+```bash
+npm run build
+```
+
+## API
+
+The package entry exports a default function named `buildSpecElement`.
+
+```js
+import buildSpecElement from "json-to-spec";
 
 const structure = {
   tagName: "div",
   attributes: { class: "card" },
   children: [
-    { tagName: "h3", textContent: "${title}" },
+    { tagName: "h2", textContent: "${title}" },
     {
-      operation: "iterate",
-      source: "users",
-      template: {
-        tagName: "div",
-        textContent: "${$number}. ${name} (${role})"
+      jsonToSpec: {
+        operation: "loopArray",
+        source: "items",
+        template: {
+          tagName: "li",
+          textContent: "${name}"
+        }
       }
     }
   ]
 };
 
 const data = {
-  title: "Engineering Team",
-  users: [
-    { name: "Karthik", role: "Architect" },
-    { name: "Praveen", role: "Engineer" }
+  title: "Products",
+  items: [
+    { name: "Laptop" },
+    { name: "Phone" },
+    { name: "Tablet" }
   ]
 };
 
-const spec = compile({ inStructure: structure, inData: data });
+const spec = buildSpecElement({
+  specJson: structure,
+  dataJson: data
+});
+
 console.log(spec);
 ```
 
-The compile flow is:
+### Notes
 
-- resolve the values inside `${...}`
-- replace tokens in the structure
-- iterate over `users` and expand the template
-- return the final spec JSON
+- The function is implemented in `src/v25/index.js`
+- Supported loop operations are currently `loopArray` and `loopObject`
+- The output is a JSON spec structure, not a DOM element by itself
 
----
+## Browser usage
 
-## 🎯 Scope
+The project includes browser samples that render the output using `json-to-tag`.
 
-This project is intentionally focused. It is a compiler, not a renderer, framework, or business-logic engine.
+```html
+<script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"></script>
+<script type="module">
+  import buildSpecElement from "./src/index.js";
 
-It does one job well: it translates declarative structure + data into a final spec tree.
+  const spec = {
+    tagName: "div",
+    children: [{ tagName: "span", textContent: "Hello" }]
+  };
 
----
+  const element = buildSpecElement({ specJson: spec, dataJson: {} });
+  document.body.appendChild(window.ks.jsonToTag.buildSpecElement(element));
+</script>
+```
 
-## 📄 License
+## Repository structure
 
-MIT &copy; [KeshavSoft](https://github.com/keshavsoft)
+```text
+.
+├── src/                  # Compiler source and published entry
+├── samples/              # Example apps and sample data
+├── docs/                 # Static documentation pages
+├── test/                 # Local/legacy test pages
+├── index.html            # Demo entry page
+├── index.js              # Top-level module export
+├── package.json          # Package metadata and scripts
+├── vite.config.js        # Vite config
+├── README.md             # Project documentation
+└── LICENSE               # If present in the repo
+```
+
+## Current implementation notes
+
+The package entry points to the latest compiler version:
+
+```js
+export { default } from "./src/v25/index.js";
+export * from "./src/v25/index.js";
+```
+
+This means the current public API is effectively built around the logic in `src/v25`.
+
+## Documentation
+
+The repo includes documentation pages under `docs/`, including:
+
+- `docs/index.html`
+- `docs/pages/what.html`
+- `docs/pages/why.html`
+- `docs/pages/how-it-works.html`
+- `docs/pages/architecture.html`
+
+## Contributing
+
+1. Clone the repo
+2. Install dependencies with `npm install`
+3. Run the demo with `npm run dev`
+4. Update source files in `src/` and sample files in `samples/`
+5. Validate with `npm run build`
+
+## License
+
+MIT
+
+This project is maintained by KeshavSoft and published under the MIT license.
