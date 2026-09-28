@@ -1,5 +1,5 @@
 export const meta = {
-    version: "v26.0",
+    version: "v28.0",
     description: "Pure spec engine no document at all"
 };
 

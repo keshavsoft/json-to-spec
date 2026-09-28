@@ -1,5 +1,5 @@
 // import resolveTemplate from "./buildSingleElement/v5/resolveTemplate.js";
-import buildSingleElement from "./buildSingleElement/v5/index.js";
+import buildSingleElement from "../../buildSingleElement/v5/index.js";
 import forArray from "./forArray/v1/index.js";
 import forObject from "./forObject/v1/index.js";
 
@@ -7,7 +7,7 @@ const startFunc = ({
     inSpecJson,
     inShowLog = false,
     inDataJson, inRowIndex,
-    inDirectiveKeys = ["jsonToSpec"],
+    inDirectiveKeys = {},
     inDirectiveKey = "jsonToSpec"
 } = {}) => {
     if (Number.isFinite(inRowIndex)) {

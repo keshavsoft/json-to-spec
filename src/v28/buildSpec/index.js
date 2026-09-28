@@ -5,19 +5,28 @@ import {
 } from "./guards.js";
 
 import buildSpecArray from "./buildSpecArray.js";
-import buildSingleElement from "./ifJsonToSpec/v1/buildSingleElement/v5/index.js";
+import buildSingleElement from "./buildSingleElement/v5/index.js";
 import jsonToSpecFunc from "./ifJsonToSpec/v1/index.js";
+import simpleReplaceFunc from "./ifSimpleReplace/v1/index.js";
 
-const findDirectiveKey = (inSpecJson, inDirectiveKeys) =>
-    inDirectiveKeys.find(key => key in inSpecJson) ?? null;
+const normalizeDirectiveKeys = (inKeys) => {
+    const localBase = { "jsonToSpec": jsonToSpecFunc };
+    if (!inKeys) return localBase;
+    if (Array.isArray(inKeys)) {
+        const localFromArray = inKeys.reduce((acc, key) => ({ ...acc, [key]: simpleReplaceFunc }), {});
+        return { ...localBase, ...localFromArray };
+    };
+    return inKeys;
+};
 
 const dispatchSpec = ({
     inSpecJson,
     inShowLog = false,
     inDataJson,
     inRowIndex,
-    inDirectiveKeys = ["jsonToSpec"]
+    inDirectiveKeys
 } = {}) => {
+    const localDirectiveKeys = normalizeDirectiveKeys(inDirectiveKeys);
     // debugger
     if (isNullOrUndefined({ inSpec: inSpecJson })) {
         return null;
@@ -34,30 +43,29 @@ const dispatchSpec = ({
             inArray: inSpecJson,
             inShowLog,
             inDataJson,
-            inDirectiveKeys
+            inDirectiveKeys: localDirectiveKeys
         });
 
         return fromArray;
     };
 
-    const localDirectiveKey = findDirectiveKey(inSpecJson, inDirectiveKeys);
+    const localDirectiveKey = Object.keys(localDirectiveKeys).find(key => key in inSpecJson) ?? null;
     if (localDirectiveKey) {
-        const fromJsonToSpecFunc = jsonToSpecFunc({
+        const localHandler = localDirectiveKeys[localDirectiveKey];
+        return localHandler({
             inSpecJson,
             inShowLog, inRowIndex,
             inDataJson,
-            inDirectiveKeys,
+            inDirectiveKeys: localDirectiveKeys,
             inDirectiveKey: localDirectiveKey
         });
-
-        return fromJsonToSpecFunc;
     };
 
     const toReturnObject = buildSingleElement({
         inSpecJson,
         inShowLog, inRowIndex,
         inData: inDataJson,
-        inDirectiveKeys
+        inDirectiveKeys: localDirectiveKeys
     });
     // console.log("toReturnObject : ", inSpecJson, toReturnObject);
 

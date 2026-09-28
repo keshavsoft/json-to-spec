@@ -10,7 +10,7 @@ import buildSpec from "./buildSpec/index.js";
  */
 /**
  * @overload
- * @param {{ specJson: any, dataJson: any, showLog?: boolean, directiveKeys?: string[] }} options
+ * @param {{ specJson: any, dataJson: any, showLog?: boolean, directiveKeys?: string[] | Record<string,Function> }} options
  * @returns {any}
  */
 const buildSpecElement = (inArg1, inArg2, inArg3) => {
@@ -18,7 +18,7 @@ const buildSpecElement = (inArg1, inArg2, inArg3) => {
     const localSpecJson = localIsObject ? inArg1.specJson : inArg1;
     const localDataJson = localIsObject ? inArg1.dataJson : inArg2;
     const localShowLog = localIsObject ? (inArg1.showLog ?? false) : false;
-    const localDirectiveKeys = localIsObject ? (inArg1.directiveKeys ?? ["jsonToSpec"]) : (inArg3 ?? ["jsonToSpec"]);
+    const localDirectiveKeys = localIsObject ? inArg1.directiveKeys : inArg3;
 
     try {
         if (localShowLog) console.log("jsonToSpec 1 : ", localSpecJson);
