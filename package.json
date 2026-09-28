@@ -1,6 +1,6 @@
 {
   "name": "json-to-spec",
-  "version": "25.1.1",
+  "version": "26.1.1",
   "description": "Pure JSON Specification Compiler with jsonToSpec namespace: (structure, data) -> Spec JSON",
   "main": "./src/index.js",
   "module": "./src/index.js",
