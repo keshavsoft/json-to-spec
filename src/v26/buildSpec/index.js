@@ -5,12 +5,12 @@ import {
 } from "./guards.js";
 
 import buildSpecArray from "./buildSpecArray.js";
-import buildSingleElement from "./buildSingleElement/v5/index.js";
-import jsonToSpecFunc from "./jsonToSpecFunc.js";
+import buildSingleElement from "./ifJsonToSpec/v1/buildSingleElement/v5/index.js";
+import jsonToSpecFunc from "./ifJsonToSpec/v1/index.js";
 
 const dispatchSpec = ({
     inSpecJson,
-    inShowLog = true,
+    inShowLog = false,
     inDataJson,
     inRowIndex
 } = {}) => {

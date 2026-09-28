@@ -1,5 +1,5 @@
 import resolveTemplate from "./resolveTemplate.js";
-import { isSpecArray } from "../../guards.js";
+import { isSpecArray } from "../../../../guards.js";
 
 // Case 2: Cell ({ key, value }) resolution
 const startFunc = ({ inSpec, inData }) => {

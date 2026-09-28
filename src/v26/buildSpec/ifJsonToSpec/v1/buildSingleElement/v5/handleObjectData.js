@@ -1,4 +1,4 @@
-import buildSpec from "../../index.js";
+import buildSpec from "../../../../index.js";
 import resolveTemplate from "./resolveTemplate.js";
 
 // Case 3: Object or row resolution

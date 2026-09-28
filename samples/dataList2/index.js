@@ -4,8 +4,6 @@ import compile from "../../src/index.js";
 import { specToDom } from "https://keshavsoft.github.io/json-to-dom/dist/v31/min.js";
 
 const folder = "input";
-let actionBinding = null;
-let state = { structure: null, data: null, compiled: null };
 
 const loadInput = async () => {
   const [structure, data] = await Promise.all([
@@ -20,19 +18,13 @@ const loadInput = async () => {
 };
 
 const render = (structure, data) => {
-  // const specAsJsonToDom = compile(structure, data);
   const specAsJsonToDom = compile({
     specJson: structure,
     dataJson: data
   });
 
-  const container = document.getElementById("dom-render-container");
-  if (container) container.innerHTML = "";
-
   specToDom({ spec: specAsJsonToDom, targetHtmlId: "dom-render-container" });
 };
-
-const VARIANT = "inline"; // "stacked" | "inline" | "list"
 
 const start = async () => {
   try {
@@ -40,9 +32,8 @@ const start = async () => {
       structure,
       data
     } = await loadInput();
-    console.log("aaaaaaa : ", structure, data);
 
-    render(structure[VARIANT], data);
+    render(structure, data);
   } catch (err) {
     const container = document.getElementById("dom-render-container");
     if (container) container.innerHTML = `<div style="color:#b91c1c">Error: ${err.message}</div>`;

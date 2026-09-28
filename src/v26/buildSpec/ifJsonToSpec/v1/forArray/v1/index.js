@@ -1,4 +1,4 @@
-import dispatchSpec from "../../index.js";
+import dispatchSpec from "../../../../index.js";
 
 const startFunc = ({ inTemplate, inDataAsArray }) => {
 
