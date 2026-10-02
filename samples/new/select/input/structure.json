@@ -1,0 +1,38 @@
+[
+    {
+        "tagName": "select",
+        "attributes": {
+            "id": "LedgerName"
+        },
+        "jsonToSpec": {
+            "operation": "loopArray",
+            "source": "LedgerName",
+            "template": {
+                "tagName": "option",
+                "attributes": {
+                    "value": "${}"
+                },
+                "textContent": "${}"
+            }
+        },
+        "children": []
+    },
+    {
+        "tagName": "select",
+        "attributes": {
+            "id": "LedgerType"
+        },
+        "jsonToSpec": {
+            "operation": "loopArray",
+            "source": "LedgerType",
+            "template": {
+                "tagName": "option",
+                "attributes": {
+                    "value": "${}"
+                },
+                "textContent": "${}"
+            }
+        },
+        "children": []
+    }
+]

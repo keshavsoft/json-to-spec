@@ -22,6 +22,8 @@ const traverseObject = (specJson, dataJson) => {
         } else {
             element.children = [fromJsonToSpec];
         };
+
+        delete element.jsonToSpec;
     };
 
     if (Array.isArray(element?.children)) {
