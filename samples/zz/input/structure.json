@@ -1,11 +1,19 @@
 {
-    "tagName": "tr",
+    "tagName": "tbody",
     "jsonToSpec": {
         "operation": "loopArray",
-        "source": "columns",
+        "source": "data",
         "template": {
-            "tagName": "th",
-            "textContent": "${title}"
+            "tagName": "tr",
+            "jsonToSpec": {
+                "operation": "loopObject",
+                "source": "data",
+                "template": {
+                    "tagName": "td",
+                    "textContent": "${value}"
+                }
+            },
+            "children": []
         }
     },
     "children": []
