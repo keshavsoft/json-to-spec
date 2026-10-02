@@ -9,13 +9,13 @@ import traverseObject from "./traverseObject/index.js";
  */
 const traverse = (specJson, dataJson) => {
     if (specJson === null || specJson === undefined) return null;
-    // debugger
+    debugger
     if (typeof Node !== "undefined" && specJson instanceof Node) {
         return specJson;
     }
 
     if (Array.isArray(specJson)) {
-        return traverseArray(specJson);
+        return traverseArray(specJson, dataJson);
     };
 
     if (typeof specJson === "object") {

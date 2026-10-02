@@ -10,7 +10,7 @@
                 {
                     "tagName": "tr",
                     "jsonToSpec": {
-                        "operation": "loopArray",
+                        "operation": "loopCollection",
                         "source": "columns",
                         "template": {
                             "tagName": "th",
@@ -24,7 +24,7 @@
         {
             "tagName": "tbody",
             "jsonToSpec": {
-                "operation": "loopArray",
+                "operation": "loopCollection",
                 "source": "data",
                 "template": {
                     "tagName": "tr",

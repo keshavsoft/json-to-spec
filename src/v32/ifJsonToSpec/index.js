@@ -1,5 +1,6 @@
 import ifLoopArray from "./ifLoopArray/index.js";
 import ifLoopObject from "./ifLoopObject/index.js";
+import ifLoopCollection from "./ifLoopCollection/index.js";
 
 const startFunc = (inJsonToSpec, dataJson) => {
     if ("operation" in inJsonToSpec) {
@@ -8,9 +9,13 @@ const startFunc = (inJsonToSpec, dataJson) => {
         };
 
         if (inJsonToSpec.operation === "loopObject") {
-            // debugger
             return ifLoopObject(inJsonToSpec, dataJson)
         };
+
+        if (inJsonToSpec.operation === "loopCollection") {
+            return ifLoopCollection(inJsonToSpec, dataJson)
+        };
+
     };
 };
 

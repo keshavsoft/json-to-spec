@@ -1,11 +1,18 @@
-import forTextContent from "./forTextContent.js";
+import forTextContent from "./forTextContent/index.js";
+import forAttributes from "./forAttributes/index.js";
 
 const startFunc = (specJson, dataJson) => {
     if ("tagName" in specJson) {
         if ("textContent" in specJson) {
             const returnedTextContent = forTextContent(specJson.textContent, dataJson);
-            console.log("returnedTextContent : ", returnedTextContent);
+
             specJson.textContent = returnedTextContent;
+        };
+
+        if ("attributes" in specJson) {
+            const returnedAttributes = forAttributes(specJson.attributes, dataJson);
+
+            specJson.attributes = returnedAttributes;
         };
     };
 };

@@ -1,4 +1,6 @@
 const startFunc = (textContent, dataJson) => {
+    if (typeof dataJson === "string") return dataJson;
+
     if (typeof textContent !== "string") return textContent;
 
     if (textContent === "${value}") {
